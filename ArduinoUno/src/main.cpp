@@ -29,10 +29,10 @@ const int servoLoadPosition = 0;
 const int servoFirePosition = 140;
 
 // Create objects for class
-Shooter shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTimeDelay, int servoLoadPosition, int servoFirePosition);
+Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition);
 
 // Define functions
-bool ExecuteCommands();
+void ExecuteCommands();
 
 // Run setup code
 void setup() {
@@ -43,7 +43,7 @@ void loop() {
   ExecuteCommands();
 }
 
-bool ExecuteCommands() {
+void ExecuteCommands() {
   shooter.shoot();
 }
 
