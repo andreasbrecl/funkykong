@@ -2,7 +2,7 @@
 // MCEN 5115 Mario Kart Balloon Battle
 // 10/19/2020
 //
-// 
+// This sets up the Shooter class header file.
 
 #include "Servo.h"
 

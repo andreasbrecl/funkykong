@@ -28,6 +28,9 @@ const int fireTimeDelay = 1500;
 const int servoLoadPosition = 0;
 const int servoFirePosition = 140;
 
+// Serial speed constant
+const int serialSpeed = 9600;
+
 // Define fire logic
 int timesFired = 0;
 
@@ -39,16 +42,40 @@ void ExecuteCommands();
 
 // Run setup code
 void setup() {
-  Serial.begin(9600);
+  /*
+  Set up function for running Arduino Uno.
+
+  Input: None
+
+  Output: None
+  */
+
+  // Set serial speed
+  Serial.begin(serialSpeed);
 }
 
 void loop() {
+  /*
+  Main script look that runs commands to get proessing started. This is simple
+  to prevent complication from building here.
+
+  Input: None
+
+  Output: None
+  */
   ExecuteCommands();
 }
 
 void ExecuteCommands() {
+  /*
+  This function runs the other functions for the core processes on the Arduino
+  Uno. In this case it runs just the shooting function.
+
+  Input: None
+
+  Output: None
+  */
+
+  // Activate the shooting functionality from the shooting class
   timesFired = shooter.shoot(timesFired);
 }
-
-
-// Need to make it count 12 times

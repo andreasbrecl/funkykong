@@ -40,6 +40,16 @@ Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTim
 }
 
 int Shooter::shoot(int timesFired) {
+    /*
+    This function moves the servo based on the logic of if it should fire or not.
+    It looks at the input from the other arduino and then counts the number of times
+    that it has been fired. If it has been fired all 12 times, it runs another 
+    function to send out a signal for return to reload area.
+    
+    Input:  timesFired <int> - Tracks number of shots taken.
+
+    Output: timesFired <int> - Tracks number of shots taken.
+    */
 
     // Define variables as internal and private to the class using pointers
     this->timesFired = timesFired;
@@ -78,6 +88,14 @@ int Shooter::shoot(int timesFired) {
 }
 
 void Shooter::returnToReloadSignal() {
+    /*
+    This function sends an output to the other arudino instructing it that it is time
+    to return to base so that it can be reloaded with more ammunition.
+
+    Input: None
+
+    Output: None
+    */
     
     // Send boolian value output to other arudino 
     digitalWrite(reloadLogicPin, HIGH);
