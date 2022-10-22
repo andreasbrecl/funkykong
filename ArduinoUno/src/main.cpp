@@ -28,6 +28,9 @@ const int fireTimeDelay = 1500;
 const int servoLoadPosition = 0;
 const int servoFirePosition = 140;
 
+// Define fire logic
+int timesFired = 0;
+
 // Create objects for class
 Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition);
 
@@ -44,7 +47,7 @@ void loop() {
 }
 
 void ExecuteCommands() {
-  shooter.shoot();
+  timesFired = shooter.shoot(timesFired);
 }
 
 

@@ -12,6 +12,20 @@
 #include "Servo.h"
 
 Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTimeDelay, int servoLoadPosition, int servoFirePosition) {
+    /*
+    This function will define objects created in the shooter class. It will take
+    in the desired inputs to set up the pin values, time delays, and inital servo
+    positions.
+
+    Input:  fireLogicPin <int> - Pin that will read from the other arduino it should fire.
+            servoPin <int> - Pin that will output servo postition.
+            reloadLogicPin <int> - Pin that will send output if reload must occur.
+            fireTimeDelay <int> - This delay accounts for the 3 seconds delay between shooting.
+            servoLoadPosition <int> - Servo position for loading.
+            servoFirePosition <int> - Servo position for firing.
+
+    Output: None
+    */
     
     // Define variables as internal and private to the class using pointers
     this->fireLogicPin = fireLogicPin;
@@ -25,13 +39,73 @@ Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTim
     initialize();
 }
 
-void Shooter::shoot() {
-    return;
+int Shooter::shoot(int timesFired) {
+
+    // Define variables as internal and private to the class using pointers
+    this->timesFired = timesFired;
+    
+    // Check if should fire command recieved
+    shouldFire = digitalRead(fireLogicPin);
+    if (shouldFire == ON) {
+
+        // Set servo in load position
+        servo.write(servoLoadPosition);
+
+        // Delay for 1.5 seconds
+        delay(fireTimeDelay);
+
+        // Set servo in fire position
+        servo.write(servoFirePosition);
+
+        // Delay for 1.5 seconds
+        delay(fireTimeDelay);
+        
+        // Increment times fired logic
+        ++timesFired;
+    }
+
+    // Check if all rounds are fired
+    if (timesFired >= 12) {
+
+        // Send signal to other arduino
+        returnToReloadSignal();
+
+        // Reset counter
+        timesFired = 0;
+    }
+
+    return timesFired;
+}
+
+void Shooter::returnToReloadSignal() {
+    
+    // Send boolian value output to other arudino 
+    digitalWrite(reloadLogicPin, HIGH);
+
+    // Delay for sometime so other arduino can recieve signal
+    delay(fireTimeDelay);
+
+    // Set value to low
+    digitalWrite(reloadLogicPin, LOW);
 }
 
 void Shooter::initialize() {
+    /*
+    This function will initallize the shooter functionalatity of the arduino uno.
+    It will set the pins to either inputs or outputs. Along with this it will set
+    the initial position of the servo.
+
+    Input: None
+    
+    Output: None
+    */
+
     // Define pin out/in values
     pinMode(reloadLogicPin, OUTPUT);
     pinMode(servoPin, OUTPUT);
     pinMode(fireLogicPin, INPUT);
+
+    // Set initial servo position
+    servo.attach(servoPin);
+    servo.write(servoFirePosition);
 }
