@@ -7,7 +7,7 @@
 // The Uno will read in if a firing message is set and output if it has
 // fired the full 12 times to initate the go back to base sequence.
 
-// Include general Arduino libraries
+// Include general Arduino librariess
 #include <Arduino.h>
 #include <stdint.h>
 #include <inttypes.h>
