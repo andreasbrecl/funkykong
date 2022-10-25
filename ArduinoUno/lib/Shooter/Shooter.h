@@ -6,7 +6,7 @@
 
 #include "Servo.h"
 
-class Shooter{
+class Shooter {
     /*
     This class will deal with firing the shooter and the logic for when
     it must either reload or start/stop firing projectiles.
@@ -15,37 +15,39 @@ class Shooter{
     // Define public values
     public:
 
-    // Define general values for shooter on and off
-    #define ON true
-    #define OFF false
+        // Define general values for shooter on and off
+        #define ON true
+        #define OFF false
 
-    // Define int public variables
-    int timesFired;
+        // Define int public variables
+        int timesFired;
 
-    // Define functions in class
-    Shooter(int, int, int, int, int, int);
-    int shoot(int);
+        // Define objects in class
+        Shooter(int, int, int, int, int, int);
+
+        // Define functions in class
+        int shoot(int);
 
     // Define private values
     private:
 
-    // Define Servo object
-    Servo servo;
+        // Define Servo object
+        Servo servo;
 
-    // Define int private variables
-    int fireLogicPin;
-    int servoPin;
-    int reloadLogicPin;
-    int fireTimeDelay;
-    int servoLoadPosition;
-    int servoFirePosition;
-    
-    // Define bool private variables
-    bool shouldFire;
-    bool shouldReload;
+        // Define int private variables
+        int fireLogicPin;
+        int servoPin;
+        int reloadLogicPin;
+        int fireTimeDelay;
+        int servoLoadPosition;
+        int servoFirePosition;
+        
+        // Define bool private variables
+        bool shouldFire;
+        bool shouldReload;
 
-    // Define private functions in class
-    void initialize();
-    void returnToReloadSignal();
+        // Define private functions in class
+        void initialize();
+        void returnToReloadSignal();
 
 };
