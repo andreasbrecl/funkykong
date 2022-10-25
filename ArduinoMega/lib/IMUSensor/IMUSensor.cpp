@@ -7,7 +7,7 @@
 #include <Arduino.h>
 #include "IMUSensor.h"
 
-IMUSensor::IMUSensor() {
+IMUSensor::IMUSensor(int SCAPin, int SCLPin, int SDOPin, int CSPin) {
     /*
     <Enter description>
 
@@ -15,6 +15,13 @@ IMUSensor::IMUSensor() {
     
     Output: None
     */
+
+    // Define variables as internal and private to the class using pointers
+    this->SCAPin = SCAPin;
+    this->SCLPin = SCLPin;
+    this->SDOPin = SDOPin;
+    this->CSPin = CSPin;
+
     // Define variables as internal and private to the class using pointers
 
 

@@ -40,7 +40,10 @@ const int sonicEchoPin4 = 37;
 const int sonicEchoPin5 = 41;
 
 // Define const pins for IMU
-
+const int SCAPin = 10;
+const int SCLPin = 11;
+const int SDOPin = 12;
+const int CSPin = 13;
 
 // Define const pins for motor drivers
 const int motorDriver1Pin1 = 22;
@@ -68,7 +71,7 @@ const int serialSpeed = 9600;
 UnoLogicDriver shooterLogic(fireLogicPin);
 UltrasonicSensor ultrasonic();
 LineSensor line();
-IMUSensor IMU();
+IMUSensor IMU(SCAPin, SCLPin, SDOPin, CSPin);
 
 // Define functions
 void reloadFunkyKong();
