@@ -123,6 +123,9 @@ void Shooter::initialize() {
     pinMode(servoPin, OUTPUT);
     pinMode(fireLogicPin, INPUT);
 
+    // Set initial output as low
+    digitalWrite(reloadLogicPin, LOW);
+
     // Set initial servo position
     servo.attach(servoPin);
     servo.write(servoFirePosition);

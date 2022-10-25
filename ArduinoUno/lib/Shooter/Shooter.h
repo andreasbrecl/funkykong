@@ -6,7 +6,7 @@
 
 #include "Servo.h"
 
-class Shooter{
+class Shooter {
     /*
     This class will deal with firing the shooter and the logic for when
     it must either reload or start/stop firing projectiles.
@@ -22,8 +22,10 @@ class Shooter{
     // Define int public variables
     int timesFired;
 
-    // Define functions in class
+    // Define objects in class
     Shooter(int, int, int, int, int, int);
+
+    // Define functions in class
     int shoot(int);
 
     // Define private values
