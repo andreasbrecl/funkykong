@@ -15,39 +15,39 @@ class Shooter {
     // Define public values
     public:
 
-    // Define general values for shooter on and off
-    #define ON true
-    #define OFF false
+        // Define general values for shooter on and off
+        #define ON true
+        #define OFF false
 
-    // Define int public variables
-    int timesFired;
+        // Define int public variables
+        int timesFired;
 
-    // Define objects in class
-    Shooter(int, int, int, int, int, int);
+        // Define objects in class
+        Shooter(int, int, int, int, int, int);
 
-    // Define functions in class
-    int shoot(int);
+        // Define functions in class
+        int shoot(int);
 
     // Define private values
     private:
 
-    // Define Servo object
-    Servo servo;
+        // Define Servo object
+        Servo servo;
 
-    // Define int private variables
-    int fireLogicPin;
-    int servoPin;
-    int reloadLogicPin;
-    int fireTimeDelay;
-    int servoLoadPosition;
-    int servoFirePosition;
-    
-    // Define bool private variables
-    bool shouldFire;
-    bool shouldReload;
+        // Define int private variables
+        int fireLogicPin;
+        int servoPin;
+        int reloadLogicPin;
+        int fireTimeDelay;
+        int servoLoadPosition;
+        int servoFirePosition;
+        
+        // Define bool private variables
+        bool shouldFire;
+        bool shouldReload;
 
-    // Define private functions in class
-    void initialize();
-    void returnToReloadSignal();
+        // Define private functions in class
+        void initialize();
+        void returnToReloadSignal();
 
 };

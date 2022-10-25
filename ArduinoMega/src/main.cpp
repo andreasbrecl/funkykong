@@ -13,22 +13,44 @@
 
 // Inlcude custom libraries
 #include "UnoLogicDriver.h"
+#include "UltrasonicSensor.h"
+#include "LineSensor.h"
+#include "IMUSensor.h"
 
 // Define const pins for arudino Uno interaction
 const int fireLogicPin = 3;
 const int reloadLogicPin = 2; 
 
 // Define const pins for line sensors
-
+const int lineAnalogPin1 = A12;
+const int lineAnalogPin2 = A13;
+const int lineAnalogPin3 = A14;
+const int lineAnalogPin4 = A15;
 
 // Define const pins for ultrasonic sensors
-
+const int sonicTrigPin1 = 30;
+const int sonicTrigPin2 = 32;
+const int sonicTrigPin3 = 34;
+const int sonicTrigPin4 = 36;
+const int sonicTrigPin5 = 40;
+const int sonicEchoPin1 = 31;
+const int sonicEchoPin2 = 33;
+const int sonicEchoPin3 = 35;
+const int sonicEchoPin4 = 37;
+const int sonicEchoPin5 = 41;
 
 // Define const pins for IMU
 
 
 // Define const pins for motor drivers
-
+const int motorDriver1Pin1 = 22;
+const int motorDriver1Pin2 = 23;
+const int motorDriver2Pin1 = 24;
+const int motorDriver2Pin2 = 25;
+const int motorDriver3Pin1 = 26;
+const int motorDriver3Pin2 = 27;
+const int motorDriver4Pin1 = 28;
+const int motorDriver4Pin2 = 29;
 
 // Define volitile variable 
 volatile bool reloadState = 0;
@@ -44,6 +66,9 @@ const int serialSpeed = 9600;
 
 // Create objects for classes
 UnoLogicDriver shooterLogic(fireLogicPin);
+UltrasonicSensor ultrasonic();
+LineSensor line();
+IMUSensor IMU();
 
 // Define functions
 void reloadFunkyKong();
@@ -113,5 +138,17 @@ void ExecuteCommands() {
 
   // Pull data from sensors
 
+
+  // Send data to raspberry pi
+
+  
+  // Pull data from raspberry pi
+
+
+  // Send information to motor drivers
+
+
+  // Send logic to weapon for firing
+  shooterLogic.shouldFireLogic(shouldFire);
 }
 
