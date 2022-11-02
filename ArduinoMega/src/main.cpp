@@ -18,6 +18,7 @@
 #include "IMUSensor.h"
 #include "AccelStepper.h"
 #include "MultiStepper.h"
+#include "DriveTrain.h"
 
 // Define const pins for arudino Uno interaction
 const int fireLogicPin = 3;
@@ -45,6 +46,7 @@ const int sonicEchoPin5 = 41;
 
 
 // Define const pins for motor drivers
+
 const int BRdirPin = 22;
 const int BRstepPin = 23;
 const int BLdirPin = 24;
@@ -54,6 +56,8 @@ const int FRstepPin = 27;
 const int FLdirPin = 28;
 const int FLstepPin = 29;
 const int motorInterfaceType = 1;
+const int maxSpeed = 900;
+const int stopSpeed = 0;
 
 // Define volitile variable 
 volatile bool reloadState = 0;
@@ -72,6 +76,7 @@ UnoLogicDriver shooterLogic(fireLogicPin);
 UltrasonicSensor ultrasonic();
 LineSensor line();
 IMUSensor IMU();
+DriveTrain Mover( BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed );
 
 
 
