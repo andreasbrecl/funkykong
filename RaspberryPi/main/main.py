@@ -22,6 +22,12 @@ def executeFunctions():
 
     Output: None
     """
+    while True:
+        # UART variables
+        port = '/dev/ttyACM0'
+        baurdRate = 9600
+        timeout = 1
+
     return
 
 def main():
