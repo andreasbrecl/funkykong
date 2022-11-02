@@ -11,7 +11,7 @@ import serial
 import time
 
 class UARTComms:
-    def __init__(self):
+    def __init__(self, port, baudRate, timeout):
         """
         This function initalizes the object for the serial
         communications.
@@ -20,7 +20,10 @@ class UARTComms:
 
         Output: None
         """
-        pass
+        # Define self vars
+        self.port = port
+        self.baudRate = baudRate
+        self.timeout = timeout
 
     def recieveData():
         """
@@ -43,3 +46,21 @@ class UARTComms:
         Output: None
         """
         pass
+
+    def initalizeUART(self, ser):
+        """
+        This function will create the inital objects needed
+        for serial communication.
+
+        Inputs:  self <object> - Instance of a sepecific class
+
+        Outputs: ser <object> - This is the serial communication object
+        """
+        # Create serial object
+        ser = serial.Serial(self.port, self.baudRate, self.timeout)
+
+        # Reset serial input buffer
+        ser.reset_input_buffer()
+
+        # Return serial information
+        return ser
