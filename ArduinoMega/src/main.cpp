@@ -16,6 +16,8 @@
 #include "UltrasonicSensor.h"
 #include "LineSensor.h"
 #include "IMUSensor.h"
+#include "AccelStepper.h"
+#include "MultiStepper.h"
 
 // Define const pins for arudino Uno interaction
 const int fireLogicPin = 3;
@@ -43,14 +45,15 @@ const int sonicEchoPin5 = 41;
 
 
 // Define const pins for motor drivers
-const int motorDriver1Pin1 = 22;
-const int motorDriver1Pin2 = 23;
-const int motorDriver2Pin1 = 24;
-const int motorDriver2Pin2 = 25;
-const int motorDriver3Pin1 = 26;
-const int motorDriver3Pin2 = 27;
-const int motorDriver4Pin1 = 28;
-const int motorDriver4Pin2 = 29;
+const int BRdirPin = 22;
+const int BRstepPin = 23;
+const int BLdirPin = 24;
+const int BLstepPin = 25;
+const int FRdirPin = 26;
+const int FRstepPin = 27;
+const int FLdirPin = 28;
+const int FLstepPin = 29;
+const int motorInterfaceType = 1;
 
 // Define volitile variable 
 volatile bool reloadState = 0;
@@ -69,6 +72,11 @@ UnoLogicDriver shooterLogic(fireLogicPin);
 UltrasonicSensor ultrasonic();
 LineSensor line();
 IMUSensor IMU();
+
+
+
+
+
 
 // Define functions
 void reloadFunkyKong();

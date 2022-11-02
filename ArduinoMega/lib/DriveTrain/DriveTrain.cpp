@@ -123,6 +123,35 @@ void DriveTrain::Go_Left(){
   Back_Right.runSpeed();
 }
 
+void DriveTrain::Clockwise(){
+  Front_Left.setSpeed(maxSpeed);
+  Front_Right.setSpeed(maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
+  Back_Right.setSpeed(maxSpeed);
+  // Step the motor with a constant speed as set by setSpeed():
+  Front_Left.runSpeed();
+  Front_Right.runSpeed();
+  Back_Left.runSpeed();
+  Back_Right.runSpeed();
+
+
+}
+
+void DriveTrain::CounterClockwise(){
+  Front_Left.setSpeed(-maxSpeed);
+  Front_Right.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
+  Back_Right.setSpeed(-maxSpeed);
+  // Step the motor with a constant speed as set by setSpeed():
+  Front_Left.runSpeed();
+  Front_Right.runSpeed();
+  Back_Left.runSpeed();
+  Back_Right.runSpeed();
+
+
+}
+
+
 void DriveTrain::Go_FLeft(){
 Front_Left.setSpeed(maxSpeed);
 Front_Left.runSpeed();
