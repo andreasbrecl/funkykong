@@ -1,6 +1,6 @@
 // Author: Andreas Brecl
 // MCEN 5115 Mario Kart Balloon Battle
-// 10/24/2020
+// 10/24/2022
 //
 // This script will control the firing logic of the Uno.
 // This will take in the input needed from the arduino

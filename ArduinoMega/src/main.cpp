@@ -1,6 +1,6 @@
 // Author: Andreas Brecl
 // MCEN 5115 Mario Kart Balloon Battle
-// 10/24/2020
+// 10/24/2022
 //
 // Main scripts for operation of the Arduino Mega.
 // The Arduino Uno will be operating the distance, tape sensors, IMU, 
@@ -19,6 +19,7 @@
 #include "AccelStepper.h"
 #include "MultiStepper.h"
 #include "DriveTrain.h"
+#include "LineSensor.h"
 
 // Define const pins for arudino Uno interaction
 const int fireLogicPin = 3;
@@ -29,6 +30,10 @@ const int lineAnalogPin1 = A12;
 const int lineAnalogPin2 = A13;
 const int lineAnalogPin3 = A14;
 const int lineAnalogPin4 = A15;
+const int lineDigitalPin1 = 46;
+const int lineDigitalPin2 = 47;
+const int lineDigitalPin3 = 48;
+const int lineDigitalPin4 = 49;
 
 // Define const pins for ultrasonic sensors
 const int sonicTrigPin1 = 30;
@@ -73,6 +78,9 @@ bool shouldFire = 0;
 // Define distanceVector array
 float* distanceVectorOutput;
 
+// Define line sensor array
+bool* lineSensorVector;
+
 // Serial speed constant
 const int serialSpeed = 9600;
 
@@ -82,6 +90,7 @@ UltrasonicSensor ultrasonic(sonicTrigPin1, sonicTrigPin2, sonicTrigPin3, sonicTr
 LineSensor line();
 IMUSensor IMU(SCAPin, SCLPin, SDOPin, CSPin);
 DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
+LineSensor lineSensor(lineAnalogPin1, lineAnalogPin2, lineAnalogPin3, lineAnalogPin4, lineDigitalPin1, lineDigitalPin2, lineDigitalPin3, lineDigitalPin4);
 
 // Define functions
 void reloadFunkyKong();
@@ -155,6 +164,7 @@ void ExecuteCommands() {
 
   // Pull data from sensors
   distanceVectorOutput = ultrasonic.distanceCalculations();
+  lineSensorVector = lineSensor.lineSensorOutputs();
 
   // Send data to raspberry pi
 
