@@ -6,8 +6,10 @@
 
 #include <Arduino.h>
 #include "IMUSensor.h"
+#include "SparkFunLSM6DSO.h"
+#include "Wire.h"
 
-IMUSensor::IMUSensor(int SCAPin, int SCLPin, int SDOPin, int CSPin) {
+IMUSensor::IMUSensor() {
     /*
     <Enter description>
 
@@ -17,10 +19,7 @@ IMUSensor::IMUSensor(int SCAPin, int SCLPin, int SDOPin, int CSPin) {
     */
 
     // Define variables as internal and private to the class using pointers
-    this->SCAPin = SCAPin;
-    this->SCLPin = SCLPin;
-    this->SDOPin = SDOPin;
-    this->CSPin = CSPin;
+
 
     // Define variables as internal and private to the class using pointers
 
@@ -28,6 +27,7 @@ IMUSensor::IMUSensor(int SCAPin, int SCLPin, int SDOPin, int CSPin) {
     // Initialize the pins on the arduino
     initialize();
 }
+
 
 
 void IMUSensor::initialize() {
@@ -38,7 +38,8 @@ void IMUSensor::initialize() {
     
     Output: None
     */
-
-
+    
+    // Initalize I2C
+    Wire.begin();
 }
 

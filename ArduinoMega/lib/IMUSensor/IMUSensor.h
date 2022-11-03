@@ -4,6 +4,9 @@
 //
 // This sets up the IMU sensor class header file.
 
+#include "SparkFunLSM6DSO.h"
+#include "Wire.h"
+
 class IMUSensor {
     /*
     This class will determine the readings on the IMU sensor.
@@ -13,7 +16,7 @@ class IMUSensor {
     public:
 
         // Define objects in class
-        IMUSensor(int, int, int, int);
+        IMUSensor();
 
     // Define private values
     private:
@@ -21,10 +24,10 @@ class IMUSensor {
         // Define private functions in class
         void initialize();
 
+        // Define private objects
+        LSM6DSO myIMU;
+
         // Define int private variables
-        int SCAPin;
-        int SCLPin;
-        int SDOPin;
-        int CSPin;
+
     
 };
