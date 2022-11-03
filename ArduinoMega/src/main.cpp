@@ -70,12 +70,15 @@ int driveMode = 0;
 // Define boolian vars
 bool shouldFire = 0;
 
+// Define distanceVector array
+float* distanceVectorOutput;
+
 // Serial speed constant
 const int serialSpeed = 9600;
 
 // Create objects for classes
 UnoLogicDriver shooterLogic(fireLogicPin);
-UltrasonicSensor ultrasonic();
+UltrasonicSensor ultrasonic(sonicTrigPin1, sonicTrigPin2, sonicTrigPin3, sonicTrigPin4, sonicTrigPin5, sonicEchoPin1, sonicEchoPin2, sonicEchoPin3, sonicEchoPin4, sonicEchoPin5);
 LineSensor line();
 IMUSensor IMU(SCAPin, SCLPin, SDOPin, CSPin);
 DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
@@ -147,7 +150,7 @@ void ExecuteCommands() {
   }
 
   // Pull data from sensors
-
+  distanceVectorOutput = ultrasonic.distanceCalculations();
 
   // Send data to raspberry pi
 
