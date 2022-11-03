@@ -72,5 +72,3 @@ void UnoLogicDriver::initialize() {
     // Set output as low
     digitalWrite(fireLogicPin, OFF);
 }
-
-// <LS:123,234,456,234!>
