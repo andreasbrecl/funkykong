@@ -99,11 +99,13 @@ void setup() {
   // Set serial speed
   Serial.begin(serialSpeed);
 
+  /*
   // Set up system interupt
   pinMode(reloadLogicPin, INPUT_PULLUP);
 
   // Define interrupt pin
   attachInterrupt(digitalPinToInterrupt(reloadLogicPin), reloadFunkyKong, RISING);
+  */
 }
 
 void loop() {
@@ -118,17 +120,19 @@ void loop() {
   ExecuteCommands();
 }
 
-void reloadFunkyKong() {
-  /*
-  This function sets the reloadState variable to one. This is only activated when
-  a system interrupt is recieved by the arduino uno.
 
-  Input: None
+// void reloadFunkyKong() {
+//  /*
+//  This function sets the reloadState variable to one. This is only activated when
+//  a system interrupt is recieved by the arduino uno.
+//
+//  Input: None
+//
+//  Output: None
+//  */
+//  reloadState = 1;
+//}
 
-  Output: None
-  */
-  reloadState = 1;
-}
 
 void ExecuteCommands() {
   /*
