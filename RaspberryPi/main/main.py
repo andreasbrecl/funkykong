@@ -10,6 +10,8 @@ It will take in the data, then determine the motion planning required
 to put the system into the correct location.
 """
 
+# Import classes
+from lib.uart_comms import UARTComms
 
 
 def executeFunctions():
@@ -22,13 +24,20 @@ def executeFunctions():
 
     Output: None
     """
-    while True:
-        # UART variables
-        port = '/dev/ttyACM0'
-        baurdRate = 9600
-        timeout = 1
+    # UART variables
+    port = '/dev/ttyACM0'
+    baudRate = 9600
+    timeout = 1
 
-    return
+    # Create UART object
+    UART = UARTComms(port, baudRate, timeout)
+
+    # Initialize UART communications
+    ser = UART.initalizeUART()
+
+    while True:
+        # Recieve UART comms data
+        inputtedData = UART.recieveData(ser)
 
 def main():
     """

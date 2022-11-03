@@ -61,24 +61,6 @@ class UARTComms:
         # Write serial data
         ser.write(motorDataBytes)
 
-    def initalizeUART(self, ser):
-        """
-        This function will create the inital objects needed
-        for serial communication.
-
-        Inputs:  self <object> - Instance of a sepecific class
-
-        Outputs: ser <object> - This is the serial communication object
-        """
-        # Create serial object
-        ser = serial.Serial(self.port, self.baudRate, self.timeout)
-
-        # Reset serial input buffer
-        ser.reset_input_buffer()
-
-        # Return serial information
-        return ser
-
     def decodeInputtedData(self, recievedData):
         """
         This function will determine specific readings of
@@ -117,3 +99,21 @@ class UARTComms:
 
         # Return data
         return inputtedData
+
+    def initalizeUART(self, ser):
+        """
+        This function will create the inital objects needed
+        for serial communication.
+
+        Inputs:  self <object> - Instance of a sepecific class
+
+        Outputs: ser <object> - This is the serial communication object
+        """
+        # Create serial object
+        ser = serial.Serial(self.port, self.baudRate, self.timeout)
+
+        # Reset serial input buffer
+        ser.reset_input_buffer()
+
+        # Return serial information
+        return ser
