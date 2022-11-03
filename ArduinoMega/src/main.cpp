@@ -47,12 +47,6 @@ const int sonicEchoPin3 = 35;
 const int sonicEchoPin4 = 37;
 const int sonicEchoPin5 = 41;
 
-// Define const pins for IMU
-const int SCAPin = 10;
-const int SCLPin = 11;
-const int SDOPin = 12;
-const int CSPin = 13;
-
 // Define const pins for motor drivers
 const int BRdirPin = 22;
 const int BRstepPin = 23;
@@ -88,7 +82,7 @@ const int serialSpeed = 9600;
 UnoLogicDriver shooterLogic(fireLogicPin);
 UltrasonicSensor ultrasonic(sonicTrigPin1, sonicTrigPin2, sonicTrigPin3, sonicTrigPin4, sonicTrigPin5, sonicEchoPin1, sonicEchoPin2, sonicEchoPin3, sonicEchoPin4, sonicEchoPin5);
 LineSensor line();
-IMUSensor IMU(SCAPin, SCLPin, SDOPin, CSPin);
+IMUSensor IMU();
 DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
 LineSensor lineSensor(lineAnalogPin1, lineAnalogPin2, lineAnalogPin3, lineAnalogPin4, lineDigitalPin1, lineDigitalPin2, lineDigitalPin3, lineDigitalPin4);
 
