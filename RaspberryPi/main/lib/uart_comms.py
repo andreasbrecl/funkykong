@@ -9,6 +9,7 @@ communications between the raspberry pi and arduino.
 # Import libraries
 import serial
 import time
+import re
 
 class UARTComms:
     def __init__(self, port, baudRate, timeout):
@@ -25,27 +26,40 @@ class UARTComms:
         self.baudRate = baudRate
         self.timeout = timeout
 
-    def recieveData():
+    def recieveData(self, ser):
         """
         This function will deal with recieveing data from
         the Arduino UART serial communcations.
 
-        Input:  None
+        Input:  ser <object> - This is the serial communication
+                self <object> - Instance of a sepecific class
 
-        Output: None
+        Output: inputedData <str> - String of sensor input from Arduino
         """
-        pass
+        # Pull UART Data
+        recievedData = ser.readline().decode('utf-8').rstrip()
 
-    def writeData():
+        # Seperate data
+        inputtedData = self.decodeInputtedData(recievedData)
+
+        # return UART data
+        return inputtedData
+
+    def writeData(ser, motorData):
         """
         This function will deal with sending data from the
         Arudino UART serial communcations.
 
-        Input:  None
+        Input:  motorData <str> - Information for how motors should move
+                ser <object> - This is the serial communication
 
         Output: None
         """
-        pass
+        # Convert message to bytes
+        motorDataBytes = bytes(motorData, 'utf-8')
+
+        # Write serial data
+        ser.write(motorDataBytes)
 
     def initalizeUART(self, ser):
         """
@@ -64,3 +78,42 @@ class UARTComms:
 
         # Return serial information
         return ser
+
+    def decodeInputtedData(self, recievedData):
+        """
+        This function will determine specific readings of
+        each sensor. The inputted data will be read in 
+        the following way.
+        format: <ls!X,ls@X,ls#X,ls$X,us!XXX.X,us@XXX.X,us#XXX.X,us$XXX.X,us$XXX.X,us%XXX.X,imu!XXX.X>
+
+        Input:  recievedData <str> - Data passed by arduino
+                self <object> - Instance of a sepecific class
+
+        Output: inputtedData <list><int> - Data values of sensors in a list
+        """
+        # Split the data 
+        splitData = recievedData.split(",")
+
+        # Pull line sensor data
+        lineSensorReading1 = splitData[0][4]
+        lineSensorReading2 = splitData[1][3]
+        lineSensorReading3 = splitData[2][3]
+        lineSensorReading4 = splitData[3][3]
+
+        # Pull ultra sonic sensor data
+        ultrasonicSensorReading1 = splitData[4][3:8]
+        ultrasonicSensorReading2 = splitData[5][3:8]
+        ultrasonicSensorReading3 = splitData[6][3:8]
+        ultrasonicSensorReading4 = splitData[7][3:8]
+        ultrasonicSensorReading5 = splitData[8][3:8]
+
+        # Pull IMU data
+        IMUSensorReading = splitData[9][4:9]
+
+        # Combine into output
+        inputtedData = [lineSensorReading1,lineSensorReading2,lineSensorReading3,lineSensorReading4,\
+            ultrasonicSensorReading1,ultrasonicSensorReading2,ultrasonicSensorReading3,ultrasonicSensorReading4,\
+                ultrasonicSensorReading5,IMUSensorReading]
+
+        # Return data
+        return inputtedData
