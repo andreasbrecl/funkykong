@@ -78,7 +78,7 @@ UnoLogicDriver shooterLogic(fireLogicPin);
 UltrasonicSensor ultrasonic();
 LineSensor line();
 IMUSensor IMU(SCAPin, SCLPin, SDOPin, CSPin);
-DriveTrain Mover( BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed );
+DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
 
 // Define functions
 void reloadFunkyKong();

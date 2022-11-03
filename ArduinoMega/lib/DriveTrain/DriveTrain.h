@@ -14,7 +14,7 @@ class DriveTrain {
         
 
         // Define objects in class
-        DriveTrain(int, int, int, int, int, int,  int, int, int);
+        DriveTrain(int, int, int, int, int, int, int, int, int, int, int);
 
         void forward();
         void Go_Right();
@@ -25,12 +25,15 @@ class DriveTrain {
         void Go_Left();
         void Go_FLeft();
         void Go_FLeftB();
+        void Clockwise();
+        void CounterClockwise();
 
 
         AccelStepper Front_Left;
-        AccelStepper Front_Right ;
+        AccelStepper Front_Right;
         AccelStepper Back_Left;
         AccelStepper Back_Right; 
+
     // Define private values
     private:
 
@@ -48,7 +51,8 @@ class DriveTrain {
         int FLdirPin;
         int FLstepPin;
         int motorInterfaceType;
-    
+        int maxSpeed;
+        int stopSpeed;
         
 
         void initialize();
