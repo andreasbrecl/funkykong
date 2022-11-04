@@ -14,42 +14,26 @@ class UltrasonicSensor {
     public:
 
         // Define objects in class
-        UltrasonicSensor(int, int, int, int, int, int, int, int, int, int);
+        UltrasonicSensor(int, int);
 
         // Define output int variables
-        int distance1;
-        int distance2;
-        int distance3;
-        int distance4;
-        int distance5;
+        float distance;
 
         // Predefine float vector
-        static float distanceVector[5];
+        float distanceValue;
 
         // Define functions
-        float* distanceCalculations();
+        float distanceCalculations();
 
     // Define private values
     private:
 
         // Define pin int private variables
-        int sonicTrigPin1;
-        int sonicTrigPin2;
-        int sonicTrigPin3;
-        int sonicTrigPin4;
-        int sonicTrigPin5;
-        int sonicEchoPin1;
-        int sonicEchoPin2;
-        int sonicEchoPin3;
-        int sonicEchoPin4;
-        int sonicEchoPin5;
+        int sonicTrigPin;
+        int sonicEchoPin;
 
         // Define duration long private variables
-        long duration1;
-        long duration2;
-        long duration3;
-        long duration4;
-        long duration5;
+        long duration;
 
         // Delay timings
         int clearDelay = 2;

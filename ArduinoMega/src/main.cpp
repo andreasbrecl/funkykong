@@ -73,7 +73,11 @@ int driveMode = 0;
 bool shouldFire = 0;
 
 // Define distanceVector array
-float* distanceVectorOutput;
+float distanceValue1;
+float distanceValue2;
+float distanceValue3;
+float distanceValue4;
+float distanceValue5;
 
 // Define line sensor values
 bool lineSensorValue1;
@@ -94,7 +98,11 @@ const int serialSpeed = 9600;
 
 // Create objects for classes
 UnoLogicDriver shooterLogic(fireLogicPin);
-UltrasonicSensor ultrasonic(sonicTrigPin1, sonicTrigPin2, sonicTrigPin3, sonicTrigPin4, sonicTrigPin5, sonicEchoPin1, sonicEchoPin2, sonicEchoPin3, sonicEchoPin4, sonicEchoPin5);
+UltrasonicSensor ultrasonic1(sonicTrigPin1, sonicEchoPin1);
+UltrasonicSensor ultrasonic2(sonicTrigPin2, sonicEchoPin2);
+UltrasonicSensor ultrasonic3(sonicTrigPin3, sonicEchoPin3);
+UltrasonicSensor ultrasonic4(sonicTrigPin4, sonicEchoPin4);
+UltrasonicSensor ultrasonic5(sonicTrigPin5, sonicEchoPin5);
 IMUSensor IMU;
 DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
 LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
@@ -173,7 +181,11 @@ void ExecuteCommands() {
   }
 
   // Pull data from sensors
-  distanceVectorOutput = ultrasonic.distanceCalculations();
+  distanceValue1 = ultrasonic1.distanceCalculations();
+  distanceValue2 = ultrasonic2.distanceCalculations();
+  distanceValue3 = ultrasonic3.distanceCalculations();
+  distanceValue4 = ultrasonic4.distanceCalculations();
+  distanceValue5 = ultrasonic5.distanceCalculations();
   lineSensorValue1 = lineSensor1.lineSensorOutputs();
   lineSensorValue2 = lineSensor2.lineSensorOutputs();
   lineSensorValue3 = lineSensor3.lineSensorOutputs();

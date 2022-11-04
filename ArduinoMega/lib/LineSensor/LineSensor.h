@@ -4,6 +4,8 @@
 //
 // This sets up the Line sensor class header file.
 
+#pragma once
+
 class LineSensor {
     /*
     This class will determine the boolean readings of the line
