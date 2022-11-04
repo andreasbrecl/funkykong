@@ -14,33 +14,21 @@ class LineSensor {
     public:
 
         // Define objects in class
-        LineSensor(int,int,int,int,int,int,int,int);
-
-        // Define line sensor output variables
-        bool lineSensorReading1;
-        bool lineSensorReading2;
-        bool lineSensorReading3;
-        bool lineSensorReading4;
+        LineSensor(int,int);
 
         // Create line sensor reading array
-        static bool lineSensorVector[4];
+        bool lineSensorValue;
 
         // Define functions
-        bool* lineSensorOutputs();
+        bool lineSensorOutputs();
 
 
     // Define private values
     private:
 
         // Define private int vars in class
-        int lineAnalogPin1;
-        int lineAnalogPin2;
-        int lineAnalogPin3;
-        int lineAnalogPin4;
-        int lineDigitalPin1;
-        int lineDigitalPin2;
-        int lineDigitalPin3;
-        int lineDigitalPin4;
+        int lineAnalogPin;
+        int lineDigitalPin;
 
         // Define private functions in class
         void initialize();

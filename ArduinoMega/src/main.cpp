@@ -75,8 +75,11 @@ bool shouldFire = 0;
 // Define distanceVector array
 float* distanceVectorOutput;
 
-// Define line sensor array
-bool* lineSensorVector;
+// Define line sensor values
+bool lineSensorValue1;
+bool lineSensorValue2;
+bool lineSensorValue3;
+bool lineSensorValue4;
 
 // Define IMU array
 double* IMUReadingsVector;
@@ -94,7 +97,10 @@ UnoLogicDriver shooterLogic(fireLogicPin);
 UltrasonicSensor ultrasonic(sonicTrigPin1, sonicTrigPin2, sonicTrigPin3, sonicTrigPin4, sonicTrigPin5, sonicEchoPin1, sonicEchoPin2, sonicEchoPin3, sonicEchoPin4, sonicEchoPin5);
 IMUSensor IMU;
 DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
-LineSensor lineSensor(lineAnalogPin1, lineAnalogPin2, lineAnalogPin3, lineAnalogPin4, lineDigitalPin1, lineDigitalPin2, lineDigitalPin3, lineDigitalPin4);
+LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
+LineSensor lineSensor2(lineAnalogPin2, lineDigitalPin2);
+LineSensor lineSensor3(lineAnalogPin3, lineDigitalPin3);
+LineSensor lineSensor4(lineAnalogPin4, lineDigitalPin4);
 
 // Define functions
 void reloadFunkyKong();
@@ -168,11 +174,14 @@ void ExecuteCommands() {
 
   // Pull data from sensors
   distanceVectorOutput = ultrasonic.distanceCalculations();
-  lineSensorVector = lineSensor.lineSensorOutputs();
+  lineSensorValue1 = lineSensor1.lineSensorOutputs();
+  lineSensorValue2 = lineSensor2.lineSensorOutputs();
+  lineSensorValue3 = lineSensor3.lineSensorOutputs();
+  lineSensorValue4 = lineSensor4.lineSensorOutputs();
   IMUReadingsVector = IMU.calculateAngle(angle);
 
   // Send data to raspberry pi
-  
+
   
   // Pull data from raspberry pi
 

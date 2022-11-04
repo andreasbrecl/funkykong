@@ -24,6 +24,37 @@ SerialComms::SerialComms() {
     initalize();
 }
 
+void SerialComms::sendSerial() {
+    /*
+    This function will send UART serial comms to the raspberry pi.
+
+    Input:  None
+
+    Output: None
+    */
+    
+    // Print serial data
+    Serial.println(sendCommand);
+}
+
+String SerialComms::recieveSerial() {
+    /*
+    This function will send UART serial comms to the raspberry pi.
+
+    Input:  None
+
+    Output: None
+    */
+    // See if string data is avaliable
+    if (Serial.available() > 0) {
+
+        // Pull data
+        inputCommand = Serial.readStringUntil('\n');
+    }
+
+    return inputCommand;
+}
+
 void SerialComms::initalize() {
     /*
     This function initalizes the serial comms.
@@ -32,5 +63,5 @@ void SerialComms::initalize() {
 
     Output: None
     */
-   
+
 }

@@ -16,9 +16,19 @@ class SerialComms {
         // Define objects in class
         SerialComms();
 
+        // Define public functions
+        void sendSerial();
+        String recieveSerial();
+
+        // Define public string vars
+        String inputCommand;
+
     // Define private values
     private:
 
         // Define private funcitons
         void initalize();
+
+        // Define string
+        String sendCommand;
 };
