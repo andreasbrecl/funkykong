@@ -11,24 +11,18 @@
 
 IMUSensor::IMUSensor() {
     /*
-    <Enter description>
+    This function initalizes the IMU object.
 
     Input: None
     
     Output: None
     */
-
-    // Define variables as internal and private to the class using pointers
-
-
-    // Define variables as internal and private to the class using pointers
-
-
+   
     // Initialize the pins on the arduino
     initialize();
 }
 
-IMUSensor::IMUOutputs IMUSensor::calculateAngle(float angle) {
+double* IMUSensor::calculateAngle(double angle) {
     /*
     This function calculates the current angle of the system.
 
@@ -56,12 +50,12 @@ IMUSensor::IMUOutputs IMUSensor::calculateAngle(float angle) {
     // Calculate angle
     angle = (1 - alpha)*(angle + gyroX * dt)+(alpha)*(accelX);
 
-    // Define IMUOuputs
-    currentIMU.angle = angle;
-    currentIMU.time2 = time2;
+    // Define array
+    IMUReadingsVector[0] = angle;
+    IMUReadingsVector[1] = time2;
 
     // Return data
-    return currentIMU;
+    return IMUReadingsVector;
 }
 
 float IMUSensor::readGyro() {

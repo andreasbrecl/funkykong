@@ -15,27 +15,21 @@ class IMUSensor {
     // Define public values
     public:
 
-        // Define struct
-        struct IMUOutputs {
-            float angle;
-            long int time2;
-        };
-
-        // Define struct object
-        IMUOutputs currentIMU;
-
         // Define objects in class
         IMUSensor();
 
         // Define public functions in class
-        IMUOutputs calculateAngle(float);
+        double* calculateAngle(double);
 
         // Define public float variables
-        float angle;
+        double angle;
 
         // Define public long int
-        long int time1;
-        long int time2;
+        double time1;
+        double time2;
+
+        // Define output array
+        static double IMUReadingsVector[2];
 
     // Define private values
     private:
@@ -52,8 +46,8 @@ class IMUSensor {
         float gyroX;
         float accelX;
         float alpha;
-        float tau = 0.25;
-        
+        float tau = 1/1000;
+
         // Define long int private variables
         long int dt;
 };
