@@ -57,6 +57,8 @@ const int FRdirPin = 26;
 const int FRstepPin = 27;
 const int FLdirPin = 28;
 const int FLstepPin = 29;
+
+// Define motor int vars
 const int motorInterfaceType = 1;
 const int maxSpeed = 900;
 const int stopSpeed = 0;
@@ -170,7 +172,7 @@ void ExecuteCommands() {
   IMUReadingsVector = IMU.calculateAngle(angle);
 
   // Send data to raspberry pi
-
+  
   
   // Pull data from raspberry pi
 

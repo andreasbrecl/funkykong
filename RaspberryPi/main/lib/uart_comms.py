@@ -55,6 +55,9 @@ class UARTComms:
 
         Output: None
         """
+        # Add delimiter
+        motorData = motorData + "\n"
+
         # Convert message to bytes
         motorDataBytes = bytes(motorData, 'utf-8')
 
