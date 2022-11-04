@@ -14,7 +14,7 @@ class DriveTrain {
         
 
         // Define objects in class
-        DriveTrain(int, int, int, int, int, int,  int, int, int);
+        DriveTrain(int, int, int, int, int, int,  int, int, int, int, int);
 
         void forward();
         void Go_Right();
@@ -22,9 +22,13 @@ class DriveTrain {
         void Diag_FLeft();
         void Diag_BLeft();
         void Diag_BRight();
+        void Clockwise();
+        void CounterClockwise();
         void Go_Left();
         void Go_FLeft();
         void Go_FLeftB();
+        void Stop();
+        
 
 
         AccelStepper Front_Left;
@@ -48,6 +52,8 @@ class DriveTrain {
         int FLdirPin;
         int FLstepPin;
         int motorInterfaceType;
+        int maxSpeed;
+        int stopSpeed;
     
         
 
