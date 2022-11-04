@@ -75,6 +75,11 @@ float* distanceVectorOutput;
 // Define line sensor array
 bool* lineSensorVector;
 
+// Initalize angle and time
+float angle = 0;
+long int time1 = 0;
+long int time2 = 0;
+
 // Serial speed constant
 const int serialSpeed = 9600;
 
