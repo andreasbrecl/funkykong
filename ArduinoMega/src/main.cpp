@@ -20,6 +20,7 @@
 #include "MultiStepper.h"
 #include "DriveTrain.h"
 #include "LineSensor.h"
+#include "SerialComms.h"
 
 // Define const pins for arudino Uno interaction
 const int fireLogicPin = 3;
@@ -169,7 +170,7 @@ void ExecuteCommands() {
   IMUReadingsVector = IMU.calculateAngle(angle);
 
   // Send data to raspberry pi
-  
+
   
   // Pull data from raspberry pi
 
