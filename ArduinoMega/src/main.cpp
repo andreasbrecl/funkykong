@@ -86,12 +86,12 @@ bool lineSensorValue3;
 bool lineSensorValue4;
 
 // Define IMU array
-double* IMUReadingsVector;
+double IMUReadings;
 
 // Initalize angle and time
 float angle = 0;
-long int time1 = 0;
-long int time2 = 0;
+double time1 = 0;
+double time2 = 0;
 
 // Serial speed constant
 const int serialSpeed = 9600;
@@ -190,7 +190,8 @@ void ExecuteCommands() {
   lineSensorValue2 = lineSensor2.lineSensorOutputs();
   lineSensorValue3 = lineSensor3.lineSensorOutputs();
   lineSensorValue4 = lineSensor4.lineSensorOutputs();
-  IMUReadingsVector = IMU.calculateAngle(angle);
+  IMUReadings = IMU.calculateAngle(angle, time1);
+  time1 = millis();
 
   // Send data to raspberry pi
 

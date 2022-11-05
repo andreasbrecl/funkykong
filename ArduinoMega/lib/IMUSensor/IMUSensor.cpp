@@ -22,7 +22,7 @@ IMUSensor::IMUSensor() {
     initialize();
 }
 
-double* IMUSensor::calculateAngle(double angle) {
+double IMUSensor::calculateAngle(double angle, double time1) {
     /*
     This function calculates the current angle of the system.
 
@@ -43,19 +43,16 @@ double* IMUSensor::calculateAngle(double angle) {
     dt = time2 - time1;
 
     // Calculate alpha
-    time2 = millis();
-    
     alpha = (tau)/(tau + dt);
 
     // Calculate angle
     angle = (1 - alpha)*(angle + gyroX * dt)+(alpha)*(accelX);
 
     // Define array
-    IMUReadingsVector[0] = angle;
-    IMUReadingsVector[1] = time2;
+    IMUReadings = angle;
 
     // Return data
-    return IMUReadingsVector;
+    return IMUReadings;
 }
 
 float IMUSensor::readGyro() {

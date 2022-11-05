@@ -19,7 +19,7 @@ class IMUSensor {
         IMUSensor();
 
         // Define public functions in class
-        double* calculateAngle(double);
+        double calculateAngle(double, double);
 
         // Define public float variables
         double angle;
@@ -29,7 +29,7 @@ class IMUSensor {
         double time2;
 
         // Define output array
-        static double IMUReadingsVector[2];
+        double IMUReadings;
 
     // Define private values
     private:
