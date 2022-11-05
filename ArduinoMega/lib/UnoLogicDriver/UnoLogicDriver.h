@@ -4,6 +4,9 @@
 //
 // This sets up the Arduino Uno shooting logic class header file.
 
+#ifndef UNOLOGICDRIVER_H
+#define UNOLOGICDRIVER_H
+
 class UnoLogicDriver {
     /*
     This class will determine the communication logic for sending shooting
@@ -36,3 +39,5 @@ class UnoLogicDriver {
         void initialize();
     
 };
+
+#endif

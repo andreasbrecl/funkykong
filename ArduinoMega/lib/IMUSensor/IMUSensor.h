@@ -7,6 +7,9 @@
 #include "SparkFunLSM6DSO.h"
 #include "Wire.h"
 
+#ifndef IMUSENSOR_H
+#define IMUSENSOR_H
+
 class IMUSensor {
     /*
     This class will determine the readings on the IMU sensor.
@@ -51,3 +54,5 @@ class IMUSensor {
         // Define long int private variables
         long int dt;
 };
+
+#endif

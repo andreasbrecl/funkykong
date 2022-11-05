@@ -4,7 +4,8 @@
 //
 // This sets up the Line sensor class header file.
 
-#pragma once
+#ifndef LINESENSOR_H
+#define LINESENSOR_H
 
 class LineSensor {
     /*
@@ -36,3 +37,5 @@ class LineSensor {
         void initialize();
     
 };
+
+#endif

@@ -4,6 +4,9 @@
 //
 // This sets up the serial comms sensor class header file.
 
+#ifndef SERIALCOMMS_H
+#define SERIALCOMMS_H
+
 class SerialComms {
     /*
     This class will deal with sending and recieving the
@@ -32,3 +35,5 @@ class SerialComms {
         // Define string
         String sendCommand;
 };
+
+#endif

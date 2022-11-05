@@ -4,6 +4,9 @@
 //
 // This sets up the Ultrasonic sensor class header file.
 
+#ifndef ULTRASONICSENSOR_H
+#define ULTRASONICSENSOR_H
+
 class UltrasonicSensor {
     /*
     This call will deal with collecting the data from the
@@ -46,3 +49,5 @@ class UltrasonicSensor {
         void initialize();
     
 };
+
+#endif
