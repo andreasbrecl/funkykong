@@ -26,7 +26,13 @@ class UARTComms:
         self.baudRate = baudRate
         self.timeout = timeout
 
-    def recieveData(self, ser):
+        # Create serial object
+        ser = serial.Serial(self.port, self.baudRate, self.timeout)
+
+        # Reset serial input buffer
+        ser.reset_input_buffer()
+
+    def recieveData(self):
         """
         This function will deal with recieveing data from
         the Arduino UART serial communcations.
@@ -37,7 +43,7 @@ class UARTComms:
         Output: inputedData <str> - String of sensor input from Arduino
         """
         # Pull UART Data
-        recievedData = ser.readline().decode('utf-8').rstrip()
+        recievedData = self.ser.readline().decode('utf-8').rstrip()
 
         # Seperate data
         inputtedData = self.decodeInputtedData(recievedData)
@@ -45,7 +51,7 @@ class UARTComms:
         # return UART data
         return inputtedData
 
-    def writeData(ser, motorData):
+    def writeData(self, motorData):
         """
         This function will deal with sending data from the
         Arudino UART serial communcations.
@@ -62,7 +68,7 @@ class UARTComms:
         motorDataBytes = bytes(motorData, 'utf-8')
 
         # Write serial data
-        ser.write(motorDataBytes)
+        self.ser.write(motorDataBytes)
 
     def decodeInputtedData(self, recievedData):
         """
@@ -102,21 +108,3 @@ class UARTComms:
 
         # Return data
         return inputtedData
-
-    def initalizeUART(self, ser):
-        """
-        This function will create the inital objects needed
-        for serial communication.
-
-        Inputs:  self <object> - Instance of a sepecific class
-
-        Outputs: ser <object> - This is the serial communication object
-        """
-        # Create serial object
-        ser = serial.Serial(self.port, self.baudRate, self.timeout)
-
-        # Reset serial input buffer
-        ser.reset_input_buffer()
-
-        # Return serial information
-        return ser

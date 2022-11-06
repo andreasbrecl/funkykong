@@ -32,12 +32,9 @@ def executeFunctions():
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
 
-    # Initialize UART communications
-    ser = UART.initalizeUART()
-
     while True:
         # Recieve UART comms data
-        inputtedData = UART.recieveData(ser)
+        inputtedData = UART.recieveData()
 
 def main():
     """
