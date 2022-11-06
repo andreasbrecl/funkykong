@@ -86,14 +86,14 @@ class UARTComms:
         lineSensorReading4 = splitData[3][3]
 
         # Pull ultra sonic sensor data
-        ultrasonicSensorReading1 = splitData[4][3:8]
-        ultrasonicSensorReading2 = splitData[5][3:8]
-        ultrasonicSensorReading3 = splitData[6][3:8]
-        ultrasonicSensorReading4 = splitData[7][3:8]
-        ultrasonicSensorReading5 = splitData[8][3:8]
+        ultrasonicSensorReading1 = splitData[4][3:-1]
+        ultrasonicSensorReading2 = splitData[5][3:-1]
+        ultrasonicSensorReading3 = splitData[6][3:-1]
+        ultrasonicSensorReading4 = splitData[7][3:-1]
+        ultrasonicSensorReading5 = splitData[8][3:-1]
 
         # Pull IMU data
-        IMUSensorReading = splitData[9][4:9]
+        IMUSensorReading = splitData[9][4:-1]
 
         # Combine into output
         inputtedData = [lineSensorReading1,lineSensorReading2,lineSensorReading3,lineSensorReading4,\

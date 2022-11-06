@@ -20,8 +20,20 @@ class SerialComms {
         SerialComms();
 
         // Define public functions
-        void sendSerial();
+        void sendSerial(float,float,float,float,float,bool,bool,bool,bool,double);
         String recieveSerial();
+
+        // Define public vars
+        float distanceValue1;
+        float distanceValue2;
+        float distanceValue3;
+        float distanceValue4;
+        float distanceValue5;
+        bool lineSensorValue1;
+        bool lineSensorValue2;
+        bool lineSensorValue3;
+        bool lineSensorValue4;
+        double IMUReadings;
 
         // Define public string vars
         String inputCommand;
@@ -31,9 +43,6 @@ class SerialComms {
 
         // Define private funcitons
         void initalize();
-
-        // Define string
-        String sendCommand;
 };
 
 #endif

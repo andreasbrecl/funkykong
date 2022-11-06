@@ -24,7 +24,7 @@ SerialComms::SerialComms() {
     initalize();
 }
 
-void SerialComms::sendSerial() {
+void SerialComms::sendSerial(float distanceValue1, float distanceValue2, float distanceValue3, float distanceValue4, float distanceValue5, bool lineSensorValue1, bool lineSensorValue2, bool lineSensorValue3, bool lineSensorValue4, double IMUReadings) {
     /*
     This function will send UART serial comms to the raspberry pi.
 
@@ -34,7 +34,27 @@ void SerialComms::sendSerial() {
     */
     
     // Print serial data
-    Serial.println(sendCommand);
+    Serial.print("<ls!");
+    Serial.print(lineSensorValue1);
+    Serial.print(",ls@");
+    Serial.print(lineSensorValue2);
+    Serial.print(",ls#");
+    Serial.print(lineSensorValue3);
+    Serial.print(",ls$");
+    Serial.print(lineSensorValue4);
+    Serial.print(",us!");
+    Serial.print(distanceValue1,1);
+    Serial.print(",us@");
+    Serial.print(distanceValue2,1);
+    Serial.print(",us#");
+    Serial.print(distanceValue3,1);
+    Serial.print(",us$");
+    Serial.print(distanceValue4,1);
+    Serial.print(",us%");
+    Serial.print(distanceValue5,1);
+    Serial.print(",imu!");
+    Serial.print(IMUReadings,1);
+    Serial.println(">");
 }
 
 String SerialComms::recieveSerial() {
@@ -63,5 +83,4 @@ void SerialComms::initalize() {
 
     Output: None
     */
-
 }

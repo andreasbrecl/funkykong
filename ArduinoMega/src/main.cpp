@@ -6,7 +6,7 @@
 // The Arduino Uno will be operating the distance, tape sensors, IMU, 
 // and motor drivers.
 
-// Include general Arudino libraries
+// Include general Arudino/C++ libraries
 #include <Arduino.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -66,8 +66,8 @@ const int stopSpeed = 0;
 // Define volitile variable 
 volatile bool reloadState = 0;
 
-// Define vehicle mode (0) - don't move, (1) - move to fire position, (2) - return to reload
-int driveMode = 0;
+// Define vehicle mode 
+String driveMode = "A";
 
 // Define boolian vars
 bool shouldFire = 0;
@@ -109,6 +109,7 @@ LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
 LineSensor lineSensor2(lineAnalogPin2, lineDigitalPin2);
 LineSensor lineSensor3(lineAnalogPin3, lineDigitalPin3);
 LineSensor lineSensor4(lineAnalogPin4, lineDigitalPin4);
+SerialComms serialComms;
 
 // Define functions
 void reloadFunkyKong();
@@ -194,10 +195,11 @@ void ExecuteCommands() {
   time1 = millis();
 
   // Send data to raspberry pi
-
+  serialComms.sendSerial(distanceValue1, distanceValue2, distanceValue3, distanceValue4, distanceValue5,
+    lineSensorValue1, lineSensorValue2, lineSensorValue3, lineSensorValue4, IMUReadings);
   
   // Pull data from raspberry pi
-
+  driveMode = serialComms.recieveSerial();
 
   // Send information to motor drivers
 
