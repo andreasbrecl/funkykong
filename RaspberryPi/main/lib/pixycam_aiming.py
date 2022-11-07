@@ -1,5 +1,9 @@
 """
-Author: Andreas Brecl
-Date: 11/2/2022
+Author: 
+Date: 
 
 """
+
+class PixycamAiming:
+    def __init__(self) -> None:
+        pass
