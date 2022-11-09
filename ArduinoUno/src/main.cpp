@@ -20,6 +20,7 @@
 const int fireLogicPin = 2;
 const int servoPin = 3;
 const int reloadLogicPin = 4;
+const int triggerRelayPin = 5;
 
 // Define time constants
 const int fireTimeDelay = 1500;
@@ -35,7 +36,7 @@ const int serialSpeed = 9600;
 int timesFired = 0;
 
 // Create objects for class
-Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition);
+Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition, triggerRelayPin);
 
 // Define functions
 void ExecuteCommands();
