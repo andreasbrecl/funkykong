@@ -33,13 +33,69 @@ void DriveTrain::initialize() {
     this->Front_Right = AccelStepper(motorInterfaceType, FRstepPin, FRdirPin);
     this->Back_Left = AccelStepper(motorInterfaceType, BLstepPin, BLdirPin);
     this->Back_Right = AccelStepper(motorInterfaceType, BRstepPin, BRdirPin);
+
+  Front_Left.setMaxSpeed(1500);
+  Front_Right.setMaxSpeed(1000);
+  Back_Left.setMaxSpeed(1000);
+  Back_Right.setMaxSpeed(1000);
+}
+
+void DriveTrain::processCommand(String driveMode){
+  if(driveMode == "forward"){
+          forward();
+        }
+        else if(driveMode == "backward"){
+          backward();
+        }
+        else if(driveMode == "left"){
+          Go_Left();
+        }
+        else if(driveMode == "right"){
+          Go_Right();
+        }
+        if(driveMode == "fleft"){
+          Diag_FLeft();
+        }
+        else if(driveMode == "bleft"){
+          Diag_BLeft();
+        }
+        else if(driveMode == "fright"){
+          Diag_FRight();
+        }
+        else if(driveMode == "bright"){
+          Diag_BRight();
+        }
+        else if(driveMode == "ccw"){
+          CounterClockwise();
+        }
+        else if (driveMode == "cw"){
+          Clockwise();
+        }
+        else if(driveMode == "Shtop"){
+          Stop();
+          
+        }
 }
 
 void DriveTrain::forward(){
   Front_Left.setSpeed(maxSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
   Back_Right.setSpeed(-maxSpeed);
+  // Step the motor with a constant speed as set by setSpeed():
+  Front_Left.runSpeed();
+  Front_Right.runSpeed();
+  Back_Left.runSpeed();
+  Back_Right.runSpeed();
+
+
+}
+
+void DriveTrain::backward(){
+  Front_Left.setSpeed(-maxSpeed);
+  Front_Right.setSpeed(maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
+  Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -53,7 +109,7 @@ void DriveTrain::forward(){
 void DriveTrain::Go_Right(){
   Front_Left.setSpeed(maxSpeed);
   Front_Right.setSpeed(maxSpeed);
-  Back_Left.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
   Back_Right.setSpeed(-maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
@@ -77,7 +133,7 @@ void DriveTrain::Diag_FRight(){
 void DriveTrain::Diag_FLeft(){
   Front_Left.setSpeed(stopSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
   Back_Right.setSpeed(stopSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
@@ -102,7 +158,7 @@ void DriveTrain::Diag_BLeft(){
 void DriveTrain::Diag_BRight(){
   Front_Left.setSpeed(stopSpeed);
   Front_Right.setSpeed(maxSpeed);
-  Back_Left.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
   Back_Right.setSpeed(stopSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
@@ -114,7 +170,7 @@ void DriveTrain::Diag_BRight(){
 void DriveTrain::Go_Left(){
   Front_Left.setSpeed(-maxSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
   Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
@@ -126,7 +182,7 @@ void DriveTrain::Go_Left(){
 void DriveTrain::Clockwise(){
   Front_Left.setSpeed(maxSpeed);
   Front_Right.setSpeed(maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
   Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
@@ -140,7 +196,7 @@ void DriveTrain::Clockwise(){
 void DriveTrain::CounterClockwise(){
   Front_Left.setSpeed(-maxSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
   Back_Right.setSpeed(-maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
