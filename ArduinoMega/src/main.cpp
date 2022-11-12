@@ -202,7 +202,7 @@ void ExecuteCommands() {
   driveMode = serialComms.recieveSerial();
 
   // Send information to motor drivers
-
+  // ENTER DRIVEMODE COMMAND HERE
 
   // Send logic to weapon for firing
   shooterLogic.shouldFireLogic(shouldFire);
