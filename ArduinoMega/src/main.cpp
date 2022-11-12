@@ -172,15 +172,6 @@ void ExecuteCommands() {
   Output: None
   */
 
-  // Check if reload state is set to one
-  if (reloadState == 1) {
-    // Set function here to change state
-    driveMode = 2;
-
-    // Set reload state back to 0
-    reloadState = 0;
-  }
-
   // Pull data from sensors
   distanceValue1 = ultrasonic1.distanceCalculations();
   distanceValue2 = ultrasonic2.distanceCalculations();
