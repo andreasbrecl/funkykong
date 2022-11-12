@@ -23,7 +23,7 @@ class Shooter {
         int timesFired;
 
         // Define objects in class
-        Shooter(int, int, int, int, int, int);
+        Shooter(int, int, int, int, int, int, int);
 
         // Define functions in class
         int shoot(int);
@@ -41,6 +41,7 @@ class Shooter {
         int fireTimeDelay;
         int servoLoadPosition;
         int servoFirePosition;
+        int triggerRelayPin;
         
         // Define bool private variables
         bool shouldFire;

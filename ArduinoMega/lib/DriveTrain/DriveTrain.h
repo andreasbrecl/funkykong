@@ -32,9 +32,10 @@ class DriveTrain {
 
 
         AccelStepper Front_Left;
-        AccelStepper Front_Right ;
+        AccelStepper Front_Right;
         AccelStepper Back_Left;
         AccelStepper Back_Right; 
+
     // Define private values
     private:
 

@@ -1,8 +1,11 @@
 // Author: Andreas Brecl
 // MCEN 5115 Mario Kart Balloon Battle
-// 10/24/2020
+// 10/24/2022
 //
 // This sets up the Arduino Uno shooting logic class header file.
+
+#ifndef UNOLOGICDRIVER_H
+#define UNOLOGICDRIVER_H
 
 class UnoLogicDriver {
     /*
@@ -36,3 +39,5 @@ class UnoLogicDriver {
         void initialize();
     
 };
+
+#endif

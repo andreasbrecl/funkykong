@@ -23,6 +23,7 @@ DriveTrain::DriveTrain(int BRdirPin, int BRstepPin, int BLdirPin, int BLstepPin,
     this->motorInterfaceType = motorInterfaceType;
     this->maxSpeed = maxSpeed;
     this->stopSpeed = stopSpeed;
+    
     // Initialize the pins on the Arduino
     initialize();
 }
