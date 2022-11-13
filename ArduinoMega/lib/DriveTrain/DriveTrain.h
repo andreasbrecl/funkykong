@@ -16,18 +16,8 @@ class DriveTrain {
         // Define objects in class
         DriveTrain(int, int, int, int, int, int,  int, int, int, int, int);
 
-        void forward();
-        void Go_Right();
-        void Diag_FRight();
-        void Diag_FLeft();
-        void Diag_BLeft();
-        void Diag_BRight();
-        void Clockwise();
-        void CounterClockwise();
-        void Go_Left();
-        void Go_FLeft();
-        void Go_FLeftB();
-        void Stop();
+        
+        void processCommand(String);
         
 
 
@@ -56,7 +46,19 @@ class DriveTrain {
         int maxSpeed;
         int stopSpeed;
     
-        
+        void forward();
+        void backward();
+        void Go_Right();
+        void Diag_FRight();
+        void Diag_FLeft();
+        void Diag_BLeft();
+        void Diag_BRight();
+        void Clockwise();
+        void CounterClockwise();
+        void Go_Left();
+        void Go_FLeft();
+        void Go_FLeftB();
+        void Stop();
 
         void initialize();
 
