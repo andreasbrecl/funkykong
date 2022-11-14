@@ -55,43 +55,7 @@ int Shooter::shoot(int timesFired) {
     // Define variables as internal and private to the class using pointers
     this->timesFired = timesFired;
     
-    // Check if should fire command recieved
-    shouldFire = digitalRead(fireLogicPin);
-    if (1 == 1) {
-        // Turn on shooter
-        digitalWrite(triggerRelayPin, HIGH);
 
-        // Set servo in load position
-        servo1.write(servoLoadPosition);
-
-        // Delay for 1.5 seconds
-        delay(fireTimeDelay);
-
-        // Set servo in fire position
-        servo1.write(servoFirePosition);
-
-        // Delay for 1.5 seconds
-        delay(fireTimeDelay);
-        
-        // Increment times fired logic
-        ++timesFired;
-    } else {
-        // Turn on shooter
-        digitalWrite(triggerRelayPin, LOW);
-    }
-
-    // Check if all rounds are fired
-    if (timesFired >= 12) {
-
-        // Turn on shooter
-        digitalWrite(triggerRelayPin, LOW);
-
-        // Send signal to other arduino
-        returnToReloadSignal();
-
-        // Reset counter
-        timesFired = 0;
-    }
 
     return timesFired;
 }
