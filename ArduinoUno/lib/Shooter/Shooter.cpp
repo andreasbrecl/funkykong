@@ -57,19 +57,18 @@ int Shooter::shoot(int timesFired) {
     
     // Check if should fire command recieved
     shouldFire = digitalRead(fireLogicPin);
-    if (shouldFire == ON) {
-
+    if (1 == 1) {
         // Turn on shooter
         digitalWrite(triggerRelayPin, HIGH);
 
         // Set servo in load position
-        servo.write(servoLoadPosition);
+        servo1.write(servoLoadPosition);
 
         // Delay for 1.5 seconds
         delay(fireTimeDelay);
 
         // Set servo in fire position
-        servo.write(servoFirePosition);
+        servo1.write(servoFirePosition);
 
         // Delay for 1.5 seconds
         delay(fireTimeDelay);
@@ -139,6 +138,6 @@ void Shooter::initialize() {
     digitalWrite(triggerRelayPin, LOW);
 
     // Set initial servo position
-    servo.attach(servoPin);
-    servo.write(servoFirePosition);
+    servo1.attach(servoPin);
+    servo1.write(servoFirePosition);
 }

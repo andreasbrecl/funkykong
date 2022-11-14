@@ -15,6 +15,9 @@ class Shooter {
     // Define public values
     public:
 
+        // Define Servo object
+        Servo servo1;
+
         // Define general values for shooter on and off
         #define ON true
         #define OFF false
@@ -27,12 +30,10 @@ class Shooter {
 
         // Define functions in class
         int shoot(int);
+        void initialize();
 
     // Define private values
     private:
-
-        // Define Servo object
-        Servo servo;
 
         // Define int private variables
         int fireLogicPin;
@@ -48,7 +49,6 @@ class Shooter {
         bool shouldReload;
 
         // Define private functions in class
-        void initialize();
         void returnToReloadSignal();
 
 };
