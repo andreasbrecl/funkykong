@@ -4,6 +4,7 @@
 //
 // This sets up the Shooter class header file.
 
+#include <Arduino.h>
 #include "Servo.h"
 
 class Shooter {
