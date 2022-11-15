@@ -65,6 +65,7 @@ void loop() {
   Output: None
   */
   ExecuteCommands();
+  
 }
 
 void ExecuteCommands() {
@@ -79,4 +80,6 @@ void ExecuteCommands() {
 
   // Activate the shooting functionality from the shooting class
   timesFired = shooter.shoot(timesFired);
+
+  delay(fireTimeDelay);
 }

@@ -35,6 +35,9 @@ Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTim
     this->servoLoadPosition = servoLoadPosition;
     this->servoFirePosition = servoFirePosition;
     this->triggerRelayPin = triggerRelayPin;
+
+    // Define Servo
+    this->servo1 = Servo();
     
     // Initialize the pins on the Arduino
     initialize();
@@ -140,4 +143,6 @@ void Shooter::initialize() {
     // Set initial servo position
     servo1.attach(servoPin);
     servo1.write(servoFirePosition);
+
+    //delay(5);
 }
