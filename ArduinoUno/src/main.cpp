@@ -9,8 +9,6 @@
 
 // Include general Arduino librariess
 #include <Arduino.h>
-#include <stdint.h>
-#include <inttypes.h>
 
 // Inlcude custom libraries
 #include "Servo.h"
@@ -38,9 +36,6 @@ int timesFired = 0;
 // Create objects for class
 Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition, triggerRelayPin);
 
-// Define functions
-void ExecuteCommands();
-
 // Run setup code
 void setup() {
   /*
@@ -67,5 +62,4 @@ void loop() {
 
   // Activate the shooting functionality from the shooting class
   timesFired = shooter.shoot(timesFired);
-  
 }

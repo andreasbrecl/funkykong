@@ -37,7 +37,10 @@ Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTim
     this->triggerRelayPin = triggerRelayPin;
 
     // Define Servo
-    this->servo1 = Servo();
+    Servo servo_inital;
+
+    // Make new servo
+    servo1 = servo_inital;
     
     // Initialize the pins on the Arduino
     initialize();
