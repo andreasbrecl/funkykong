@@ -41,9 +41,15 @@ Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTim
 
     // Make new servo
     servo1 = servo_inital;
-    
-    // Initialize the pins on the Arduino
-    initialize();
+
+    // Define pin out/in values
+    pinMode(reloadLogicPin, OUTPUT);
+    pinMode(fireLogicPin, INPUT);
+    pinMode(triggerRelayPin, OUTPUT);
+
+    // Set initial output as low
+    digitalWrite(reloadLogicPin, LOW);
+    digitalWrite(triggerRelayPin, LOW);
 }
 
 int Shooter::shoot(int timesFired) {
@@ -132,15 +138,6 @@ void Shooter::initialize() {
     
     Output: None
     */
-
-    // Define pin out/in values
-    pinMode(reloadLogicPin, OUTPUT);
-    pinMode(fireLogicPin, INPUT);
-    pinMode(triggerRelayPin, OUTPUT);
-
-    // Set initial output as low
-    digitalWrite(reloadLogicPin, LOW);
-    digitalWrite(triggerRelayPin, LOW);
 
     // Set initial servo position
     servo1.attach(servoPin);

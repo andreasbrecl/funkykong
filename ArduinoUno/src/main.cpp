@@ -48,6 +48,9 @@ void setup() {
 
   // Set serial speed
   Serial.begin(serialSpeed);
+
+  // Initalize servo
+  shooter.initialize();
 }
 
 void loop() {
