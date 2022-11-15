@@ -69,7 +69,7 @@ int Shooter::shoot(int timesFired) {
     
     // Check if should fire command recieved
     shouldFire = digitalRead(fireLogicPin);
-    if (1 == 1) {
+    if (shouldFire == ON) {
         // Turn on shooter
         digitalWrite(triggerRelayPin, HIGH);
 
