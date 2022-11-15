@@ -57,19 +57,6 @@ void setup() {
 
 void loop() {
   /*
-  Main script look that runs commands to get proessing started. This is simple
-  to prevent complication from building here.
-
-  Input: None
-
-  Output: None
-  */
-  ExecuteCommands();
-  
-}
-
-void ExecuteCommands() {
-  /*
   This function runs the other functions for the core processes on the Arduino
   Uno. In this case it runs just the shooting function.
 
@@ -80,6 +67,5 @@ void ExecuteCommands() {
 
   // Activate the shooting functionality from the shooting class
   timesFired = shooter.shoot(timesFired);
-
-  delay(fireTimeDelay);
+  
 }

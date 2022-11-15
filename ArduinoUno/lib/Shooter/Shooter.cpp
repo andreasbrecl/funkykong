@@ -132,7 +132,6 @@ void Shooter::initialize() {
 
     // Define pin out/in values
     pinMode(reloadLogicPin, OUTPUT);
-    pinMode(servoPin, OUTPUT);
     pinMode(fireLogicPin, INPUT);
     pinMode(triggerRelayPin, OUTPUT);
 
@@ -143,6 +142,4 @@ void Shooter::initialize() {
     // Set initial servo position
     servo1.attach(servoPin);
     servo1.write(servoFirePosition);
-
-    //delay(5);
 }
