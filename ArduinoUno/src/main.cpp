@@ -9,8 +9,6 @@
 
 // Include general Arduino librariess
 #include <Arduino.h>
-#include <stdint.h>
-#include <inttypes.h>
 
 // Inlcude custom libraries
 #include "Servo.h"
@@ -35,10 +33,8 @@ const int serialSpeed = 9600;
 // Define fire logic
 int timesFired = 0;
 
-Servo servo1;
-
-// Define functions
-void ExecuteCommands();
+// Create objects for class
+Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition, triggerRelayPin);
 
 // Run setup code
 void setup() {
@@ -52,55 +48,15 @@ void setup() {
 
   // Set serial speed
   Serial.begin(serialSpeed);
-  // Define pin out/in values
-  pinMode(reloadLogicPin, OUTPUT);
-  pinMode(servoPin, OUTPUT);
-  pinMode(fireLogicPin, INPUT);
-  pinMode(triggerRelayPin, OUTPUT);
 
-  // Set initial output as low
-  digitalWrite(reloadLogicPin, LOW);
-  digitalWrite(triggerRelayPin, LOW);
-
-  // Set initial servo position
-  servo1.attach(servoPin);
-  servo1.write(servoFirePosition);
+  // Initalize servo
+  shooter.initialize();
 }
 
 void loop() {
   /*
-  Main script look that runs commands to get proessing started. This is simple
-  to prevent complication from building here.
-
-  Input: None
-
-  Output: None
-  */
-  if (1 == 1) {
-      // Turn on shooter
-      digitalWrite(triggerRelayPin, HIGH);
-
-      // Set servo in load position
-      servo1.write(servoLoadPosition);
-
-      // Delay for 1.5 seconds
-      delay(fireTimeDelay);
-
-      // Set servo in fire position
-      servo1.write(servoFirePosition);
-
-      // Delay for 1.5 seconds
-      delay(fireTimeDelay);
-      
-      // Increment times fired logic
-      ++timesFired;
-  } else {
-      // Turn on shooter
-      digitalWrite(triggerRelayPin, LOW);
-  }
-
-  // Check if all rounds are fired
-  if (timesFired >= 12) {
+  This function runs the other functions for the core processes on the Arduino
+  Uno. In this case it runs just the shooting function.
 
       // Turn on shooter
       digitalWrite(triggerRelayPin, LOW);
