@@ -1,10 +1,12 @@
 // Author: Andreas Brecl
 // MCEN 5115 Mario Kart Balloon Battle
-// 10/24/2020
+// 10/24/2022
 //
-// This script is a cope of the main script for arduino, specifically for driving and nothing else.
+// Main scripts for operation of the Arduino Mega.
+// The Arduino Uno will be operating the distance, tape sensors, IMU, 
+// and motor drivers.
 
-// Include general Arudino libraries
+// Include general Arudino/C++ libraries
 #include <Arduino.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -17,6 +19,8 @@
 #include "AccelStepper.h"
 #include "MultiStepper.h"
 #include "DriveTrain.h"
+#include "LineSensor.h"
+#include "SerialComms.h"
 
 // Define const pins for arudino Uno interaction
 const int fireLogicPin = 3;
@@ -27,6 +31,10 @@ const int lineAnalogPin1 = A12;
 const int lineAnalogPin2 = A13;
 const int lineAnalogPin3 = A14;
 const int lineAnalogPin4 = A15;
+const int lineDigitalPin1 = 46;
+const int lineDigitalPin2 = 47;
+const int lineDigitalPin3 = 48;
+const int lineDigitalPin4 = 49;
 
 // Define const pins for ultrasonic sensors
 const int sonicTrigPin1 = 30;
@@ -40,19 +48,22 @@ const int sonicEchoPin3 = 35;
 const int sonicEchoPin4 = 37;
 const int sonicEchoPin5 = 41;
 
-// Define const pins for IMU
-
-
 // Define const pins for motor drivers
 
+
+const int FRdirPin = 25;
+const int FLdirPin = 24;
+const int BLdirPin = 23;
 const int BRdirPin = 22;
-const int BRstepPin = 23;
-const int BLdirPin = 24;
-const int BLstepPin = 25;
-const int FRdirPin = 26;
-const int FRstepPin = 27;
-const int FLdirPin = 28;
-const int FLstepPin = 29;
+
+const int FRstepPin = 29;
+const int FLstepPin = 28;
+const int BLstepPin = 27;
+const int BRstepPin = 26;
+
+
+
+// Define motor int vars
 const int motorInterfaceType = 1;
 const int maxSpeed = 200;
 const int stopSpeed = 0;
@@ -60,26 +71,50 @@ const int stopSpeed = 0;
 // Define volitile variable 
 volatile bool reloadState = 0;
 
-// Define vehicle mode (0) - don't move, (1) - move to fire position, (2) - return to reload
-int driveMode = 0;
+// Define vehicle mode 
+String driveMode = "A";
 
 // Define boolian vars
 bool shouldFire = 0;
+
+// Define distanceVector array
+float distanceValue1;
+float distanceValue2;
+float distanceValue3;
+float distanceValue4;
+float distanceValue5;
+
+// Define line sensor values
+bool lineSensorValue1;
+bool lineSensorValue2;
+bool lineSensorValue3;
+bool lineSensorValue4;
+
+// Define IMU array
+double IMUReadings;
+
+// Initalize angle and time
+float angle = 0;
+double time1 = 0;
+double time2 = 0;
 
 // Serial speed constant
 const int serialSpeed = 9600;
 
 // Create objects for classes
 UnoLogicDriver shooterLogic(fireLogicPin);
-UltrasonicSensor ultrasonic();
-LineSensor line();
-IMUSensor IMU();
-DriveTrain Mover( BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed );
-
-
-
-
-
+UltrasonicSensor ultrasonic1(sonicTrigPin1, sonicEchoPin1);
+UltrasonicSensor ultrasonic2(sonicTrigPin2, sonicEchoPin2);
+UltrasonicSensor ultrasonic3(sonicTrigPin3, sonicEchoPin3);
+UltrasonicSensor ultrasonic4(sonicTrigPin4, sonicEchoPin4);
+UltrasonicSensor ultrasonic5(sonicTrigPin5, sonicEchoPin5);
+IMUSensor IMU;
+DriveTrain Mover(BRdirPin, BRstepPin, BLdirPin, BLstepPin, FRdirPin, FRstepPin, FLdirPin, FLstepPin, motorInterfaceType, maxSpeed, stopSpeed);
+LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
+LineSensor lineSensor2(lineAnalogPin2, lineDigitalPin2);
+LineSensor lineSensor3(lineAnalogPin3, lineDigitalPin3);
+LineSensor lineSensor4(lineAnalogPin4, lineDigitalPin4);
+SerialComms serialComms;
 
 // Define functions
 void reloadFunkyKong();
@@ -97,11 +132,13 @@ void setup() {
   // Set serial speed
   Serial.begin(serialSpeed);
 
+  /*
   // Set up system interupt
   pinMode(reloadLogicPin, INPUT_PULLUP);
 
   // Define interrupt pin
   attachInterrupt(digitalPinToInterrupt(reloadLogicPin), reloadFunkyKong, RISING);
+  */
 }
 
 void loop() {
@@ -112,27 +149,23 @@ void loop() {
   Input: None
 
   Output: None
-  
-   ExecuteCommands();
-   */
-
-  ExecuteCommands();
-
-
-  
-}
-
-void reloadFunkyKong() {
-  /*
-  This function sets the reloadState variable to one. This is only activated when
-  a system interrupt is recieved by the arduino uno.
-
-  Input: None
-
-  Output: None
   */
-  reloadState = 1;
+  ExecuteCommands();
 }
+
+
+// void reloadFunkyKong() {
+//  /*
+//  This function sets the reloadState variable to one. This is only activated when
+//  a system interrupt is recieved by the arduino uno.
+//
+//  Input: None
+//
+//  Output: None
+//  */
+//  reloadState = 1;
+//}
+
 
 void ExecuteCommands() {
   /*
@@ -144,38 +177,30 @@ void ExecuteCommands() {
   Output: None
   */
 
-  // Check if reload state is set to one
-  if (reloadState == 1) {
-    // Set function here to change state
-    
-    
-    // Set reload state back to 0
-    reloadState = 0;
-  }
-
+  /*
   // Pull data from sensors
-
+  distanceValue1 = ultrasonic1.distanceCalculations();
+  distanceValue2 = ultrasonic2.distanceCalculations();
+  distanceValue3 = ultrasonic3.distanceCalculations();
+  distanceValue4 = ultrasonic4.distanceCalculations();
+  distanceValue5 = ultrasonic5.distanceCalculations();
+  lineSensorValue1 = lineSensor1.lineSensorOutputs();
+  lineSensorValue2 = lineSensor2.lineSensorOutputs();
+  lineSensorValue3 = lineSensor3.lineSensorOutputs();
+  lineSensorValue4 = lineSensor4.lineSensorOutputs();
+  IMUReadings = IMU.calculateAngle(angle, time1);
+  time1 = millis();
 
   // Send data to raspberry pi
-
-  
+  serialComms.sendSerial(distanceValue1, distanceValue2, distanceValue3, distanceValue4, distanceValue5,
+    lineSensorValue1, lineSensorValue2, lineSensorValue3, lineSensorValue4, IMUReadings);
+  */
   // Pull data from raspberry pi
-
+  driveMode = serialComms.recieveSerial();
   
-  if (Serial.available() > 0) {
-      String driveMode = Serial.readStringUntil('\n');
-      //Serial.print("You sent me: ");
-      Mover.processCommand(driveMode);
-      // Serial.println(driveMode);
-        
-
- 
-    }
-
-
-  
+  Mover.processCommand(driveMode);
   // Send information to motor drivers
-
+  // ENTER DRIVEMODE COMMAND HERE
 
   // Send logic to weapon for firing
   shooterLogic.shouldFireLogic(shouldFire);

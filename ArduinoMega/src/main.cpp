@@ -49,18 +49,23 @@ const int sonicEchoPin4 = 37;
 const int sonicEchoPin5 = 41;
 
 // Define const pins for motor drivers
+
+
+const int FRdirPin = 25;
+const int FLdirPin = 24;
+const int BLdirPin = 23;
 const int BRdirPin = 22;
-const int BRstepPin = 23;
-const int BLdirPin = 24;
-const int BLstepPin = 25;
-const int FRdirPin = 26;
-const int FRstepPin = 27;
-const int FLdirPin = 28;
-const int FLstepPin = 29;
+
+const int FRstepPin = 29;
+const int FLstepPin = 28;
+const int BLstepPin = 27;
+const int BRstepPin = 26;
+
+
 
 // Define motor int vars
 const int motorInterfaceType = 1;
-const int maxSpeed = 900;
+const int maxSpeed = 200;
 const int stopSpeed = 0;
 
 // Define volitile variable 
@@ -172,6 +177,7 @@ void ExecuteCommands() {
   Output: None
   */
 
+  /*
   // Pull data from sensors
   distanceValue1 = ultrasonic1.distanceCalculations();
   distanceValue2 = ultrasonic2.distanceCalculations();
@@ -188,10 +194,11 @@ void ExecuteCommands() {
   // Send data to raspberry pi
   serialComms.sendSerial(distanceValue1, distanceValue2, distanceValue3, distanceValue4, distanceValue5,
     lineSensorValue1, lineSensorValue2, lineSensorValue3, lineSensorValue4, IMUReadings);
-  
+  */
   // Pull data from raspberry pi
   driveMode = serialComms.recieveSerial();
-
+  
+  Mover.processCommand(driveMode);
   // Send information to motor drivers
   // ENTER DRIVEMODE COMMAND HERE
 
