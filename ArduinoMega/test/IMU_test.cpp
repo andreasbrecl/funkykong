@@ -93,6 +93,5 @@ void ExecuteCommands() {
   IMUReadings = IMU.calculateAngle(angle, time1);
   time1 = millis();
   Serial.println(IMUReadings);
-  Serial.println("Test");
 }
 
