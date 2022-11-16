@@ -1,8 +1,10 @@
 // Author: Andreas Brecl
 // MCEN 5115 Mario Kart Balloon Battle
-// 11/16/2022
+// 10/24/2022
 //
-// Test script for line sensor.
+// Main scripts for operation of the Arduino Mega.
+// The Arduino Uno will be operating the distance, tape sensors, IMU, 
+// and motor drivers.
 
 // Include general Arudino/C++ libraries
 #include <Arduino.h>
@@ -10,26 +12,24 @@
 #include <inttypes.h>
 
 // Inlcude custom libraries
-#include "LineSensor.h"
+#include "UltrasonicSensor.h"
 
-// Define const pins for line sensors
-const int lineAnalogPin1 = A12;
-const int lineDigitalPin1 = 46;
+// Define const pins for arudino Uno interaction
+const int fireLogicPin = 3;
+const int reloadLogicPin = 2; 
 
-// Define line sensor values
-bool lineSensorValue1;
-bool lineSensorValue2;
-bool lineSensorValue3;
-bool lineSensorValue4;
+// Define const pins for ultrasonic sensors
+const int sonicTrigPin1 = 30;
+const int sonicEchoPin1 = 31;
 
-// Define IMU array
-double IMUReadings;
+// Define distanceVector array
+float distanceValue1;
 
 // Serial speed constant
 const int serialSpeed = 9600;
 
 // Create objects for classes
-LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
+UltrasonicSensor ultrasonic1(sonicTrigPin1, sonicEchoPin1);
 
 // Define functions
 void reloadFunkyKong();
@@ -69,6 +69,19 @@ void loop() {
 }
 
 
+// void reloadFunkyKong() {
+//  /*
+//  This function sets the reloadState variable to one. This is only activated when
+//  a system interrupt is recieved by the arduino uno.
+//
+//  Input: None
+//
+//  Output: None
+//  */
+//  reloadState = 1;
+//}
+
+
 void ExecuteCommands() {
   /*
   This function runs the other functions for the core processes on the Arduino
@@ -80,7 +93,7 @@ void ExecuteCommands() {
   */
 
   // Pull data from sensors
-  lineSensorValue1 = lineSensor1.lineSensorOutputs();
-  Serial.println(lineSensorValue1);
+  distanceValue1 = ultrasonic1.distanceCalculations();
+  Serial.println(distanceValue1);
 }
 
