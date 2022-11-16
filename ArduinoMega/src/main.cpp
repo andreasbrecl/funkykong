@@ -89,6 +89,7 @@ void ExecuteCommands() {
   Output: None
   */
 
+  /*
   // Pull data from sensors
   IMUReadings = IMU.calculateAngle(angle, time1);
   time1 = millis();
