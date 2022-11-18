@@ -17,13 +17,6 @@ IMUSensor::IMUSensor() {
     
     Output: None
     */
-   
-    // Define objects
-    LSM6DSO myIMU1;
-    myIMU = myIMU1;
-
-    // Initialize the pins on the arduino
-    initialize();
 }
 
 double IMUSensor::calculateAngle(double angle, double time1) {
@@ -39,6 +32,9 @@ double IMUSensor::calculateAngle(double angle, double time1) {
     // Pull data
     gyroX = readGyro();
     accelX = readAccel();
+
+    Serial.println(gyroX);
+    Serial.println(accelX);
 
     // Calculate time 2
     time2 = millis();
@@ -98,7 +94,12 @@ void IMUSensor::initialize() {
     Output: None
     */
     
+    // Define objects
+    LSM6DSO myIMU1;
+    myIMU = myIMU1;
+
     // Initalize I2C
     Wire.begin();
+    Serial.print("123");
 }
 

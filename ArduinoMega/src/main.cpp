@@ -42,8 +42,9 @@ void setup() {
   */
 
   // Set serial speed
+  IMU.initialize();
   Serial.begin(serialSpeed);
-
+  Serial.println("START");
   /*
   // Set up system interupt
   pinMode(reloadLogicPin, INPUT_PULLUP);
@@ -88,12 +89,10 @@ void ExecuteCommands() {
 
   Output: None
   */
-
-  /*
   // Pull data from sensors
-  IMUReadings = IMU.calculateAngle(angle, time1);
-  time1 = millis();
+  //IMUReadings = IMU.calculateAngle(angle, time1);
+  IMUReadings = IMU.readGyro();
+  //time1 = millis();
   Serial.println(IMUReadings);
-  Serial.println("Test");
 }
 
