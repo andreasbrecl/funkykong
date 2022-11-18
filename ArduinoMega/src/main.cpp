@@ -42,8 +42,9 @@ void setup() {
   */
 
   // Set serial speed
-  IMU.initialize();
   Serial.begin(serialSpeed);
+  delay(500); 
+  IMU.initialize();
   Serial.println("START");
   /*
   // Set up system interupt
@@ -91,8 +92,8 @@ void ExecuteCommands() {
   */
   // Pull data from sensors
   //IMUReadings = IMU.calculateAngle(angle, time1);
-  IMUReadings = IMU.readGyro();
+  //Serial.println("IM HERE");
+  IMUReadings = IMU.readAccel();
   //time1 = millis();
   Serial.println(IMUReadings);
 }
-

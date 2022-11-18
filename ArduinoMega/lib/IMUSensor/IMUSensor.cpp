@@ -80,6 +80,7 @@ float IMUSensor::readAccel() {
     Output: accelX <float> - Accel reading in rad/s
     */
     accelX = myIMU.readFloatAccelX();
+    accelX = 0;
 
     // Return info
     return accelX;
@@ -96,10 +97,10 @@ void IMUSensor::initialize() {
     
     // Define objects
     LSM6DSO myIMU1;
-    myIMU = myIMU1;
+    this->myIMU = myIMU1;
 
     // Initalize I2C
     Wire.begin();
-    Serial.print("123");
+    delay(10);
 }
 

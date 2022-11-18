@@ -40,7 +40,7 @@ class IMUSensor {
         float readAccel();
 
     // Define private values
-    private:
+    //private:
 
         // Define private objects
         LSM6DSO myIMU;
