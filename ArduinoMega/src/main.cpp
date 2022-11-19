@@ -12,21 +12,44 @@
 #include <inttypes.h>
 
 // Inlcude custom libraries
-#include "IMUSensor.h"
+#include "UltrasonicSensor.h"
 
-// Define IMU array
-double IMUReadings;
+// Define const pins for arudino Uno interaction
+const int fireLogicPin = 3;
+const int reloadLogicPin = 2; 
 
-// Initalize angle and time
-float angle = 0;
-double time1 = 0;
-double time2 = 0;
+// Define const pins for ultrasonic sensors
+const int sonicTrigPin1 = 48;
+const int sonicEchoPin1 = 45;
+
+const int sonicTrigPin2 = 49;
+const int sonicEchoPin2 = 42;
+
+const int sonicTrigPin3 = 44;
+const int sonicEchoPin3 = 41;
+
+const int sonicTrigPin4 = 47;
+const int sonicEchoPin4 = 40;
+
+const int sonicTrigPin5 = 46;
+const int sonicEchoPin5 = 43;
+
+// Define distanceVector array
+float distanceValue1;
+float distanceValue2;
+float distanceValue3;
+float distanceValue4;
+float distanceValue5;
 
 // Serial speed constant
 const int serialSpeed = 9600;
 
 // Create objects for classes
-IMUSensor IMU;
+UltrasonicSensor ultrasonic1(sonicTrigPin1, sonicEchoPin1);
+UltrasonicSensor ultrasonic2(sonicTrigPin2, sonicEchoPin2);
+UltrasonicSensor ultrasonic3(sonicTrigPin3, sonicEchoPin3);
+UltrasonicSensor ultrasonic4(sonicTrigPin4, sonicEchoPin4);
+UltrasonicSensor ultrasonic5(sonicTrigPin5, sonicEchoPin5);
 
 // Define functions
 void reloadFunkyKong();
@@ -43,9 +66,7 @@ void setup() {
 
   // Set serial speed
   Serial.begin(serialSpeed);
-  delay(500); 
-  IMU.initialize();
-  Serial.println("START");
+
   /*
   // Set up system interupt
   pinMode(reloadLogicPin, INPUT_PULLUP);
@@ -90,10 +111,22 @@ void ExecuteCommands() {
 
   Output: None
   */
+
   // Pull data from sensors
-  //IMUReadings = IMU.calculateAngle(angle, time1);
-  //Serial.println("IM HERE");
-  IMUReadings = IMU.readAccel();
-  //time1 = millis();
-  Serial.println(IMUReadings);
+  distanceValue1 = ultrasonic1.distanceCalculations();
+  Serial.print("Distance 1:");
+  Serial.println(distanceValue1);
+  distanceValue2 = ultrasonic2.distanceCalculations();
+  Serial.print("Distance 2:");
+  Serial.println(distanceValue2);
+  distanceValue3 = ultrasonic3.distanceCalculations();
+  Serial.print("Distance 3:");  
+  Serial.println(distanceValue3);
+  distanceValue4 = ultrasonic4.distanceCalculations();
+  Serial.print("Distance 4:");
+  Serial.println(distanceValue4);
+  distanceValue5 = ultrasonic5.distanceCalculations();
+    Serial.print("Distance 5:");
+  Serial.println(distanceValue5);
 }
+

@@ -33,9 +33,6 @@ double IMUSensor::calculateAngle(double angle, double time1) {
     gyroX = readGyro();
     accelX = readAccel();
 
-    Serial.println(gyroX);
-    Serial.println(accelX);
-
     // Calculate time 2
     time2 = millis();
 
@@ -46,10 +43,10 @@ double IMUSensor::calculateAngle(double angle, double time1) {
     alpha = (tau)/(tau + dt);
 
     // Calculate angle
-    angle = (1 - alpha)*(angle + gyroX * dt)+(alpha)*(accelX);
+    angleNew = (1 - alpha)*(angle + gyroX * dt)+(alpha)*(accelX);
 
     // Define array
-    IMUReadings = angle;
+    IMUReadings = angleNew;
 
     // Return data
     return IMUReadings;
@@ -80,7 +77,6 @@ float IMUSensor::readAccel() {
     Output: accelX <float> - Accel reading in rad/s
     */
     accelX = myIMU.readFloatAccelX();
-    accelX = 0;
 
     // Return info
     return accelX;
@@ -96,11 +92,13 @@ void IMUSensor::initialize() {
     */
     
     // Define objects
-    LSM6DSO myIMU1;
-    this->myIMU = myIMU1;
+    //LSM6DSO myIMU1;
+    //this->myIMU = myIMU1;
 
     // Initalize I2C
     Wire.begin();
     delay(10);
+    myIMU.begin();
+    myIMU.initialize(BASIC_SETTINGS);
 }
 

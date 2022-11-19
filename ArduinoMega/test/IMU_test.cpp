@@ -13,12 +13,13 @@
 
 // Inlcude custom libraries
 #include "IMUSensor.h"
+#include "SparkFunLSM6DSO.h"
 
 // Define IMU array
 double IMUReadings;
 
 // Initalize angle and time
-float angle = 0;
+double angle = 0;
 double time1 = 0;
 double time2 = 0;
 
@@ -27,6 +28,7 @@ const int serialSpeed = 9600;
 
 // Create objects for classes
 IMUSensor IMU;
+LSM6DSO myIMU;
 
 // Define functions
 void reloadFunkyKong();
@@ -45,7 +47,6 @@ void setup() {
   Serial.begin(serialSpeed);
   delay(500); 
   IMU.initialize();
-  Serial.println("START");
   /*
   // Set up system interupt
   pinMode(reloadLogicPin, INPUT_PULLUP);
@@ -91,10 +92,7 @@ void ExecuteCommands() {
   Output: None
   */
   // Pull data from sensors
-  //IMUReadings = IMU.calculateAngle(angle, time1);
-  //Serial.println("IM HERE");
-  IMUReadings = IMU.readAccel();
-  //time1 = millis();
-  Serial.println(IMUReadings);
+  angle = IMU.calculateAngle(angle, time1);
+  time1 = millis();
+  Serial.println(angle);
 }
-

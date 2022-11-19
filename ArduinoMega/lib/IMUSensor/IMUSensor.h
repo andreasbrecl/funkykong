@@ -27,6 +27,7 @@ class IMUSensor {
 
         // Define public float variables
         double angle;
+        double angleNew;
 
         // Define public long int
         double time1;
@@ -35,12 +36,8 @@ class IMUSensor {
         // Define output array
         double IMUReadings;
 
-        // Define private functions in class
-        float readGyro();
-        float readAccel();
-
     // Define private values
-    //private:
+    private:
 
         // Define private objects
         LSM6DSO myIMU;
@@ -53,6 +50,10 @@ class IMUSensor {
 
         // Define long int private variables
         long int dt;
+
+        // Define private functions in class
+        float readGyro();
+        float readAccel();
 };
 
 #endif

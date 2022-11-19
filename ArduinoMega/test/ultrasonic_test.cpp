@@ -19,17 +19,33 @@ const int fireLogicPin = 3;
 const int reloadLogicPin = 2; 
 
 // Define const pins for ultrasonic sensors
-const int sonicTrigPin1 = 30;
-const int sonicEchoPin1 = 31;
+const int sonicTrigPin1 = 44;
+const int sonicEchoPin1 = 41;
+const int sonicTrigPin2 = 47;
+const int sonicEchoPin2 = 46;
+const int sonicTrigPin3 = 46;
+const int sonicEchoPin3 = 43;
+const int sonicTrigPin4 = 49;
+const int sonicEchoPin4 = 42;
+const int sonicTrigPin5 = 48;
+const int sonicEchoPin5 = 45;
 
 // Define distanceVector array
 float distanceValue1;
+float distanceValue2;
+float distanceValue3;
+float distanceValue4;
+float distanceValue5;
 
 // Serial speed constant
 const int serialSpeed = 9600;
 
 // Create objects for classes
 UltrasonicSensor ultrasonic1(sonicTrigPin1, sonicEchoPin1);
+UltrasonicSensor ultrasonic2(sonicTrigPin2, sonicEchoPin2);
+UltrasonicSensor ultrasonic3(sonicTrigPin3, sonicEchoPin3);
+UltrasonicSensor ultrasonic4(sonicTrigPin4, sonicEchoPin4);
+UltrasonicSensor ultrasonic5(sonicTrigPin5, sonicEchoPin5);
 
 // Define functions
 void reloadFunkyKong();
@@ -94,6 +110,19 @@ void ExecuteCommands() {
 
   // Pull data from sensors
   distanceValue1 = ultrasonic1.distanceCalculations();
+  Serial.print("Distance 1:");
   Serial.println(distanceValue1);
+  distanceValue2 = ultrasonic2.distanceCalculations();
+  Serial.print("Distance 2:");
+  Serial.println(distanceValue2);
+  distanceValue3 = ultrasonic3.distanceCalculations();
+  Serial.print("Distance 3:");  
+  Serial.println(distanceValue3);
+  distanceValue4 = ultrasonic4.distanceCalculations();
+  Serial.print("Distance 4:");
+  Serial.println(distanceValue4);
+  distanceValue5 = ultrasonic5.distanceCalculations();
+    Serial.print("Distance 5:");
+  Serial.println(distanceValue5);
 }
 
