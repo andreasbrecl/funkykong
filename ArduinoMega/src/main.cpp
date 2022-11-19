@@ -37,16 +37,20 @@ const int lineDigitalPin3 = 48;
 const int lineDigitalPin4 = 49;
 
 // Define const pins for ultrasonic sensors
-const int sonicTrigPin1 = 30;
-const int sonicTrigPin2 = 32;
-const int sonicTrigPin3 = 34;
-const int sonicTrigPin4 = 36;
-const int sonicTrigPin5 = 40;
-const int sonicEchoPin1 = 31;
-const int sonicEchoPin2 = 33;
-const int sonicEchoPin3 = 35;
-const int sonicEchoPin4 = 37;
-const int sonicEchoPin5 = 41;
+const int sonicTrigPin1 = 48;
+const int sonicEchoPin1 = 45;
+
+const int sonicTrigPin2 = 49;
+const int sonicEchoPin2 = 42;
+
+const int sonicTrigPin3 = 44;
+const int sonicEchoPin3 = 41;
+
+const int sonicTrigPin4 = 47;
+const int sonicEchoPin4 = 40;
+
+const int sonicTrigPin5 = 46;
+const int sonicEchoPin5 = 43;
 
 // Define const pins for motor drivers
 const int BRdirPin = 22;
