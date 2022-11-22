@@ -27,14 +27,17 @@ const int fireLogicPin = 3;
 const int reloadLogicPin = 2; 
 
 // Define const pins for line sensors
-const int lineAnalogPin1 = A12;
-const int lineAnalogPin2 = A13;
-const int lineAnalogPin3 = A14;
-const int lineAnalogPin4 = A15;
-const int lineDigitalPin1 = 46;
-const int lineDigitalPin2 = 47;
-const int lineDigitalPin3 = 48;
-const int lineDigitalPin4 = 49;
+const int lineAnalogPin1 = A0;
+const int lineDigitalPin1 = 50;
+
+const int lineAnalogPin2 = A1;
+const int lineDigitalPin2 = 51;
+
+const int lineAnalogPin3 = A2;
+const int lineDigitalPin3 = 52;
+
+const int lineAnalogPin4 = A3;
+const int lineDigitalPin4 = 53;
 
 // Define const pins for ultrasonic sensors
 const int sonicTrigPin1 = 48;
