@@ -27,7 +27,8 @@ class UARTComms:
         self.timeout = timeout
 
         # Create serial object
-        self.ser = serial.Serial(self.port, self.baudRate, self.timeout)
+        ser = serial.Serial(self.port, self.baudRate, timeout=self.timeout)
+        self.ser = ser
 
         # Reset serial input buffer
         self.ser.reset_input_buffer()
