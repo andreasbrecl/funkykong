@@ -27,10 +27,10 @@ class UARTComms:
         self.timeout = timeout
 
         # Create serial object
-        ser = serial.Serial(self.port, self.baudRate, self.timeout)
+        self.ser = serial.Serial(self.port, self.baudRate, self.timeout)
 
         # Reset serial input buffer
-        ser.reset_input_buffer()
+        self.ser.reset_input_buffer()
 
     def recieveData(self):
         """
