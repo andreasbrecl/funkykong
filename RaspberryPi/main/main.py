@@ -35,6 +35,7 @@ def executeFunctions():
     while True:
         # Recieve UART comms data
         inputtedData = UART.recieveData()
+        print(inputtedData)
 
 def main():
     """
