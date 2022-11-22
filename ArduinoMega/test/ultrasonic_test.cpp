@@ -19,16 +19,20 @@ const int fireLogicPin = 3;
 const int reloadLogicPin = 2; 
 
 // Define const pins for ultrasonic sensors
-const int sonicTrigPin1 = 44;
-const int sonicEchoPin1 = 41;
-const int sonicTrigPin2 = 47;
-const int sonicEchoPin2 = 46;
-const int sonicTrigPin3 = 46;
-const int sonicEchoPin3 = 43;
-const int sonicTrigPin4 = 49;
-const int sonicEchoPin4 = 42;
-const int sonicTrigPin5 = 48;
-const int sonicEchoPin5 = 45;
+const int sonicTrigPin1 = 48;
+const int sonicEchoPin1 = 45;
+
+const int sonicTrigPin2 = 49;
+const int sonicEchoPin2 = 42;
+
+const int sonicTrigPin3 = 44;
+const int sonicEchoPin3 = 41;
+
+const int sonicTrigPin4 = 47;
+const int sonicEchoPin4 = 40;
+
+const int sonicTrigPin5 = 46;
+const int sonicEchoPin5 = 43;
 
 // Define distanceVector array
 float distanceValue1;

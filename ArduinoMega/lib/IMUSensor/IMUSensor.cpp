@@ -43,7 +43,8 @@ double IMUSensor::calculateAngle(double angle, double time1) {
     alpha = (tau)/(tau + dt);
 
     // Calculate angle
-    angleNew = (1 - alpha)*(angle + gyroX * dt)+(alpha)*(accelX);
+    //angleNew = (1 - alpha)*(angle + gyroX * dt)+(alpha)*(accelX);
+    angleNew = angle + gyroX*dt + 1/2*accelX*dt*dt;
 
     // Define array
     IMUReadings = angleNew;

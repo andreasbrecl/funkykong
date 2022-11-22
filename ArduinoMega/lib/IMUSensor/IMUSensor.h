@@ -26,8 +26,8 @@ class IMUSensor {
         void initialize();
 
         // Define public float variables
-        double angle;
-        double angleNew;
+        float angle = 0;
+        double angleNew = 0;
 
         // Define public long int
         double time1;

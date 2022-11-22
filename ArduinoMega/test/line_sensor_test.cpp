@@ -13,8 +13,17 @@
 #include "LineSensor.h"
 
 // Define const pins for line sensors
-const int lineAnalogPin1 = A12;
-const int lineDigitalPin1 = 46;
+const int lineAnalogPin1 = A0;
+const int lineDigitalPin1 = 50;
+
+const int lineAnalogPin2 = A1;
+const int lineDigitalPin2 = 51;
+
+const int lineAnalogPin3 = A2;
+const int lineDigitalPin3 = 52;
+
+const int lineAnalogPin4 = A3;
+const int lineDigitalPin4 = 53;
 
 // Define line sensor values
 bool lineSensorValue1;
@@ -30,6 +39,9 @@ const int serialSpeed = 9600;
 
 // Create objects for classes
 LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
+LineSensor lineSensor2(lineAnalogPin2, lineDigitalPin2);
+LineSensor lineSensor3(lineAnalogPin3, lineDigitalPin3);
+LineSensor lineSensor4(lineAnalogPin4, lineDigitalPin4);
 
 // Define functions
 void reloadFunkyKong();
@@ -82,5 +94,11 @@ void ExecuteCommands() {
   // Pull data from sensors
   lineSensorValue1 = lineSensor1.lineSensorOutputs();
   Serial.println(lineSensorValue1);
+  lineSensorValue2 = lineSensor2.lineSensorOutputs();
+  Serial.println(lineSensorValue2);
+  lineSensorValue3 = lineSensor3.lineSensorOutputs();
+  Serial.println(lineSensorValue3);
+  lineSensorValue4 = lineSensor4.lineSensorOutputs();
+  Serial.println(lineSensorValue4);
 }
 
