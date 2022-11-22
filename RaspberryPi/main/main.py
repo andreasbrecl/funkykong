@@ -25,7 +25,7 @@ def executeFunctions():
     Output: None
     """
     # UART variables
-    port = '/dev/ttyACM0'
+    port = '/dev/ttyUSB0'
     baudRate = 9600
     timeout = 1
 
