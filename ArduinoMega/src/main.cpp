@@ -1,8 +1,10 @@
 // Author: Andreas Brecl
 // MCEN 5115 Mario Kart Balloon Battle
-// 11/16/2022
+// 10/24/2022
 //
-// Test script for line sensor.
+// Main scripts for operation of the Arduino Mega.
+// The Arduino Uno will be operating the distance, tape sensors, IMU, 
+// and motor drivers.
 
 // Include general Arudino/C++ libraries
 #include <Arduino.h>
@@ -10,38 +12,44 @@
 #include <inttypes.h>
 
 // Inlcude custom libraries
-#include "LineSensor.h"
+#include "UltrasonicSensor.h"
 
-// Define const pins for line sensors
-const int lineAnalogPin1 = A0;
-const int lineDigitalPin1 = 50;
+// Define const pins for arudino Uno interaction
+const int fireLogicPin = 3;
+const int reloadLogicPin = 2; 
 
-const int lineAnalogPin2 = A1;
-const int lineDigitalPin2 = 51;
+// Define const pins for ultrasonic sensors
+const int sonicTrigPin1 = 45;
+const int sonicEchoPin1 = 48;
 
-const int lineAnalogPin3 = A2;
-const int lineDigitalPin3 = 52;
+const int sonicTrigPin2 = 49;
+const int sonicEchoPin2 = 42;
 
-const int lineAnalogPin4 = A3;
-const int lineDigitalPin4 = 53;
+const int sonicTrigPin3 = 44;
+const int sonicEchoPin3 = 41;
 
-// Define line sensor values
-bool lineSensorValue1;
-bool lineSensorValue2;
-bool lineSensorValue3;
-bool lineSensorValue4;
+const int sonicTrigPin4 = 47;
+const int sonicEchoPin4 = 40;
 
-// Define IMU array
-double IMUReadings;
+const int sonicTrigPin5 = 46;
+const int sonicEchoPin5 = 43;
+
+// Define distanceVector array
+float distanceValue1;
+float distanceValue2;
+float distanceValue3;
+float distanceValue4;
+float distanceValue5;
 
 // Serial speed constant
 const int serialSpeed = 9600;
 
 // Create objects for classes
-LineSensor lineSensor1(lineAnalogPin1, lineDigitalPin1);
-LineSensor lineSensor2(lineAnalogPin2, lineDigitalPin2);
-LineSensor lineSensor3(lineAnalogPin3, lineDigitalPin3);
-LineSensor lineSensor4(lineAnalogPin4, lineDigitalPin4);
+UltrasonicSensor ultrasonic1(sonicTrigPin1, sonicEchoPin1);
+UltrasonicSensor ultrasonic2(sonicTrigPin2, sonicEchoPin2);
+UltrasonicSensor ultrasonic3(sonicTrigPin3, sonicEchoPin3);
+UltrasonicSensor ultrasonic4(sonicTrigPin4, sonicEchoPin4);
+UltrasonicSensor ultrasonic5(sonicTrigPin5, sonicEchoPin5);
 
 // Define functions
 void reloadFunkyKong();
@@ -81,6 +89,19 @@ void loop() {
 }
 
 
+// void reloadFunkyKong() {
+//  /*
+//  This function sets the reloadState variable to one. This is only activated when
+//  a system interrupt is recieved by the arduino uno.
+//
+//  Input: None
+//
+//  Output: None
+//  */
+//  reloadState = 1;
+//}
+
+
 void ExecuteCommands() {
   /*
   This function runs the other functions for the core processes on the Arduino
@@ -92,19 +113,24 @@ void ExecuteCommands() {
   */
 
   // Pull data from sensors
-  lineSensorValue1 = lineSensor1.lineSensorOutputs();
-  Serial.print("Line Sensor 1: ");
-  Serial.println(lineSensorValue1);
-  lineSensorValue2 = lineSensor2.lineSensorOutputs();
-  Serial.print("Line Sensor 2: ");
-  Serial.println(lineSensorValue2);
-  lineSensorValue3 = lineSensor3.lineSensorOutputs();
-  Serial.print("Line Sensor 3: ");
-  Serial.println(lineSensorValue3);
-  lineSensorValue4 = lineSensor4.lineSensorOutputs();
-  Serial.print("Line Sensor 4: ");
-  Serial.println(lineSensorValue4);
+  distanceValue1 = ultrasonic1.distanceCalculations();
+  Serial.print("Distance 1:");
+  Serial.println(distanceValue1);
+  distanceValue2 = ultrasonic2.distanceCalculations();
+  Serial.print("Distance 2:");
+  Serial.println(distanceValue2);
+  distanceValue3 = ultrasonic3.distanceCalculations();
+  Serial.print("Distance 3:");  
+  Serial.println(distanceValue3);
+  distanceValue4 = ultrasonic4.distanceCalculations();
+  Serial.print("Distance 4:");
+  Serial.println(distanceValue4);
+  distanceValue5 = ultrasonic5.distanceCalculations();
+  Serial.print("Distance 5:");
+  Serial.println(distanceValue5);
+  Serial.println("==================");
 
   delay(500);
 }
+
 
