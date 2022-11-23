@@ -36,8 +36,7 @@ class UARTComms:
         This function will deal with recieveing data from
         the Arduino UART serial communcations.
 
-        Input:  ser <object> - This is the serial communication
-                self <object> - Instance of a sepecific class
+        Input:  None
 
         Output: inputedData <str> - String of sensor input from Arduino
         """
@@ -56,7 +55,6 @@ class UARTComms:
         Arudino UART serial communcations.
 
         Input:  motorData <str> - Information for how motors should move
-                ser <object> - This is the serial communication
 
         Output: None
         """
@@ -77,7 +75,6 @@ class UARTComms:
         format: <ls!X,ls@X,ls#X,ls$X,us!XXX.X,us@XXX.X,us#XXX.X,us$XXX.X,us$XXX.X,us%XXX.X,imu!XXX.X>
 
         Input:  recievedData <str> - Data passed by arduino
-                self <object> - Instance of a sepecific class
 
         Output: inputtedData <list><int> - Data values of sensors in a list
         """

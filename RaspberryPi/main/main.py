@@ -12,7 +12,10 @@ to put the system into the correct location.
 
 # Import classes
 from lib.uart_comms import UARTComms
+from lib.path_planning import PathPlanning
 
+# Import built in funcitons
+import time
 
 def executeFunctions():
     """
@@ -29,12 +32,30 @@ def executeFunctions():
     baudRate = 9600
     timeout = 1
 
+    # Path planning variables, times are in seconds
+    fullRotationTime = 10
+    leftRightToFireTime = 10
+    forwardBackwardsToReloadTime = 10
+
+    # Initial movement criterias
+    systemMode = "Initialize"
+    time1 = time.time()
+    time2 = time.time()
+    currentModeInformation = [systemMode, time1, time2]
+
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
+    path = PathPlanning()
 
     while True:
         # Recieve UART comms data
         inputtedData = UART.recieveData()
+
+        # Run motion planning functionality
+        currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation)
+
+        # Send command to arduino
+        UART.writeData(movementCommand)
 
 def main():
     """
