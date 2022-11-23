@@ -8,8 +8,6 @@ communications between the raspberry pi and arduino.
 
 # Import libraries
 import serial
-import time
-import re
 
 class UARTComms:
     def __init__(self, port, baudRate, timeout):
