@@ -17,7 +17,9 @@ class PathPlanning:
         """
         Contructor to inital the class of path planning.
         """
-        self.pixyCam = PixycamAiming()
+        # Define constructor variables
+        pixyCam = PixycamAiming()
+        self.pixyCam = pixyCam
 
     def initializePath():
         """
@@ -28,22 +30,36 @@ class PathPlanning:
         itself a set distance from the main wall. This will help
         localize the robot's motion.
 
-        Input:  None
+        Input:  inputtedData <list> <str> - Sensor input from the Mega
 
-        Output: None
+        Output: movementCommand <str> - Command for how robot needs to move
+                systemMode <str> - Defines mode for the system
         """
 
     def pathToShootingLocation():
+        """
+        
+        """
         pass
 
     def pathToReloadStation():
+        """
+        
+        """
         pass
 
     def shootAtTarget():
+        """
+        
+        """
         pass
 
     def reloadRobot():
+        """
+        
+        """
         pass
+
 
     def mainPathPlanning(self, inputtedData, currentModeInformation):
         """
