@@ -9,17 +9,33 @@ represents
 """
 
 from lib.pixycam_aiming import PixycamAiming
-#import RPi.GPIO as GPIO  
+import RPi.GPIO as GPIO  
 import time
 
 class PathPlanning:
-    def __init__(self):
+    def __init__(self, firePin, reloadPin):
         """
-        Contructor to inital the class of path planning.
+        Contructor to inital the class of path planning. Takes
+        in pin values for GPIO.
+
+        Input:  firePin <int> - Fire pin value
+                reloadPin <int> - reload pin value
+
+        Output: None
         """
         # Define constructor variables
+        self.firePin = firePin
+        self.reloadPin = reloadPin
+
+        # Define pixycam information
         pixyCam = PixycamAiming()
         self.pixyCam = pixyCam
+
+        # Define pins
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(firePin, GPIO.OUT)
+        GPIO.setup(reloadPin, GPIO.IN)
+
 
     def initializePath(self, inputtedData, currentModeInformation, pathDistanceList):
         """
@@ -281,8 +297,94 @@ class PathPlanning:
         backwards = "C"
         rotateRight = "J"
         rotateLeft = "K"
+
+        # Predefine pixy cam
+        pixyCamAim = "None"
+        pixyCamAimLeft = "Left"
+        pixyCamAimRight = "Right"
+        pixyCamAimCenter = "Center"
         
         # Enter Aim shooter mode
+        if subMode == subModeAimShooter:
+
+            # Read in data
+            pixyCamAim = "None" # ADD FUNCTION READ IN HERE
+
+            # Check what direction to aim
+            if pixyCamAim == pixyCamAimLeft:
+                
+                # Rotate left to aim
+                movementCommand = rotateLeft
+
+                # Set GPIO low
+                GPIO.output(self.firePin, 0)
+
+                # See if reload is triggered
+                if GPIO.input(self.reloadPin):
+
+                    # Change mode
+                    subMode = subModeFixOrientation
+            
+            # Check to aim right
+            elif pixyCamAim == pixyCamAimRight:
+
+                # Rotate right
+                movementCommand = rotateRight
+
+                # Set GPIO low
+                GPIO.output(self.firePin, 0)
+
+                # See if reload is triggered
+                if GPIO.input(self.reloadPin):
+
+                    # Change mode
+                    subMode = subModeFixOrientation
+                
+
+            elif pixyCamAim == pixyCamAimCenter:
+
+                # Stop moving
+                movementCommand = stop
+
+                # Trigger firing
+                GPIO.output(self.firePin, 1)
+
+                # See if reload is triggered
+                if GPIO.input(self.reloadPin):
+
+                    # Change mode
+                    subMode = subModeFixOrientation
+                    
+                    # Set GPIO low
+                    GPIO.output(self.firePin, 0)
+
+        # Fix how robot is oriented         
+        elif subMode == subModeFixOrientation:
+            
+            # Fix how it is facing
+            movementCommand = self.verifyForwardFacing(self, ultrasonicSensorReading1, ultrasonicSensorReading2)
+
+            # Checkmovement command
+            if movementCommand == stop:
+
+                # Change submode
+                subMode = subModeFixDistance
+
+        # Fix distance robot is off wall
+        elif subMode == subModeFixDistance:
+
+            # Check distance between items
+            movementCommand = self.checkDistance(shootingDistance, ultrasonicSensorReading1)
+
+            # Checkmovement command
+            if movementCommand == stop:
+
+                # Change submode
+                systemMode = "GoToReload"
+                subMode = "MoveDiag"
+
+                # Calculate time
+                time1 = time.time()
 
         # Return data
         return movementCommand, systemMode, subMode, time1

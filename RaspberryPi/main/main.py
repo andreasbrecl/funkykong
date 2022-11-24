@@ -32,6 +32,10 @@ def executeFunctions():
     baudRate = 9600
     timeout = 1
 
+    # Define GPIO pins
+    firePin = 17
+    reloadPin = 27
+
     # Path planning variables, times are in seconds
     diagTimeToShooting = 5
     leftRightTimeToShooting = 5
@@ -53,7 +57,7 @@ def executeFunctions():
 
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
-    path = PathPlanning()
+    path = PathPlanning(firePin, reloadPin)
 
     while True:
         # Recieve UART comms data
