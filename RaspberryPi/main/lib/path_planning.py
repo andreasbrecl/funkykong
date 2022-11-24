@@ -41,8 +41,6 @@ class PathPlanning:
         """
         # Pull current mode data
         systemMode = currentModeInformation[0]
-        time1 = currentModeInformation[1]
-        time2 = currentModeInformation[2]
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
 
