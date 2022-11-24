@@ -33,14 +33,14 @@ def executeFunctions():
     timeout = 1
 
     # Path planning variables, times are in seconds
-    fullRotationTime = 10
-    leftRightToFireTime = 10
-    forwardBackwardsToReloadTime = 10
-    timeList = [fullRotationTime, leftRightToFireTime, forwardBackwardsToReloadTime]
+    diagTimeToShooting = 5
+    leftRightTimeToShooting = 5
+    timeList = [diagTimeToShooting, leftRightTimeToShooting]
     
     # Path planning distances
     initializationDistance = 5
-    pathDistanceList = [initializationDistance]
+    shootingDistance = 5
+    pathDistanceList = [initializationDistance, shootingDistance]
 
     # Initial movement criterias
     movementCommand = "A"

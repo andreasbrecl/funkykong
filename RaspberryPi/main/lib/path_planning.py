@@ -41,6 +41,7 @@ class PathPlanning:
         """
         # Pull current mode data
         systemMode = currentModeInformation[0]
+        time1 = currentModeInformation[1]
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
 
@@ -108,7 +109,7 @@ class PathPlanning:
         elif subMode == subModeAlignDistance:
 
             # Check distance between items
-            movementCommand = self.checkDistance(initializationDistance, ultrasonicSensorReading1):
+            movementCommand = self.checkDistance(initializationDistance, ultrasonicSensorReading1)
 
             # Checkmovement command
             if movementCommand == stop:
@@ -140,10 +141,13 @@ class PathPlanning:
                 systemMode = "GoToShoot"
                 subMode = "MoveDiag"
 
-        # Return data
-        return movementCommand, systemMode, subMode, sideColor
+                # Calculate start of movement time
+                time1 = time.time()
 
-    def pathToShootingLocation(inputtedData, currentModeInformation, timeList, pathDistanceList):
+        # Return data
+        return movementCommand, systemMode, subMode, sideColor, time1
+
+    def pathToShootingLocation(self, inputtedData, currentModeInformation, timeList, pathDistanceList):
         """
         This function will deal with the path to shooting location.
 
@@ -151,13 +155,88 @@ class PathPlanning:
 
         Output: 
         """
+        # Pull current mode data
+        systemMode = currentModeInformation[0]
+        time1 = currentModeInformation[1]
+        subMode = currentModeInformation[3]
+        sideColor = currentModeInformation[4]
 
+        # Pull distance values
+        shootingDistance = pathDistanceList[1]
+
+        # Pull timing values
+        diagTimeToShooting = timeList[0]
+        leftRightTimeToShooting = timeList[1]
+        
+        # Split input data
+        ultrasonicSensorReading1 = inputtedData[4]
+        ultrasonicSensorReading2 = inputtedData[5]
+
+        # Define color checks
+        colorCheckRed = "Red"
+        colorCheckGreen = "Green"
+
+        # Define sub modes
+        subModeMoveDiag = "MoveDiag"
+        subModeMoveSidways = "MoveSidways"
+
+        # Define movement commands
+        stop = "A"
+        forward = "B"
+        backwards = "C"
+        left = "D"
+        right = "E"
+        diagFowardRight = "F"
+        diagFowardLeft = "G"
+        diagBackRight = "H"
+        diagBackLeft = "I"
+        rotateRight = "J"
+        rotateLeft = "K"
 
         # See if system is in diagonal movement mode
-        #if
+        if subMode == subModeMoveDiag:
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle diag forward right
+                movementCommand = self.moveBasedOnTime(diagTimeToShooting, time1, diagFowardRight)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle diag forward left
+                movementCommand = self.moveBasedOnTime(diagTimeToShooting, time1, diagFowardLeft)
+
+            if movementCommand == stop:
+
+                # Change mode
+                subMode = subModeMoveSidways
+
+                # Reset time
+                time1 = time.time()
+
+        # Move system sidways
+        elif subMode == subModeMoveSidways:
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, right)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, left)
+
+            if movementCommand == stop:
+
+                # Change mode
+                systemMode = "Shoot"
+                subMode = "None"
 
         # Return data
-        return movementCommand, systemMode, subMode
+        return movementCommand, systemMode, subMode, time1
 
     def pathToReloadStation(inputtedData):
         """
@@ -188,6 +267,33 @@ class PathPlanning:
         
         """
         pass
+
+    def moveBasedOnTime(desiredTime, time1, movementCommand):
+        """
+        This function will deal with the movements based on
+        the inputted time and the movement wanted. It will
+        also do the checks for if the time requirements are
+        met.
+
+        Input:  desiredTime =
+
+        Output: movementCommand <str> - Movement command to be sent to system
+        """
+        # Define movement
+        stop = "A"
+
+        # calculate time2
+        time2 = time.time()
+
+        # Calculate time difference
+        timeDifference = time2 - time1
+
+        # Check if motion should stop
+        if timeDifference >= desiredTime:
+            movementCommand = stop
+
+        # Return command
+        return movementCommand
 
     def verifyForwardFacing(self, ultrasonic1, ultrasonic2):
         """
@@ -302,11 +408,11 @@ class PathPlanning:
 
         # Initialize and localize the robot's motion
         if systemMode == "Initialize":
-            movementCommand, systemMode, subMode, sideColor = self.initializePath(inputtedData, currentModeInformation, pathDistanceList)
+            movementCommand, systemMode, subMode, sideColor, time1 = self.initializePath(inputtedData, currentModeInformation, pathDistanceList)
 
         # Go to the shooting location
         elif systemMode == "GoToShoot":
-            movementCommand, systemMode, subMode = self.pathToShootingLocation(inputtedData, currentModeInformation, timeList, pathDistanceList)
+            movementCommand, systemMode, subMode, time1 = self.pathToShootingLocation(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # travel path for reload
         elif systemMode == "GoToReload":
