@@ -562,15 +562,15 @@ class PathPlanning:
 
         # travel path for reload
         elif systemMode == "GoToReload":
-            movementCommand, systemMode = self.pathToReloadStation(inputtedData) 
+            movementCommand, systemMode, subMode, time1 = self.pathToReloadStation(inputtedData, currentModeInformation, timeList, pathDistanceList) 
 
         # Fire projectiles
         elif systemMode == "Shoot":
-            movementCommand, systemMode = self.shootAtTarget(inputtedData)
+            movementCommand, systemMode, subMode, time1 = self.shootAtTarget(inputtedData, currentModeInformation, pathDistanceList)
 
         # System is in reload mode
         elif systemMode == "Reload":
-            movementCommand, systemMode = self.reloadRobot(inputtedData) 
+            movementCommand, systemMode, subMode, time1 = self.reloadRobot(inputtedData) 
 
 
         # Remake current mode information
