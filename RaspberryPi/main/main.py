@@ -36,12 +36,20 @@ def executeFunctions():
     fullRotationTime = 10
     leftRightToFireTime = 10
     forwardBackwardsToReloadTime = 10
+    timeList = [fullRotationTime, leftRightToFireTime, forwardBackwardsToReloadTime]
+    
+    # Path planning distances
+    initializationDistance = 5
+    pathDistanceList = [initializationDistance]
 
     # Initial movement criterias
+    movementCommand = "A"
     systemMode = "Initialize"
     time1 = time.time()
     time2 = time.time()
-    currentModeInformation = [systemMode, time1, time2]
+    subMode = "Initialize"
+    sideColor = "None"
+    currentModeInformation = [systemMode, time1, time2, subMode, sideColor]
 
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
@@ -52,7 +60,7 @@ def executeFunctions():
         inputtedData = UART.recieveData()
 
         # Run motion planning functionality
-        currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation)
+        currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # Send command to arduino
         UART.writeData(movementCommand)
