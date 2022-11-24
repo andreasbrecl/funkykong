@@ -21,7 +21,7 @@ class PathPlanning:
         pixyCam = PixycamAiming()
         self.pixyCam = pixyCam
 
-    def initializePath(inputtedData, currentModeInformation, pathDistanceList):
+    def initializePath(self, inputtedData, currentModeInformation, pathDistanceList):
         """
         This funciton will align the robot as needed so that it
         can navigate to the fire zone. This is the first process
@@ -71,12 +71,14 @@ class PathPlanning:
         backwards = "C"
         left = "D"
         right = "E"
-
+        rotateRight = "J"
+        rotateLeft = "K"
+        
         # Run inital rotation to determine size
         if subMode == subModeInitialize:
             
             # Start rotation
-            movementCommand = "J"
+            movementCommand = rotateRight
 
             # Check if pixy camera has found information
             sideColor = "None" # ENTER UPDATED FUNCTION OUTPUT HERE
@@ -93,47 +95,26 @@ class PathPlanning:
         # Run rotation to find the wall
         elif subMode == subModeFindWall:
 
-            # Run rotation 
-            movementCommand = "J"
+            # Check distance between items
+            movementCommand = self.verifyForwardFacing(ultrasonicSensorReading1, ultrasonicSensorReading2)
 
-            # Calculate percent different of ultrasonic readings
-            percentDifference = abs(ultrasonicSensorReading1 - ultrasonicSensorReading2) / ultrasonicSensorReading1 * 100
+            # Checkmovement command
+            if movementCommand == stop:
 
-            # See if value is within 5 %
-            if percentDifference <= 5:
-
-                # Stop motion
-                movementCommand = stop
-
-                # Change mode to movement forward or backwards
+                # Change submode
                 subMode = subModeAlignDistance
 
         # Change mode to wall alignment
         elif subMode == subModeAlignDistance:
 
-            # Calculate percent difference of measurements and needed distance
-            percentDifferenceFromNeeded = abs(initializationDistance - ultrasonicSensorReading1) / initializationDistance * 100
-            
-            # Check if distance is within needed area
-            if percentDifferenceFromNeeded <= 5:
+            # Check distance between items
+            movementCommand = self.checkDistance(initializationDistance, ultrasonicSensorReading1):
 
-                # Stop motion
-                movementCommand = stop
+            # Checkmovement command
+            if movementCommand == stop:
 
                 # Change submode
                 subMode = subModeMoveToSide
-
-            # Check if robot is too close to wall
-            elif initializationDistance > ultrasonicSensorReading1:
-                
-                # Back robot up
-                movementCommand = backwards
-            
-            # Check if robot is too far from wall
-            elif initializationDistance < ultrasonicSensorReading1:
-                
-                # Move robot forward
-                movementCommand = forward
 
         # Do movement of side to side
         elif subMode == subModeMoveToSide:
@@ -162,7 +143,7 @@ class PathPlanning:
         # Return data
         return movementCommand, systemMode, subMode, sideColor
 
-    def pathToShootingLocation(inputtedData):
+    def pathToShootingLocation(inputtedData, currentModeInformation, timeList, pathDistanceList):
         """
         This function will deal with the path to shooting location.
 
@@ -170,9 +151,13 @@ class PathPlanning:
 
         Output: 
         """
-        
+
+
+        # See if system is in diagonal movement mode
+        #if
+
         # Return data
-        return movementCommand, systemMode 
+        return movementCommand, systemMode, subMode
 
     def pathToReloadStation(inputtedData):
         """
@@ -204,6 +189,97 @@ class PathPlanning:
         """
         pass
 
+    def verifyForwardFacing(self, ultrasonic1, ultrasonic2):
+        """
+        This function will determine if the system is facing
+        forward by comparing the ultrasonic readings of the
+        system.
+
+        Input:  ultrasonic1 <int> - Ultrasonic reading from sensor 1
+                ultrasonic2 <int> - Ultrasonic reading from sensor 2
+
+        Output: movementCommand <str> - Movement command to be sent to system
+        """
+        # Define movements
+        stop = "A"
+        rotateRight = "J"
+        rotateLeft = "K"
+
+        # Run rotation 
+        if ultrasonic1 > ultrasonic2 and ultrasonic1 < 20 and ultrasonic2 < 20:
+            movementCommand = rotateLeft
+        elif ultrasonic2 > ultrasonic1 and ultrasonic1 < 20 and ultrasonic2 < 20:
+            movementCommand = rotateRight
+        else:
+            movementCommand = rotateLeft
+
+        # Calculate percent different of ultrasonic readings
+        percentDifference = self.calculatePercentage(ultrasonic1, ultrasonic2)
+
+        # See if value is within 5 %
+        if percentDifference <= 5:
+
+            # Stop motion
+            movementCommand = stop
+        
+        # Return command
+        return movementCommand
+        
+
+    def checkDistance(self, ultrasonic, expectedDistance):
+        """
+        This function checks if the ultrasonic sensor distances
+        are too close, too far, or correct distance from target.
+
+        Input:  ultrasonic <int> - Ultrasonic sensor reading
+                expectedDistance <int> - Distance needed at location
+        
+        Output: movementCommand <str> - Movement command to be sent to system
+        """
+        # Define movements
+        stop = "A"
+        forward = "B"
+        backwards = "C"
+
+        # Calculate percent difference of measurements and needed distance
+        percentDifferenceFromNeeded = self.calculatePercentage(expectedDistance, ultrasonic)
+        
+        # Check if distance is within needed area
+        if percentDifferenceFromNeeded <= 5:
+
+            # Stop motion
+            movementCommand = stop
+
+        # Check if robot is too close to wall
+        elif expectedDistance > ultrasonic:
+            
+            # Back robot up
+            movementCommand = backwards
+        
+        # Check if robot is too far from wall
+        elif expectedDistance < ultrasonic:
+            
+            # Move robot forward
+            movementCommand = forward
+
+        return movementCommand
+
+    def calculatePercentage(variable1, variable2):
+        """
+        This function will compute the average value between two
+        variables.
+
+        Input:  variable1 <int> - Variable 1 input
+                variable2 <int> - Variable 2 input
+        
+        Output: percentDifference <int> - Percent difference between values
+        """
+        # Calculate percentage
+        percentDifference = abs(variable1 - variable2) / variable1 * 100
+        
+        # Return values
+        return percentDifference
+
     def mainPathPlanning(self, inputtedData, currentModeInformation, timeList, pathDistanceList):
         """
         This is the main function that will handle which part of
@@ -230,7 +306,7 @@ class PathPlanning:
 
         # Go to the shooting location
         elif systemMode == "GoToShoot":
-            movementCommand, systemMode = self.pathToShootingLocation(inputtedData)
+            movementCommand, systemMode, subMode = self.pathToShootingLocation(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # travel path for reload
         elif systemMode == "GoToReload":
