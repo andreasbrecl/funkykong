@@ -38,6 +38,7 @@ class PathPlanning:
                 systemMode <str> - Defines mode for the system
                 subMode <str> - Sub mode of process
                 sideColor <str> - Determines the side the robot is on
+                time1 <int> - system time
         """
         # Pull current mode data
         systemMode = currentModeInformation[0]
@@ -152,8 +153,14 @@ class PathPlanning:
         This function will deal with the path to shooting location.
 
         Input:  inputtedData <list> <str> - Sensor input from the Mega
+                currentModeInformation <list> <str> <int> - Information on what mode the system is in
+                pathDistanceList <list> <int> - Distances that are expected at different parts in time
+                timeList <list> <int> - Drive time values for actions
 
-        Output: 
+        Output: movementCommand <str> - Command for how robot needs to move
+                systemMode <str> - Defines mode for the system
+                subMode <str> - Sub mode of process
+                time1 <int> - system time
         """
         # Pull current mode data
         systemMode = currentModeInformation[0]
@@ -161,16 +168,9 @@ class PathPlanning:
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
 
-        # Pull distance values
-        shootingDistance = pathDistanceList[1]
-
         # Pull timing values
         diagTimeToShooting = timeList[0]
         leftRightTimeToShooting = timeList[1]
-        
-        # Split input data
-        ultrasonicSensorReading1 = inputtedData[4]
-        ultrasonicSensorReading2 = inputtedData[5]
 
         # Define color checks
         colorCheckRed = "Red"
@@ -233,27 +233,71 @@ class PathPlanning:
 
                 # Change mode
                 systemMode = "Shoot"
-                subMode = "None"
+                subMode = "AimShooter"
 
         # Return data
         return movementCommand, systemMode, subMode, time1
 
+    
+    def shootAtTarget(self, inputtedData, currentModeInformation, pathDistanceList):
+        """
+        This function will deal with shooting the shooter at
+        the detected target. It will locate the enemy balloon
+        and then rotate towards it. Once it has fired the full
+        magazine, it will stop this function.
+
+        Input:  inputtedData <list> <str> - Sensor input from the Mega
+                currentModeInformation <list> <str> <int> - Information on what mode the system is in
+                pathDistanceList <list> <int> - Distances that are expected at different parts in time
+
+        Output: movementCommand <str> - Command for how robot needs to move
+                systemMode <str> - Defines mode for the system
+                subMode <str> - Sub mode of process
+                time1 <int> - system time
+        """
+        # Pull current mode data
+        systemMode = currentModeInformation[0]
+        time1 = currentModeInformation[1]
+        subMode = currentModeInformation[3]
+        # Pull distance values
+        shootingDistance = pathDistanceList[1]
+        
+        # Split input data
+        ultrasonicSensorReading1 = inputtedData[4]
+        ultrasonicSensorReading2 = inputtedData[5]
+
+        # Define color checks
+        colorCheckRed = "Red"
+        colorCheckGreen = "Green"
+
+        # Define sub modes
+        subModeAimShooter = "AimShooter"
+        subModeFixOrientation = "FixOrientation"
+        subModeFixDistance = "FixDistance"
+
+        # Define movement commands
+        stop = "A"
+        forward = "B"
+        backwards = "C"
+        rotateRight = "J"
+        rotateLeft = "K"
+        
+        # Enter Aim shooter mode
+
+        # Return data
+        return movementCommand, systemMode, subMode, time1
+
+    
     def pathToReloadStation(inputtedData):
         """
         
         """
 
-        # Return data
-        return movementCommand, systemMode 
-
-    def shootAtTarget(inputtedData):
-        """
-        
-        """
 
         # Return data
         return movementCommand, systemMode 
 
+    
     def reloadRobot(inputtedData):
         """
         
