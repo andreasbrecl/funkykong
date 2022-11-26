@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 import time
 
 class PathPlanning:
-    def __init__(self, firePin, reloadPin):
+    def __init__(self, firePin, reloadPin, reloadDonePin):
         """
         Contructor to inital the class of path planning. Takes
         in pin values for GPIO.
@@ -35,6 +35,7 @@ class PathPlanning:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(firePin, GPIO.OUT)
         GPIO.setup(reloadPin, GPIO.IN)
+        GPIO.setup(reloadDonePin, GPIO.IN)
 
 
     def initializePath(self, inputtedData, currentModeInformation, pathDistanceList):
@@ -187,6 +188,7 @@ class PathPlanning:
         # Pull timing values
         diagTimeToShooting = timeList[0]
         leftRightTimeToShooting = timeList[1]
+        forwardTimeToShooting = timeList[2]
 
         # Define color checks
         colorCheckRed = "Red"
@@ -195,6 +197,7 @@ class PathPlanning:
         # Define sub modes
         subModeMoveDiag = "MoveDiag"
         subModeMoveSidways = "MoveSidways"
+        subModeMoveForward = "MoveForward"
 
         # Define movement commands
         stop = "A"
@@ -251,6 +254,20 @@ class PathPlanning:
                 systemMode = "Shoot"
                 subMode = "AimShooter"
 
+        # Move to forward location
+        elif subMode == subModeMoveForward:
+
+            # Determine movement
+            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, forward)
+
+            if movementCommand == stop:
+                
+                # Change mode
+                subMode = subModeMoveDiag
+
+                # Update time
+                time1 = time.time()
+
         # Return data
         return movementCommand, systemMode, subMode, time1
 
@@ -275,7 +292,7 @@ class PathPlanning:
         systemMode = currentModeInformation[0]
         time1 = currentModeInformation[1]
         subMode = currentModeInformation[3]
-        
+
         # Pull distance values
         shootingDistance = pathDistanceList[1]
         
@@ -382,7 +399,7 @@ class PathPlanning:
 
                 # Change submode
                 systemMode = "GoToReload"
-                subMode = "MoveDiag"
+                subMode = "MoveSidways"
 
                 # Calculate time
                 time1 = time.time()
@@ -391,23 +408,289 @@ class PathPlanning:
         return movementCommand, systemMode, subMode, time1
 
     
-    def pathToReloadStation(inputtedData):
+    def pathToReloadStation(self, inputtedData, currentModeInformation, timeList):
         """
-        
-        """
+        This function will deal with the pathfinding from the
+        shooting position to the reload station. It will align
+        itself with the lines around the border of the arena
+        and then back itself into the reload corner.
 
+        Input:  inputtedData <list> <str> - Sensor input from the Mega
+                currentModeInformation <list> <str> <int> - Information on what mode the system is in
+                pathDistanceList <list> <int> - Distances that are expected at different parts in time
+                timeList <list> <int> - Drive time values for actions
+
+        Output: movementCommand <str> - Command for how robot needs to move
+                systemMode <str> - Defines mode for the system
+                subMode <str> - Sub mode of process
+                time1 <int> - system time
+        """
+        # Pull current mode data
+        systemMode = currentModeInformation[0]
+        time1 = currentModeInformation[1]
+        subMode = currentModeInformation[3]
+        sideColor = currentModeInformation[4]
+
+        # Pull timing values
+        leftRightTimeToShooting = timeList[1]
+
+        # Split input data
+        lineSensorReading1 = inputtedData[0]
+        lineSensorReading2 = inputtedData[1]
+        lineSensorReading3 = inputtedData[2]
+        lineSensorReading4 = inputtedData[3]
+
+        # Define color checks
+        colorCheckRed = "Red"
+        colorCheckGreen = "Green"
+
+        # Define sub modes
+        subModeMoveDiag = "MoveDiag"
+        subModeMoveSidways = "MoveSidways"
+        subModeMoveBack = "MoveBack"
+        subModeMoveForward = "MoveForward"
+        subModeAlignSide = "AlignSide"
+        subModeReload = "Reload"
+        subModeAlignBack = "AlignBack"
+
+        # Define movement commands
+        stop = "A"
+        forward = "B"
+        backwards = "C"
+        left = "D"
+        right = "E"
+        diagFowardRight = "F"
+        diagFowardLeft = "G"
+        diagBackRight = "H"
+        diagBackLeft = "I"
+        rotateRight = "J"
+        rotateLeft = "K"
+
+        # Enter sidways movement mode
+        if subMode == subModeMoveSidways:
+
+            # Check what side the robot is on
+            if sideColor == colorCheckGreen:
+                
+                # Move right
+                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, right)
+
+            elif sideColor == colorCheckRed:
+        
+                # Move left
+                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, left)
+
+            # Check if movement has compleded 
+            if movementCommand == stop:
+
+                # Change mode
+                subMode = subModeMoveDiag
+
+        # Move diagonal until line is hit
+        if subMode == subModeMoveDiag:
+
+            # Check what side the robot is on
+            if sideColor == colorCheckGreen:
+                
+                # Move diag back right
+                movementCommand = diagBackRight
+
+            elif sideColor == colorCheckRed:
+        
+                # Move diag back left
+                movementCommand = diagBackLeft
+
+            # Check if system has run into side lines
+            if lineSensorReading1 == 1 or lineSensorReading2 == 1 or lineSensorReading3 == 1 or lineSensorReading4 == 1:
+
+                # Stop system
+                movementCommand = stop
+
+                # Change mode
+                subMode = subModeAlignSide
+
+        # Align robot on side
+        elif subMode == subModeAlignSide:
+
+            # Check what side the robot is on
+            if sideColor == colorCheckGreen:
+                
+                # Align vehicle
+                movementCommand = self.alignOnLines(lineSensorReading1, lineSensorReading4, sideColor)
+
+                # Check if alignment has stopped
+                if movementCommand == stop:
+
+                    # Change mode
+                    subMode = subModeMoveBack
+
+            elif sideColor == colorCheckRed:
+
+                # Align vehicle
+                movementCommand = self.alignOnLines(lineSensorReading2, lineSensorReading3, sideColor)
+
+                # Check if alignment has stopped
+                if movementCommand == stop:
+
+                    # Change mode
+                    subMode = subModeMoveBack
+
+        # Enter move backwards mode
+        elif subMode == subModeMoveBack:
+
+            # Start backwards movement
+            movementCommand = backwards
+
+            # Check what side the robot is on
+            if sideColor == colorCheckGreen and lineSensorReading3 == 1:
+                
+                # Stop movement
+                movementCommand = stop
+
+                # Change mode
+                subMode = subModeAlignBack
+
+            elif sideColor == colorCheckRed and lineSensorReading4 == 1:
+        
+                # Stop movement
+                movementCommand = stop
+
+                # Change mode
+                subMode = subModeAlignBack
+            
+        # Align rear of vehicle
+        elif subMode == subModeAlignBack:
+
+                # Align vehicle
+                movementCommand = self.alignOnLines(lineSensorReading3, lineSensorReading4, "Rear")
+
+                # Check if alignment has stopped
+                if movementCommand == stop:
+
+                    # Change mode
+                    subMode = subModeReload
+                
+        # Enter reload mode
+        elif subMode == subModeReload:
+
+            # Wait for reload done input
+            if GPIO.input(self.reloadDonePin):
+
+                # Change modes
+                systemMode = "GoToShoot"
+                subMode = "MoveForward"
+
+                # Update time
+                time1 = time.time()
 
         # Return data
-        return movementCommand, systemMode 
-
+        return movementCommand, systemMode, subMode, time1
     
-    def reloadRobot(inputtedData):
+    def alignOnLines(line1, line2, sideColor):
         """
-        
-        """
+        This function will deal with aligning the vehicle on
+        the line that it has run into. This will allow it to
+        move straight on its next motion.
 
-        # Return data
-        return movementCommand, systemMode 
+        Input:  line1 <int> - Line sensor reading
+                line2 <int> - Line sensor reading
+
+        Output: movementCommand <str> - Motion vehicle needs to take
+        """
+        # Define movements
+        stop = "A"
+        backwards = "C"
+        left = "D"
+        right = "E"
+        rotateRight = "J"
+        rotateLeft = "K"
+
+        # Define checks
+        colorCheckRed = "Red"
+        colorCheckGreen = "Green"
+        colorCheckRear = "Rear"
+
+        # Check what side the vehicle is on
+        if sideColor == colorCheckGreen:
+
+            # Check if only front sensor is triggered   
+            if line1 == 1:
+
+                # Trigger rotation
+                movementCommand = rotateLeft
+            
+            # Check if only back sensor is triggered
+            elif line2 == 1:
+            
+                # Trigger rotation
+                movementCommand = rotateRight
+                
+            # Check if neither are triggered
+            elif line1 == 0 and line2 == 0:
+            
+                # Move right
+                movementCommand = right
+                
+            # Check if both are triggerd
+            elif line1 == 1 and line2 == 1:
+                
+                # Stop movement
+                movementCommand = stop
+
+        # Check for other side
+        elif sideColor == colorCheckRed:
+            
+            # Check if only front sensor is triggered   
+            if line1 == 1:
+
+                # Trigger rotation
+                movementCommand = rotateRight
+            
+            # Check if only back sensor is triggered
+            elif line2 == 1:
+            
+                # Trigger rotation
+                movementCommand = rotateLeft
+                
+            # Check if neither are triggered
+            elif line1 == 0 and line2 == 0:
+            
+                # Move right
+                movementCommand = left
+                
+            # Check if both are triggerd
+            elif line1 == 1 and line2 == 1:
+                
+                # Stop movement
+                movementCommand = stop
+
+        elif sideColor == colorCheckRear:
+
+            # Check if only front sensor is triggered   
+            if line1 == 1:
+
+                # Trigger rotation
+                movementCommand = rotateRight
+            
+            # Check if only back sensor is triggered
+            elif line2 == 1:
+            
+                # Trigger rotation
+                movementCommand = rotateLeft
+                
+            # Check if neither are triggered
+            elif line1 == 0 and line2 == 0:
+            
+                # Move right
+                movementCommand = backwards
+                
+            # Check if both are triggerd
+            elif line1 == 1 and line2 == 1:
+                
+                # Stop movement
+                movementCommand = stop
+
+        return movementCommand
 
     def checkCollision():
         """
@@ -422,7 +705,7 @@ class PathPlanning:
         also do the checks for if the time requirements are
         met.
 
-        Input:  desiredTime =
+        Input:  desiredTime <int> - Time of movement
 
         Output: movementCommand <str> - Movement command to be sent to system
         """
@@ -568,11 +851,6 @@ class PathPlanning:
         # Fire projectiles
         elif systemMode == "Shoot":
             movementCommand, systemMode, subMode, time1 = self.shootAtTarget(inputtedData, currentModeInformation, pathDistanceList)
-
-        # System is in reload mode
-        elif systemMode == "Reload":
-            movementCommand, systemMode, subMode, time1 = self.reloadRobot(inputtedData) 
-
 
         # Remake current mode information
         currentModeInformationUpdated = [systemMode, time1, time2, subMode, sideColor]

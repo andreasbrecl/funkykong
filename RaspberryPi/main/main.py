@@ -39,7 +39,8 @@ def executeFunctions():
     # Path planning variables, times are in seconds
     diagTimeToShooting = 5
     leftRightTimeToShooting = 5
-    timeList = [diagTimeToShooting, leftRightTimeToShooting]
+    forwardTimeToShooting = 5
+    timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting]
     
     # Path planning distances
     initializationDistance = 5
