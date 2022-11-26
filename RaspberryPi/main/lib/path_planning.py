@@ -26,6 +26,7 @@ class PathPlanning:
         # Define constructor variables
         self.firePin = firePin
         self.reloadPin = reloadPin
+        self.reloadDonePin = reloadDonePin
 
         # Define pixycam information
         pixyCam = PixycamAiming()
