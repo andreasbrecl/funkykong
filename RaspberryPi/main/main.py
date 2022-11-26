@@ -65,11 +65,14 @@ def executeFunctions():
         # Recieve UART comms data
         inputtedData = UART.recieveData()
 
-        # Run motion planning functionality
-        currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+        # Check if data is recieved
+        if inputtedData[-1] == True:
+            
+            # Run motion planning functionality
+            currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
-        # Send command to arduino
-        UART.writeData(movementCommand)
+            # Send command to arduino
+            UART.writeData(movementCommand)
 
 def main():
     """
