@@ -184,7 +184,6 @@ void ExecuteCommands() {
   Output: None
   */
 
-  /*
   // Pull data from sensors
   distanceValue1 = ultrasonic1.distanceCalculations();
   distanceValue2 = ultrasonic2.distanceCalculations();
@@ -195,19 +194,18 @@ void ExecuteCommands() {
   lineSensorValue2 = lineSensor2.lineSensorOutputs();
   lineSensorValue3 = lineSensor3.lineSensorOutputs();
   lineSensorValue4 = lineSensor4.lineSensorOutputs();
-  IMUReadings = IMU.calculateAngle(angle, time1);
+  IMUReadings = 10.1; //IMU.calculateAngle(angle, time1);
   time1 = millis();
 
   // Send data to raspberry pi
   serialComms.sendSerial(distanceValue1, distanceValue2, distanceValue3, distanceValue4, distanceValue5,
     lineSensorValue1, lineSensorValue2, lineSensorValue3, lineSensorValue4, IMUReadings);
-  */
+
   // Pull data from raspberry pi
   driveMode = serialComms.recieveSerial();
   
-  Mover.processCommand(driveMode);
   // Send information to motor drivers
-  // ENTER DRIVEMODE COMMAND HERE
+  Mover.processCommand(driveMode);
 
   // Send logic to weapon for firing
   shooterLogic.shouldFireLogic(shouldFire);
