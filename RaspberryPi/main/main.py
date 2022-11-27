@@ -30,9 +30,7 @@ from lib.pixycam_aiming import PixycamAiming
 
 # print("Pixy2 Python SWIG Example -- Get Blocks")
 
-pixy.init ()
-pixy.change_prog ("color_connected_components");
-
+pixyCam = PixycamAiming()
 
 
 

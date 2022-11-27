@@ -19,7 +19,9 @@ class PixycamAiming:
         Input:  None
         Output: None
         """
-        pass
+        pixy.init ()
+        pixy.change_prog ("color_connected_components");
+
 
     def RedorGreen():
         blocks = BlockArray(1)
