@@ -27,26 +27,33 @@ const int fireLogicPin = 3;
 const int reloadLogicPin = 2; 
 
 // Define const pins for line sensors
-const int lineAnalogPin1 = A12;
-const int lineAnalogPin2 = A13;
-const int lineAnalogPin3 = A14;
-const int lineAnalogPin4 = A15;
-const int lineDigitalPin1 = 46;
-const int lineDigitalPin2 = 47;
-const int lineDigitalPin3 = 48;
-const int lineDigitalPin4 = 49;
+const int lineAnalogPin1 = A0;
+const int lineDigitalPin1 = 50;
+
+const int lineAnalogPin2 = A1;
+const int lineDigitalPin2 = 51;
+
+const int lineAnalogPin3 = A2;
+const int lineDigitalPin3 = 52;
+
+const int lineAnalogPin4 = A3;
+const int lineDigitalPin4 = 53;
 
 // Define const pins for ultrasonic sensors
-const int sonicTrigPin1 = 30;
-const int sonicTrigPin2 = 32;
-const int sonicTrigPin3 = 34;
-const int sonicTrigPin4 = 36;
-const int sonicTrigPin5 = 40;
-const int sonicEchoPin1 = 31;
-const int sonicEchoPin2 = 33;
-const int sonicEchoPin3 = 35;
-const int sonicEchoPin4 = 37;
-const int sonicEchoPin5 = 41;
+const int sonicTrigPin1 = 45;
+const int sonicEchoPin1 = 48;
+
+const int sonicTrigPin2 = 49;
+const int sonicEchoPin2 = 42;
+
+const int sonicTrigPin3 = 44;
+const int sonicEchoPin3 = 41;
+
+const int sonicTrigPin4 = 47;
+const int sonicEchoPin4 = 40;
+
+const int sonicTrigPin5 = 46;
+const int sonicEchoPin5 = 43;
 
 // Define const pins for motor drivers
 
@@ -177,7 +184,6 @@ void ExecuteCommands() {
   Output: None
   */
 
-  /*
   // Pull data from sensors
   distanceValue1 = ultrasonic1.distanceCalculations();
   distanceValue2 = ultrasonic2.distanceCalculations();
@@ -188,19 +194,18 @@ void ExecuteCommands() {
   lineSensorValue2 = lineSensor2.lineSensorOutputs();
   lineSensorValue3 = lineSensor3.lineSensorOutputs();
   lineSensorValue4 = lineSensor4.lineSensorOutputs();
-  IMUReadings = IMU.calculateAngle(angle, time1);
+  IMUReadings = 10.1; //IMU.calculateAngle(angle, time1);
   time1 = millis();
 
   // Send data to raspberry pi
   serialComms.sendSerial(distanceValue1, distanceValue2, distanceValue3, distanceValue4, distanceValue5,
     lineSensorValue1, lineSensorValue2, lineSensorValue3, lineSensorValue4, IMUReadings);
-  */
+
   // Pull data from raspberry pi
   driveMode = serialComms.recieveSerial();
   
-  Mover.processCommand(driveMode);
   // Send information to motor drivers
-  // ENTER DRIVEMODE COMMAND HERE
+  Mover.processCommand(driveMode);
 
   // Send logic to weapon for firing
   shooterLogic.shouldFireLogic(shouldFire);

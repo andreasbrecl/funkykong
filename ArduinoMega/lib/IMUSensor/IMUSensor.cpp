@@ -18,6 +18,10 @@ IMUSensor::IMUSensor() {
     Output: None
     */
    
+    // Define objects
+    LSM6DSO myIMU1;
+    myIMU = myIMU1;
+
     // Initialize the pins on the arduino
     initialize();
 }
