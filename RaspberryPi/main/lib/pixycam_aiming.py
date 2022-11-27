@@ -23,7 +23,7 @@ class PixycamAiming:
         pixy.change_prog ("color_connected_components");
 
 
-    def RedorGreen():
+    def RedorGreens(self):
         blocks = BlockArray(1)
         frame = 0
         pixy.ccc_get_blocks (1, blocks)
@@ -36,7 +36,7 @@ class PixycamAiming:
         else:
             return "None"
 
-    def GetBlue():
+    def GetBlue(self):
 
         Max_x = 315
         half_x = 158

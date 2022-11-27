@@ -82,8 +82,8 @@ def executeFunctions():
     path = PathPlanning(firePin, reloadPin, reloadDonePin)
     """
     while True:
-        X = pixyCam.GetBlue()
-        print(x)
+        X = pixyCam.GetBlue
+        print(X)
         """
         # Recieve UART comms data
         inputtedData = UART.recieveData()
