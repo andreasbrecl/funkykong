@@ -24,6 +24,8 @@ import pixy
 from ctypes import *
 from pixy import *
 
+from lib.pixycam_aiming import PixycamAiming
+
 # Pixy2 Python SWIG get blocks example #
 
 # print("Pixy2 Python SWIG Example -- Get Blocks")
@@ -76,21 +78,28 @@ def executeFunctions():
     currentModeInformation = [systemMode, time1, time2, subMode, sideColor]
 
     # Create UART object
+
+    """
     UART = UARTComms(port, baudRate, timeout)
     path = PathPlanning(firePin, reloadPin, reloadDonePin)
-
+    """
     while True:
+
+        """
         # Recieve UART comms data
         inputtedData = UART.recieveData()
 
         # Check if data is recieved
         if inputtedData[-1] == True:
             
+
             # Run motion planning functionality
             currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
             # Send command to arduino
             UART.writeData(movementCommand)
+
+        """
 
 def main():
     """
