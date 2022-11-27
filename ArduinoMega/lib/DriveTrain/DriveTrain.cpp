@@ -47,50 +47,50 @@ void DriveTrain::processCommand(String driveMode){
   //This function processes the commands received from the python to move the robot.
   // Currently the commands are set up as full strings so that they are easy to interpret for the humans
   // They can be adjusted to single characters if necessary
-        if(driveMode == "forward"){
-          Serial.println("Going Forward");
+        if(driveMode == "B"){
+          // Serial.println("Going Forward");
           forward();
           
         }
-        else if(driveMode == "backward"){
+        else if(driveMode == "C"){
           backward();
-          Serial.println("Going backward");
+          // Serial.println("Going backward");
         }
-        else if(driveMode == "left"){
+        else if(driveMode == "D"){
           Go_Left();
-          Serial.println("Going Left");
+          // Serial.println("Going Left");
         }
-        else if(driveMode == "right"){
+        else if(driveMode == "E"){
           Go_Right();
-          Serial.println("Going Right");
+          // Serial.println("Going Right");
         }
-        if(driveMode == "fleft"){
+        if(driveMode == "G"){
           Diag_FLeft();
-          Serial.println("Going Diagonal Forwards Left");
+          // Serial.println("Going Diagonal Forwards Left");
         }
-        else if(driveMode == "bleft"){
+        else if(driveMode == "I"){
           Diag_BLeft();
-          Serial.println("Going Diagonal Backwards Left");
+          // Serial.println("Going Diagonal Backwards Left");
         }
-        else if(driveMode == "fright"){
+        else if(driveMode == "F"){
           Diag_FRight();
-          Serial.println("Going Diagonal Forwards Right");
+          // Serial.println("Going Diagonal Forwards Right");
         }
-        else if(driveMode == "bright"){
+        else if(driveMode == "H"){
           Diag_BRight();
-          Serial.println("Going Diagonal Backwards Right");
+          // Serial.println("Going Diagonal Backwards Right");
         }
-        else if(driveMode == "ccw"){
+        else if(driveMode == "K"){
           CounterClockwise();
-          Serial.println("Going Counter Clockwise");
+          // Serial.println("Going Counter Clockwise");
         }
-        else if (driveMode == "cw"){
+        else if (driveMode == "J"){
           Clockwise();
-          Serial.println("Going Clockwise");
+          // Serial.println("Going Clockwise");
         }
-        else if(driveMode == "Shtop"){
+        else if(driveMode == "A"){
           Stop();
-          Serial.println("Stopping! ");
+          // Serial.println("Stopping! ");
           
         }
         /*

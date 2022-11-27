@@ -1,3 +1,4 @@
+from __future__ import print_function
 #!/usr/bin/env python3
 """
 Author: Andrea Brecl
@@ -16,6 +17,31 @@ from lib.path_planning import PathPlanning
 
 # Import built in funcitons
 import time
+
+import sys
+# sys.path.append("~/Documents/Code/Pixy2Python/pixy2/build/python_demos")
+import pixy 
+from ctypes import *
+from pixy import *
+
+# Pixy2 Python SWIG get blocks example #
+
+# print("Pixy2 Python SWIG Example -- Get Blocks")
+
+pixy.init ()
+pixy.change_prog ("color_connected_components");
+
+class Blocks (Structure):
+  _fields_ = [ ("m_signature", c_uint),
+    ("m_x", c_uint),
+    ("m_y", c_uint),
+    ("m_width", c_uint),
+    ("m_height", c_uint),
+    ("m_angle", c_uint),
+    ("m_index", c_uint),
+    ("m_age", c_uint) ]
+
+
 
 def executeFunctions():
     """
@@ -82,6 +108,11 @@ def main():
 
     Output: None
     """
+
+
+    blocks = BlockArray(1)
+    frame = 0
+    
     # Execute main functionaliy
     executeFunctions()
 
