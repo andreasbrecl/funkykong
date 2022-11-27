@@ -13,7 +13,10 @@ to put the system into the correct location.
 
 # Import classes
 from lib.uart_comms import UARTComms
+from lib.path_planning import PathPlanning
 
+# Import built in funcitons
+import time
 
 import sys
 # sys.path.append("~/Documents/Code/Pixy2Python/pixy2/build/python_demos")
@@ -55,12 +58,47 @@ def executeFunctions():
     baudRate = 9600
     timeout = 1
 
+    # Define GPIO pins
+    firePin = 17
+    reloadPin = 27
+    reloadDonePin = 22
+
+    # Path planning variables, times are in seconds
+    diagTimeToShooting = 5
+    leftRightTimeToShooting = 5
+    forwardTimeToShooting = 5
+    timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting]
+    
+    # Path planning distances
+    initializationDistance = 5
+    shootingDistance = 5
+    pathDistanceList = [initializationDistance, shootingDistance]
+
+    # Initial movement criterias
+    movementCommand = "A"
+    systemMode = "Initialize"
+    time1 = time.time()
+    time2 = time.time()
+    subMode = "Initialize"
+    sideColor = "None"
+    currentModeInformation = [systemMode, time1, time2, subMode, sideColor]
+
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
+    path = PathPlanning(firePin, reloadPin, reloadDonePin)
 
     while True:
         # Recieve UART comms data
         inputtedData = UART.recieveData()
+
+        # Check if data is recieved
+        if inputtedData[-1] == True:
+            
+            # Run motion planning functionality
+            currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+
+            # Send command to arduino
+            UART.writeData(movementCommand)
 
 def main():
     """

@@ -35,9 +35,21 @@ Shooter::Shooter(int fireLogicPin, int servoPin, int reloadLogicPin, int fireTim
     this->servoLoadPosition = servoLoadPosition;
     this->servoFirePosition = servoFirePosition;
     this->triggerRelayPin = triggerRelayPin;
-    
-    // Initialize the pins on the Arduino
-    initialize();
+
+    // Define Servo
+    Servo servo_inital;
+
+    // Make new servo
+    servo1 = servo_inital;
+
+    // Define pin out/in values
+    pinMode(reloadLogicPin, OUTPUT);
+    pinMode(fireLogicPin, INPUT);
+    pinMode(triggerRelayPin, OUTPUT);
+
+    // Set initial output as low
+    digitalWrite(reloadLogicPin, LOW);
+    digitalWrite(triggerRelayPin, LOW);
 }
 
 int Shooter::shoot(int timesFired) {
@@ -58,18 +70,17 @@ int Shooter::shoot(int timesFired) {
     // Check if should fire command recieved
     shouldFire = digitalRead(fireLogicPin);
     if (shouldFire == ON) {
-
         // Turn on shooter
         digitalWrite(triggerRelayPin, HIGH);
 
         // Set servo in load position
-        servo.write(servoLoadPosition);
+        servo1.write(servoLoadPosition);
 
         // Delay for 1.5 seconds
         delay(fireTimeDelay);
 
         // Set servo in fire position
-        servo.write(servoFirePosition);
+        servo1.write(servoFirePosition);
 
         // Delay for 1.5 seconds
         delay(fireTimeDelay);
@@ -128,17 +139,7 @@ void Shooter::initialize() {
     Output: None
     */
 
-    // Define pin out/in values
-    pinMode(reloadLogicPin, OUTPUT);
-    pinMode(servoPin, OUTPUT);
-    pinMode(fireLogicPin, INPUT);
-    pinMode(triggerRelayPin, OUTPUT);
-
-    // Set initial output as low
-    digitalWrite(reloadLogicPin, LOW);
-    digitalWrite(triggerRelayPin, LOW);
-
     // Set initial servo position
-    servo.attach(servoPin);
-    servo.write(servoFirePosition);
+    servo1.attach(servoPin);
+    servo1.write(servoFirePosition);
 }

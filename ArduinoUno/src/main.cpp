@@ -9,8 +9,6 @@
 
 // Include general Arduino librariess
 #include <Arduino.h>
-#include <stdint.h>
-#include <inttypes.h>
 
 // Inlcude custom libraries
 #include "Servo.h"
@@ -38,9 +36,6 @@ int timesFired = 0;
 // Create objects for class
 Shooter shooter(fireLogicPin, servoPin, reloadLogicPin, fireTimeDelay, servoLoadPosition, servoFirePosition, triggerRelayPin);
 
-// Define functions
-void ExecuteCommands();
-
 // Run setup code
 void setup() {
   /*
@@ -53,21 +48,12 @@ void setup() {
 
   // Set serial speed
   Serial.begin(serialSpeed);
+
+  // Initalize servo
+  shooter.initialize();
 }
 
 void loop() {
-  /*
-  Main script look that runs commands to get proessing started. This is simple
-  to prevent complication from building here.
-
-  Input: None
-
-  Output: None
-  */
-  ExecuteCommands();
-}
-
-void ExecuteCommands() {
   /*
   This function runs the other functions for the core processes on the Arduino
   Uno. In this case it runs just the shooting function.
