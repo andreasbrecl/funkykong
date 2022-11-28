@@ -782,7 +782,7 @@ class PathPlanning:
         percentDifferenceFromNeeded = self.calculatePercentage(expectedDistance, ultrasonic)
         
         # Check if distance is within needed area
-        if percentDifferenceFromNeeded <= 5:
+        if percentDifferenceFromNeeded <= 10:
 
             # Stop motion
             movementCommand = stop
