@@ -59,8 +59,14 @@ float UltrasonicSensor::distanceCalculations() {
     // Calculate the distance found in centimeters
     distance = duration*halfSpeedOfSound;
 
-    // Create distance vector
-    distanceValue = distance;
+    if ( distance == 0 ) {
+        // Create distance vector
+        distanceValue = 25;
+
+    } else {
+        // Create distance vector
+        distanceValue = distance;
+    }
 
     // Return the array of values
     return distanceValue;
