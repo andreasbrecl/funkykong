@@ -62,16 +62,18 @@ def executeFunctions():
     firePin = 17
     reloadPin = 27
     reloadDonePin = 22
+    startPin = 23
+    stopPin = 24
 
     # Path planning variables, times are in seconds
-    diagTimeToShooting = 5
-    leftRightTimeToShooting = 5
-    forwardTimeToShooting = 5
+    diagTimeToShooting = 10
+    leftRightTimeToShooting = 10
+    forwardTimeToShooting = 10
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting]
     
-    # Path planning distances
-    initializationDistance = 5
-    shootingDistance = 5
+    # Path planning distances in CM
+    initializationDistance = 13
+    shootingDistance = 20
     pathDistanceList = [initializationDistance, shootingDistance]
 
     # Initial movement criterias
