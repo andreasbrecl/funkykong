@@ -62,7 +62,7 @@ class UARTComms:
         motorData = motorData + "\n"
 
         # Convert message to bytes
-        motorDataBytes = bytes(motorData, 'utf-8')
+        motorDataBytes = bytes(motorData)
 
         # Write serial data
         self.ser.write(motorDataBytes)
