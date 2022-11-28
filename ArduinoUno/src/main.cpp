@@ -28,7 +28,7 @@ const int servoLoadPosition = 0;
 const int servoFirePosition = 140;
 
 // Serial speed constant
-const int serialSpeed = 9600;
+const int serialSpeed = 115200;
 
 // Define fire logic
 int timesFired = 0;

@@ -30,7 +30,7 @@ def executeFunctions():
     """
     # UART variables
     port = '/dev/ttyACM0'
-    baudRate = 9600
+    baudRate = 115200
     timeout = 1
 
     # Define GPIO pins
