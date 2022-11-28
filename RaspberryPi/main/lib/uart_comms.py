@@ -109,6 +109,9 @@ class UARTComms:
             inputtedData = [lineSensorReading1,lineSensorReading2,lineSensorReading3,lineSensorReading4,\
                 ultrasonicSensorReading1,ultrasonicSensorReading2,ultrasonicSensorReading3,ultrasonicSensorReading4,\
                     ultrasonicSensorReading5,IMUSensorReading, serialIsRecieved]
+            
+            # Print data
+            print(inputtedData)
         
         # Send back indication showing serial not recieved
         else:
