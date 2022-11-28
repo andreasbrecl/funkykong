@@ -101,7 +101,7 @@ class PathPlanning:
             movementCommand = rotateRight
 
             # Check if pixy camera has found information
-            sideColor = "None" # ENTER UPDATED FUNCTION OUTPUT HERE
+            sideColor = self.pixyCam.RedorGreens()
 
             # Check if color is found
             if sideColor == colorCheckRed or sideColor == colorCheckGreen:
@@ -327,7 +327,7 @@ class PathPlanning:
         if subMode == subModeAimShooter:
 
             # Read in data
-            pixyCamAim = "None" # ADD FUNCTION READ IN HERE
+            pixyCamAim = self.pixyCam.GetBlue()
 
             # Check what direction to aim
             if pixyCamAim == pixyCamAimLeft:

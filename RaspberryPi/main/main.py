@@ -36,6 +36,8 @@ def executeFunctions():
     firePin = 17
     reloadPin = 27
     reloadDonePin = 22
+    startPin = 23
+    stopPin = 24
 
     # Path planning variables, times are in seconds
     diagTimeToShooting = 10
