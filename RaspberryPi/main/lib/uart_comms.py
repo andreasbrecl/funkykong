@@ -93,14 +93,14 @@ class UARTComms:
             lineSensorReading4 = int(splitData[3][3])
 
             # Pull ultra sonic sensor data
-            ultrasonicSensorReading1 = int(splitData[4][3:-1])
-            ultrasonicSensorReading2 = int(splitData[5][3:-1])
-            ultrasonicSensorReading3 = int(splitData[6][3:-1])
-            ultrasonicSensorReading4 = int(splitData[7][3:-1])
-            ultrasonicSensorReading5 = int(splitData[8][3:-1])
+            ultrasonicSensorReading1 = float(splitData[4][3:-1])
+            ultrasonicSensorReading2 = float(splitData[5][3:-1])
+            ultrasonicSensorReading3 = float(splitData[6][3:-1])
+            ultrasonicSensorReading4 = float(splitData[7][3:-1])
+            ultrasonicSensorReading5 = float(splitData[8][3:-1])
 
             # Pull IMU data
-            IMUSensorReading = int(splitData[9][4:-1])
+            IMUSensorReading = float(splitData[9][4:-1])
 
             # Define if serial message being recieved
             serialIsRecieved = True
