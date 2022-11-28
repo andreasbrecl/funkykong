@@ -54,7 +54,7 @@ float UltrasonicSensor::distanceCalculations() {
     digitalWrite(sonicTrigPin, LOW);
 
     // Sense via the echo pins
-    duration = pulseIn(sonicEchoPin, HIGH);
+    duration = pulseIn(sonicEchoPin, HIGH, timeout);
 
     // Calculate the distance found in centimeters
     distance = duration*halfSpeedOfSound;
