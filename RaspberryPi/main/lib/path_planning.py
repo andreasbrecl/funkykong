@@ -754,7 +754,7 @@ class PathPlanning:
         percentDifference = self.calculatePercentage(ultrasonic1, ultrasonic2)
 
         # See if value is within 5 %
-        if percentDifference <= 5:
+        if percentDifference <= 5 and ultrasonic1 < 20 and ultrasonic2 < 20:
 
             # Stop motion
             movementCommand = stop
