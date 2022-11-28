@@ -812,7 +812,10 @@ class PathPlanning:
         Output: percentDifference <int> - Percent difference between values
         """
         # Calculate percentage
-        percentDifference = abs(variable1 - variable2) / variable1 * 100
+        if variable1 != 0:
+            percentDifference = abs(variable1 - variable2) / variable1 * 100
+        else:
+            percentDifference = 10
         
         # Return values
         return percentDifference
