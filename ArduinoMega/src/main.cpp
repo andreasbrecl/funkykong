@@ -56,18 +56,15 @@ const int sonicTrigPin5 = 46;
 const int sonicEchoPin5 = 43;
 
 // Define const pins for motor drivers
+const int FRdirPin = 24;
+const int FLdirPin = 22;
+const int BLdirPin = 25;
+const int BRdirPin = 23;
 
-
-const int FRdirPin = 25;
-const int FLdirPin = 24;
-const int BLdirPin = 23;
-const int BRdirPin = 22;
-
-const int FRstepPin = 29;
-const int FLstepPin = 28;
-const int BLstepPin = 27;
-const int BRstepPin = 26;
-
+const int FRstepPin = 28;
+const int FLstepPin = 26;
+const int BLstepPin = 29;
+const int BRstepPin = 27;
 
 
 // Define motor int vars

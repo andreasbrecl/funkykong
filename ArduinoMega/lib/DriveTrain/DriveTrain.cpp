@@ -108,10 +108,10 @@ void DriveTrain::forward(){
   //This function moves the robot forward at a set speed
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
-  Front_Left.setSpeed(-maxSpeed);
+  Front_Left.setSpeed(maxSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(-maxSpeed);
-  Back_Right.setSpeed(maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
+  Back_Right.setSpeed(-maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -127,10 +127,10 @@ void DriveTrain::backward(){
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
-  Front_Left.setSpeed(maxSpeed);
+  Front_Left.setSpeed(-maxSpeed);
   Front_Right.setSpeed(maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
-  Back_Right.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
+  Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -147,10 +147,10 @@ void DriveTrain::Go_Right(){
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
-  Front_Left.setSpeed(-maxSpeed);
+  Front_Left.setSpeed(maxSpeed);
   Front_Right.setSpeed(maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
-  Back_Right.setSpeed(maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
+  Back_Right.setSpeed(-maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -164,10 +164,10 @@ void DriveTrain::Diag_FRight(){
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
-  Front_Left.setSpeed(-maxSpeed);
+  Front_Left.setSpeed(maxSpeed);
   Front_Right.setSpeed(stopSpeed);
   Back_Left.setSpeed(stopSpeed);
-  Back_Right.setSpeed(maxSpeed);
+  Back_Right.setSpeed(-maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -180,12 +180,12 @@ void DriveTrain::Diag_FLeft(){
   //This function moves the robot forward and diagonally to the left at a set speed
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
-
-
   Front_Left.setSpeed(stopSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
   Back_Right.setSpeed(stopSpeed);
+
+  
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -200,10 +200,10 @@ void DriveTrain::Diag_BLeft(){
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
-  Front_Left.setSpeed(maxSpeed);
+  Front_Left.setSpeed(-maxSpeed);
   Front_Right.setSpeed(stopSpeed);
   Back_Left.setSpeed(stopSpeed);
-  Back_Right.setSpeed(-maxSpeed);
+  Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -217,7 +217,7 @@ void DriveTrain::Diag_BRight(){
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
   Front_Left.setSpeed(stopSpeed);
   Front_Right.setSpeed(maxSpeed);
-  Back_Left.setSpeed(maxSpeed);
+  Back_Left.setSpeed(-maxSpeed);
   Back_Right.setSpeed(stopSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
@@ -231,10 +231,10 @@ void DriveTrain::Go_Left(){
 
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
-  Front_Left.setSpeed(maxSpeed);
+  Front_Left.setSpeed(-maxSpeed);
   Front_Right.setSpeed(-maxSpeed);
-  Back_Left.setSpeed(-maxSpeed);
-  Back_Right.setSpeed(-maxSpeed);
+  Back_Left.setSpeed(maxSpeed);
+  Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
   Front_Left.runSpeed();
   Front_Right.runSpeed();
@@ -249,7 +249,7 @@ void DriveTrain::CounterClockwise(){
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
   Front_Left.setSpeed(-maxSpeed);
-  Front_Right.setSpeed(maxSpeed);
+  Front_Right.setSpeed(-maxSpeed);
   Back_Left.setSpeed(-maxSpeed);
   Back_Right.setSpeed(-maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
@@ -268,7 +268,7 @@ void DriveTrain::Clockwise(){
   //Set the speed of the stepping of the motor. A negative can be added/removed to change the direction the motor is spinning.
 
   Front_Left.setSpeed(maxSpeed);
-  Front_Right.setSpeed(-maxSpeed);
+  Front_Right.setSpeed(maxSpeed);
   Back_Left.setSpeed(maxSpeed);
   Back_Right.setSpeed(maxSpeed);
   // Step the motor with a constant speed as set by setSpeed():
@@ -299,13 +299,13 @@ void DriveTrain::Stop(){
 void DriveTrain::Go_FLeft(){
 //This function was for debugging only a single motor, going forwards
 
-Front_Left.setSpeed(-maxSpeed);
-Front_Left.runSpeed();
+Back_Left.setSpeed(-maxSpeed);
+Back_Left.runSpeed();
 }
 
 void DriveTrain::Go_FLeftB(){
 //This function was for debugging only a single motor, going backwards  
-Front_Left.setSpeed(maxSpeed);
-Front_Left.runSpeed();
+Back_Left.setSpeed(-maxSpeed);
+Back_Left.runSpeed();
 }
 
