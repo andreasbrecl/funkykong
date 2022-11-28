@@ -87,20 +87,20 @@ class UARTComms:
             splitData = recievedData.split(",")
 
             # Pull line sensor data
-            lineSensorReading1 = splitData[0][4]
-            lineSensorReading2 = splitData[1][3]
-            lineSensorReading3 = splitData[2][3]
-            lineSensorReading4 = splitData[3][3]
+            lineSensorReading1 = int(splitData[0][4])
+            lineSensorReading2 = int(splitData[1][3])
+            lineSensorReading3 = int(splitData[2][3])
+            lineSensorReading4 = int(splitData[3][3])
 
             # Pull ultra sonic sensor data
-            ultrasonicSensorReading1 = splitData[4][3:-1]
-            ultrasonicSensorReading2 = splitData[5][3:-1]
-            ultrasonicSensorReading3 = splitData[6][3:-1]
-            ultrasonicSensorReading4 = splitData[7][3:-1]
-            ultrasonicSensorReading5 = splitData[8][3:-1]
+            ultrasonicSensorReading1 = int(splitData[4][3:-1])
+            ultrasonicSensorReading2 = int(splitData[5][3:-1])
+            ultrasonicSensorReading3 = int(splitData[6][3:-1])
+            ultrasonicSensorReading4 = int(splitData[7][3:-1])
+            ultrasonicSensorReading5 = int(splitData[8][3:-1])
 
             # Pull IMU data
-            IMUSensorReading = splitData[9][4:-1]
+            IMUSensorReading = int(splitData[9][4:-1])
 
             # Define if serial message being recieved
             serialIsRecieved = True
