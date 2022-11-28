@@ -43,7 +43,7 @@ class UltrasonicSensor {
         int senseDelay = 10;
 
         // Timeout value
-        const int timeout = 1470;
+        const int timeout = 5000;
 
         // Speed of sound
         const float halfSpeedOfSound = 0.034 / 2;

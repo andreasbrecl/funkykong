@@ -134,7 +134,7 @@ void setup() {
   */
 
   // Set serial speed
-  Serial.begin(serialSpeed);
+  Serial.begin(115200);
 
   /*
   // Set up system interupt
