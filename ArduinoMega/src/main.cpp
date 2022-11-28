@@ -33,11 +33,11 @@ const int lineDigitalPin1 = 50;
 const int lineAnalogPin2 = A1;
 const int lineDigitalPin2 = 51;
 
-const int lineAnalogPin3 = A2;
-const int lineDigitalPin3 = 52;
+const int lineAnalogPin3 = A3;
+const int lineDigitalPin3 = 53;
 
-const int lineAnalogPin4 = A3;
-const int lineDigitalPin4 = 53;
+const int lineAnalogPin4 = A2;
+const int lineDigitalPin4 = 52;
 
 // Define const pins for ultrasonic sensors
 const int sonicTrigPin1 = 45;
