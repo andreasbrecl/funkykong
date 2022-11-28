@@ -96,6 +96,9 @@ class PathPlanning:
         
         # Run inital rotation to determine size
         if subMode == subModeInitialize:
+
+            # print mode
+            print(subModeInitialize)
             
             # Start rotation
             movementCommand = rotateRight
@@ -115,6 +118,9 @@ class PathPlanning:
         # Run rotation to find the wall
         elif subMode == subModeFindWall:
 
+            # Print mode
+            print(subModeFindWall)
+
             # Check distance between items
             movementCommand = self.verifyForwardFacing(ultrasonicSensorReading1, ultrasonicSensorReading2)
 
@@ -127,6 +133,9 @@ class PathPlanning:
         # Change mode to wall alignment
         elif subMode == subModeAlignDistance:
 
+            # Print mode
+            print(subModeAlignDistance)
+
             # Check distance between items
             movementCommand = self.checkDistance(initializationDistance, ultrasonicSensorReading1)
 
@@ -138,6 +147,9 @@ class PathPlanning:
 
         # Do movement of side to side
         elif subMode == subModeMoveToSide:
+
+            # Print mode
+            print(subModeMoveToSide)
 
             # Chose movement based on side
             if sideColor == colorCheckRed:
@@ -216,6 +228,9 @@ class PathPlanning:
         # See if system is in diagonal movement mode
         if subMode == subModeMoveDiag:
 
+            # Print mode
+            print(subModeMoveDiag)
+
             # Chose movement based on side
             if sideColor == colorCheckRed:
 
@@ -238,6 +253,9 @@ class PathPlanning:
         # Move system sidways
         elif subMode == subModeMoveSidways:
 
+            # Print mode
+            print(subModeMoveSidways)
+
             # Chose movement based on side
             if sideColor == colorCheckRed:
 
@@ -257,6 +275,9 @@ class PathPlanning:
 
         # Move to forward location
         elif subMode == subModeMoveForward:
+
+            # Print mode
+            print(subModeMoveForward)
 
             # Determine movement
             movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, forward)
@@ -326,6 +347,9 @@ class PathPlanning:
         # Enter Aim shooter mode
         if subMode == subModeAimShooter:
 
+            # Print mode
+            print(subModeAimShooter)
+
             # Read in data
             pixyCamAim = self.pixyCam.GetBlue()
 
@@ -379,6 +403,9 @@ class PathPlanning:
 
         # Fix how robot is oriented         
         elif subMode == subModeFixOrientation:
+
+            # Print mode
+            print(subModeFixOrientation)
             
             # Fix how it is facing
             movementCommand = self.verifyForwardFacing(self, ultrasonicSensorReading1, ultrasonicSensorReading2)
@@ -391,6 +418,9 @@ class PathPlanning:
 
         # Fix distance robot is off wall
         elif subMode == subModeFixDistance:
+
+            # Print mode
+            print(subModeFixDistance)
 
             # Check distance between items
             movementCommand = self.checkDistance(shootingDistance, ultrasonicSensorReading1)
@@ -470,6 +500,9 @@ class PathPlanning:
         # Enter sidways movement mode
         if subMode == subModeMoveSidways:
 
+            # Print mode
+            print(subModeMoveSidways)
+
             # Check what side the robot is on
             if sideColor == colorCheckGreen:
                 
@@ -489,6 +522,9 @@ class PathPlanning:
 
         # Move diagonal until line is hit
         if subMode == subModeMoveDiag:
+
+            # Print mode
+            print(subModeMoveDiag)
 
             # Check what side the robot is on
             if sideColor == colorCheckGreen:
@@ -512,6 +548,9 @@ class PathPlanning:
 
         # Align robot on side
         elif subMode == subModeAlignSide:
+
+            # Print mode
+            print(subModeAlignSide)
 
             # Check what side the robot is on
             if sideColor == colorCheckGreen:
@@ -539,6 +578,9 @@ class PathPlanning:
         # Enter move backwards mode
         elif subMode == subModeMoveBack:
 
+            # Print mode
+            print(subModeMoveBack)
+
             # Start backwards movement
             movementCommand = backwards
 
@@ -561,18 +603,24 @@ class PathPlanning:
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
+                
+            # Print mode
+            print(subModeAlignBack)
 
-                # Align vehicle
-                movementCommand = self.alignOnLines(lineSensorReading3, lineSensorReading4, "Rear")
+            # Align vehicle
+            movementCommand = self.alignOnLines(lineSensorReading3, lineSensorReading4, "Rear")
 
-                # Check if alignment has stopped
-                if movementCommand == stop:
+            # Check if alignment has stopped
+            if movementCommand == stop:
 
-                    # Change mode
+                # Change mode
                     subMode = subModeReload
                 
         # Enter reload mode
         elif subMode == subModeReload:
+
+            # Print mode
+            print(subModeReload)
 
             # Wait for reload done input
             if GPIO.input(self.reloadDonePin):
