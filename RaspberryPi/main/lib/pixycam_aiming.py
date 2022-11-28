@@ -49,7 +49,13 @@ class PixycamAiming:
         if count > 0:
             for index in range (0, count):
                     if(sig == 1):
-                        return blocks[index].m_x-half_x
+                        spot = blocks[index].m_x-half_x
+                        if(spot < -20):
+                            return "Left"
+                        elif(spot > 20)
+                            return "Right"
+                        else
+                            return "Center"
                     else:
                         return "None"
     
