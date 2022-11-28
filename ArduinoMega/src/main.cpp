@@ -103,7 +103,7 @@ double time1 = 0;
 double time2 = 0;
 
 // Serial speed constant
-const int serialSpeed = 9600;
+const int serialSpeed = 115200;
 
 // Create objects for classes
 UnoLogicDriver shooterLogic(fireLogicPin);
