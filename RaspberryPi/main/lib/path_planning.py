@@ -801,7 +801,7 @@ class PathPlanning:
 
         return movementCommand
 
-    def calculatePercentage(variable1, variable2):
+    def calculatePercentage(self, variable1, variable2):
         """
         This function will compute the average value between two
         variables.
