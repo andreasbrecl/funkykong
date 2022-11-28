@@ -36,7 +36,7 @@ bool LineSensor::lineSensorOutputs() {
     Output: lineSensorVector <float><array> - This is a array of line values found by sensors
     */
     // Create vector of values
-    lineSensorValue = digitalRead(lineDigitalPin);
+    lineSensorValue = 1 - digitalRead(lineDigitalPin);
 
     // Return vector of values
     return lineSensorValue;
