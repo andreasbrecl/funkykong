@@ -52,9 +52,9 @@ class PixycamAiming:
                         spot = blocks[index].m_x-half_x
                         if(spot < -20):
                             return "Left"
-                        elif(spot > 20)
+                        elif(spot > 20):
                             return "Right"
-                        else
+                        else:
                             return "Center"
                     else:
                         return "None"
