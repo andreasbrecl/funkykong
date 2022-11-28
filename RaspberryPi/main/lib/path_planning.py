@@ -811,7 +811,7 @@ class PathPlanning:
         return movementCommand
         
 
-    def checkDistance(self, ultrasonic, expectedDistance):
+    def checkDistance(self, expectedDistance, ultrasonic):
         """
         This function checks if the ultrasonic sensor distances
         are too close, too far, or correct distance from target.
