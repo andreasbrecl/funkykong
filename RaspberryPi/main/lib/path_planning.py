@@ -791,9 +791,9 @@ class PathPlanning:
         rotateLeft = "K"
 
         # Run rotation 
-        if ultrasonic1 > ultrasonic2 and ultrasonic1 < 20 and ultrasonic2 < 20:
+        if ultrasonic1 > ultrasonic2 and ultrasonic1 < 25 and ultrasonic2 < 25:
             movementCommand = rotateLeft
-        elif ultrasonic2 > ultrasonic1 and ultrasonic1 < 20 and ultrasonic2 < 20:
+        elif ultrasonic2 > ultrasonic1 and ultrasonic1 < 25 and ultrasonic2 < 25:
             movementCommand = rotateRight
         else:
             movementCommand = rotateLeft
