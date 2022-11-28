@@ -69,13 +69,13 @@ def executeFunctions():
         inputtedData = UART.recieveData()
 
         # Check if data is recieved
-        if inputtedData[-1] == True:
+        #if inputtedData[-1] == True:
             
             # Run motion planning functionality
-            currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+        #    currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
             # Send command to arduino
-            UART.writeData(movementCommand)
+        #    UART.writeData(movementCommand)
 
 def main():
     """
