@@ -587,7 +587,7 @@ class PathPlanning:
         # Return data
         return movementCommand, systemMode, subMode, time1
     
-    def alignOnLines(line1, line2, sideColor):
+    def alignOnLines(self, line1, line2, sideColor):
         """
         This function will deal with aligning the vehicle on
         the line that it has run into. This will allow it to
@@ -699,7 +699,7 @@ class PathPlanning:
         """
         pass
 
-    def moveBasedOnTime(desiredTime, time1, movementCommand):
+    def moveBasedOnTime(self, desiredTime, time1, movementCommand):
         """
         This function will deal with the movements based on
         the inputted time and the movement wanted. It will
