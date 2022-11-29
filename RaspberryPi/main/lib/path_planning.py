@@ -344,6 +344,9 @@ class PathPlanning:
         rotateRight = "J"
         rotateLeft = "K"
 
+        # Movement command
+        movementCommand = stop
+
         # Predefine pixy cam
         pixyCamAim = "None"
         pixyCamAimLeft = "Left"
