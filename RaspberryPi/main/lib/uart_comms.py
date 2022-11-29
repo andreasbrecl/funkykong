@@ -58,15 +58,18 @@ class UARTComms:
 
         Output: None
         """
-        if self.ser.in_waiting() == 0:
-            # Add delimiter
-            motorData = motorData + "\n"
+        # Reset buffers
+        self.ser.reset_input_buffer()
+        self.ser.reset_output_buffer()
 
-            # Convert message to bytes
-            motorDataBytes = bytes(motorData)
+        # Add delimiter
+        motorData = motorData + "\n"
 
-            # Write serial data
-            self.ser.write(motorDataBytes)
+        # Convert message to bytes
+        motorDataBytes = bytes(motorData)
+
+        # Write serial data
+        self.ser.write(motorDataBytes)
 
     def decodeInputtedData(self, recievedData):
         """
