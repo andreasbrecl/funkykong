@@ -165,15 +165,17 @@ class PathPlanning:
             # Check if the boundry is reached
             if lineSensor1 == 1 or lineSensor2 == 1 or lineSensor3 == 1 or lineSensor4 == 1:
 
-                # Stop vehicle
-                movementCommand = stop
+                if lineSensor1 == 1 and lineSensor2 == 1 and lineSensor3 == 1 and lineSensor4 == 1:
 
-                # Change vehicle modes
-                systemMode = "GoToShoot"
-                subMode = "MoveDiag"
+                    # Stop vehicle
+                    movementCommand = stop
 
-                # Calculate start of movement time
-                time1 = time.time()
+                    # Change vehicle modes
+                    systemMode = "GoToShoot"
+                    subMode = "MoveDiag"
+
+                    # Calculate start of movement time
+                    time1 = time.time()
 
         # Return data
         return movementCommand, systemMode, subMode, sideColor, time1
