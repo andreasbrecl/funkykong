@@ -29,7 +29,7 @@ def main():
     GPIO.setup(reloadDonePin, GPIO.IN)
 
     while True:
-
+        print(GPIO.input(startPin))
         # Check start pin
         if GPIO.input(startPin):
 
