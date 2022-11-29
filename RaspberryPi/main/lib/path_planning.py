@@ -360,7 +360,7 @@ class PathPlanning:
             print(subModeAimShooter)
 
             # Read in data
-            pixyCamAim = pixyCamAimCenter #self.pixyCam.GetBlue()
+            pixyCamAim = self.pixyCam.GetBlue()
 
             # Check what direction to aim
             if pixyCamAim == pixyCamAimLeft:
@@ -899,8 +899,8 @@ class PathPlanning:
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
 
-        systemMode = "Shoot"
-        currentModeInformation[3] = "AimShooter"
+        #systemMode = "Shoot"
+        #currentModeInformation[3] = "AimShooter"
 
         # Initialize and localize the robot's motion
         if systemMode == "Initialize":
