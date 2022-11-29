@@ -410,6 +410,8 @@ class PathPlanning:
                     # Set GPIO low
                 #    GPIO.output(self.firePin, 0)
 
+            print(movementCommand)
+
         # Fix how robot is oriented         
         elif subMode == subModeFixOrientation:
 
