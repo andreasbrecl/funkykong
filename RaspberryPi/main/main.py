@@ -75,8 +75,8 @@ def executeFunctions():
             # Run motion planning functionality
             currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
-            # Send command to arduino
-            UART.writeData(movementCommand)
+        # Send command to arduino
+        UART.writeData(movementCommand)
 
 def main():
     """
