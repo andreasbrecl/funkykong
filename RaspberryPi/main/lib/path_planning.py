@@ -410,7 +410,7 @@ class PathPlanning:
                     # Set GPIO low
                 #    GPIO.output(self.firePin, 0)
 
-            print(movementCommand)
+            print(pixyCamAim)
 
         # Fix how robot is oriented         
         elif subMode == subModeFixOrientation:
