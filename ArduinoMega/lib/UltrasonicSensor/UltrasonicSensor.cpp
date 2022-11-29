@@ -61,7 +61,7 @@ float UltrasonicSensor::distanceCalculations() {
 
     if ( duration == 0 ) {
         // Create distance vector
-        distanceValue = 25;
+        distanceValue = 50;
 
     } else {
         // Create distance vector
