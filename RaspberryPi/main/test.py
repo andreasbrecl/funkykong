@@ -23,10 +23,10 @@ def main():
     # Define pin type
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(firePin, GPIO.OUT)
-    GPIO.setup(reloadPin, GPIO.IN)
-    GPIO.setup(startPin, GPIO.IN)
-    GPIO.setup(stopPin, GPIO.IN)
-    GPIO.setup(reloadDonePin, GPIO.IN)
+    GPIO.setup(reloadPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(startPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(stopPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(reloadDonePin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     while True:
         print(GPIO.input(startPin))
