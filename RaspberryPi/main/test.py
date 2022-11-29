@@ -1,4 +1,5 @@
-import RPi.GPIO as GPIO  
+import RPi.GPIO as GPIO
+import gpiozero
 import time
 
 
@@ -29,7 +30,6 @@ def main():
     GPIO.setup(reloadDonePin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     while True:
-        print(GPIO.input(startPin))
         # Check start pin
         if GPIO.input(startPin):
 
@@ -56,6 +56,8 @@ def main():
             # Reloaded
             print("Reloaded")
             reloadDone = 0
+
+        time.sleep(1)
         
 
 if __name__ == "__main__":
