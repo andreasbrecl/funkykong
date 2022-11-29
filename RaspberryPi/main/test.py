@@ -43,13 +43,13 @@ def main():
             print("Stop Pin Pressed")
 
         # Check if reload pin is triggerd
-        if GPIO.input(reloadPin) == False and reloadDone == 0:
-            GPIO.output(firePin, 1)
-            print("Shooting")
-        else:
-            GPIO.output(firePin, 0)
-            print("Reloading")
-            reloadDone = 1
+        #if GPIO.input(reloadPin) == False and reloadDone == 0:
+        #    GPIO.output(firePin, 1)
+        #    print("Shooting")
+        #else:
+        #    GPIO.output(firePin, 0)
+        #    print("Reloading")
+        #    reloadDone = 1
 
         if GPIO.input(reloadDonePin):
 
