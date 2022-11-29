@@ -899,6 +899,9 @@ class PathPlanning:
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
 
+        systemMode == "Shoot"
+        subMode = "AimShooter"
+
         # Initialize and localize the robot's motion
         if systemMode == "Initialize":
             movementCommand, systemMode, subMode, sideColor, time1 = self.initializePath(inputtedData, currentModeInformation, pathDistanceList)
