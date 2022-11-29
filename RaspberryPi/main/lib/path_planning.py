@@ -348,10 +348,10 @@ class PathPlanning:
         movementCommand = stop
 
         # Predefine pixy cam
-        pixyCamAim = "None"
-        pixyCamAimLeft = "Left"
-        pixyCamAimRight = "Right"
-        pixyCamAimCenter = "Center"
+        pixyCamAim = "N"
+        pixyCamAimLeft = "L"
+        pixyCamAimRight = "R"
+        pixyCamAimCenter = "C"
         
         # Enter Aim shooter mode
         if subMode == subModeAimShooter:

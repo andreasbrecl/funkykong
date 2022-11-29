@@ -51,13 +51,13 @@ class PixycamAiming:
                     if(sig == 1):
                         spot = blocks[index].m_x-half_x
                         if(spot < -20):
-                            return "Left"
+                            return "L"
                         elif(spot > 20):
-                            return "Right"
+                            return "R"
                         else:
-                            return "Center"
+                            return "C"
                     else:
-                        return "None"
+                        return "N"
     
     class Blocks (Structure):
         _fields_ = [ ("m_signature", c_uint),
