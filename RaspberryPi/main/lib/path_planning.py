@@ -360,7 +360,7 @@ class PathPlanning:
             print(subModeAimShooter)
 
             # Read in data
-            pixyCamAim = self.pixyCam.GetBlue()
+            pixyCamAim = pixyCamAimCenter #self.pixyCam.GetBlue()
 
             # Check what direction to aim
             if pixyCamAim == pixyCamAimLeft:
