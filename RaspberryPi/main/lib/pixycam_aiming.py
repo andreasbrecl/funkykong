@@ -20,7 +20,7 @@ class PixycamAiming:
         Output: None
         """
         pixy.init ()
-        pixy.change_prog ("color_connected_components");
+        pixy.change_prog ("color_connected_components")
 
 
     def RedorGreens(self):
