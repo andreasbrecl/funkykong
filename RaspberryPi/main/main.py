@@ -66,7 +66,8 @@ def executeFunctions():
 
     while True:
         # Recieve UART comms data
-        inputtedData = UART.recieveData()
+        if currentModeInformation[3] != "AimShooter":
+            inputtedData = UART.recieveData()
 
         # Check if data is recieved
         if inputtedData[-1] == True:
