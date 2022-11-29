@@ -165,7 +165,11 @@ class PathPlanning:
             # Check if the boundry is reached
             if lineSensor1 == 1 or lineSensor2 == 1 or lineSensor3 == 1 or lineSensor4 == 1:
 
-                if lineSensor1 != 1 and lineSensor2 != 1 and lineSensor3 != 1 and lineSensor4 != 1:
+                if lineSensor1 == 1 and lineSensor2 == 1 and lineSensor3 == 1 and lineSensor4 == 1:
+
+                    pass
+
+                else:
 
                     # Stop vehicle
                     movementCommand = stop
