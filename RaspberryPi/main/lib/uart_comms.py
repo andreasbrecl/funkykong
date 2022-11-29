@@ -58,7 +58,7 @@ class UARTComms:
 
         Output: None
         """
-        if self.ser.in_waiting() == False:
+        if self.ser.in_waiting() == 0:
             # Add delimiter
             motorData = motorData + "\n"
 
