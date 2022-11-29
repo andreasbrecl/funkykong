@@ -24,6 +24,8 @@ def main():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(firePin, GPIO.OUT)
     GPIO.setup(reloadPin, GPIO.IN)
+    GPIO.setup(startPin, GPIO.IN)
+    GPIO.setup(stopPin, GPIO.IN)
     GPIO.setup(reloadDonePin, GPIO.IN)
 
     while True:
