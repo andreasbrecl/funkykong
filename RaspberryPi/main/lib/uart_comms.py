@@ -94,7 +94,7 @@ class UARTComms:
 
             # Pull ultra sonic sensor data
             ultrasonicSensorReading1 = float(splitData[4][3:-1])
-            ultrasonicSensorReading2 = float(splitData[5][3:-1]) - 2
+            ultrasonicSensorReading2 = float(splitData[5][3:-1]) - 1.5
             ultrasonicSensorReading3 = float(splitData[6][3:-1])
             ultrasonicSensorReading4 = float(splitData[7][3:-1])
             ultrasonicSensorReading5 = float(splitData[8][3:-1])
