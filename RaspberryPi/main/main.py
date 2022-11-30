@@ -63,25 +63,20 @@ def executeFunctions():
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
     path = PathPlanning(firePin, reloadPin, reloadDonePin, startPin, stopPin)
-
-    print("I'm Here1")
     
     while True:
         # Recieve UART comms data
         if currentModeInformation[3] != "AimShooter":
             inputtedData = UART.recieveData()
-            print("I'm Here2")
 
         # Check if data is recieved
         if inputtedData[-1] == True:
             
             # Run motion planning functionality
             currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
-            print("I'm Here3")
 
         # Send command to arduino
         UART.writeData(movementCommand)
-        print("I'm Here4")
 
 def main():
     """
