@@ -94,7 +94,7 @@ int Shooter::shoot(int timesFired) {
     }
 
     // Check if all rounds are fired
-    if (timesFired >= 12) {
+    if (timesFired >= 100) {
 
         // Turn on shooter
         digitalWrite(triggerRelayPin, LOW);
