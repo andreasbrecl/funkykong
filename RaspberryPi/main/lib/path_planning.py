@@ -85,7 +85,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Red"
+        colorCheckGreen = "Green"
 
         # Define sub modes
         subModeInitialize = "Initialize"
@@ -113,6 +113,7 @@ class PathPlanning:
 
             # Check if pixy camera has found information
             sideColor = self.pixyCam.RedorGreens()
+            sideColor = "Red"
 
             # Check if color is found
             if sideColor == colorCheckRed or sideColor == colorCheckGreen:
@@ -219,7 +220,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Red"
+        colorCheckGreen = "Green"
 
         # Define sub modes
         subModeMoveDiag = "MoveDiag"
@@ -338,7 +339,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Red"
+        colorCheckGreen = "Green"
 
         # Define sub modes
         subModeAimShooter = "AimShooter"
@@ -492,7 +493,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Red"
+        colorCheckGreen = "Green"
 
         # Define sub modes
         subModeMoveDiag = "MoveDiag"
