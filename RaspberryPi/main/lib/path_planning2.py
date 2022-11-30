@@ -352,17 +352,8 @@ class PathPlanning2:
             # Print mode
             print(subModeMoveSidways)
 
-            # Chose movement based on side
-            if sideColor == colorCheckRed:
-
-                # Move vehicle right
-                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, right)
-
-            # Chose movement based on side
-            if sideColor == colorCheckGreen:
-
-                # Move vehicle right
-                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, left)              
+            # Move vehicle right
+            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, forward)            
 
             # Check if stop command recieved
             if movementCommand == stop:
