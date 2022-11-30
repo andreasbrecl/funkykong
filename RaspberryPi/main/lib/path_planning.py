@@ -907,8 +907,8 @@ class PathPlanning:
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
 
-        systemMode = "Shoot"
-        currentModeInformation[3] = "AimShooter"
+        #systemMode = "Shoot"
+        #currentModeInformation[3] = "AimShooter"
 
         # Initialize and localize the robot's motion
         if systemMode == "Initialize":
