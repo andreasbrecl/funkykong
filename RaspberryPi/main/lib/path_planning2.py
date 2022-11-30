@@ -1017,7 +1017,7 @@ class PathPlanning2:
 
         # Initialize and localize the robot's motion
         if systemMode == "Initialize":
-            movementCommand, systemMode, subMode, sideColor, time1 = self.initializePath(inputtedData, currentModeInformation, pathDistanceList)
+            movementCommand, systemMode, subMode, sideColor, time1 = self.initializePath(inputtedData, currentModeInformation, pathDistanceList, timeList)
 
         # Go to the shooting location
         elif systemMode == "GoToShoot":
