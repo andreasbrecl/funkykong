@@ -41,9 +41,9 @@ def executeFunctions():
     stopPin = 24
 
     # Path planning variables, times are in seconds
-    diagTimeToShooting = 20
+    diagTimeToShooting = 15
     leftRightTimeToShooting = 5
-    forwardTimeToShooting = 3
+    forwardTimeToShooting = 2
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting]
     
     # Path planning distances in CM
