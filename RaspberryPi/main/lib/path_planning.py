@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 import time
 
 class PathPlanning:
-    def __init__(self, firePin, reloadPin, reloadDonePin):
+    def __init__(self, firePin, reloadPin, reloadDonePin, startPin, stopPin):
         """
         Contructor to inital the class of path planning. Takes
         in pin values for GPIO.
@@ -27,6 +27,8 @@ class PathPlanning:
         self.firePin = firePin
         self.reloadPin = reloadPin
         self.reloadDonePin = reloadDonePin
+        self.startPin = startPin
+        self.stopPin = stopPin
 
         # Define pixycam information
         pixyCam = PixycamAiming()
@@ -34,9 +36,11 @@ class PathPlanning:
 
         # Define pins
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(firePin, GPIO.OUT)
-        GPIO.setup(reloadPin, GPIO.IN)
-        GPIO.setup(reloadDonePin, GPIO.IN)
+        GPIO.setup(firePin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(reloadPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(reloadDonePin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(startPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(stopPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 
     def initializePath(self, inputtedData, currentModeInformation, pathDistanceList):

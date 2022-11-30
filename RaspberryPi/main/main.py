@@ -62,7 +62,7 @@ def executeFunctions():
 
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
-    path = PathPlanning(firePin, reloadPin, reloadDonePin)
+    path = PathPlanning(firePin, reloadPin, reloadDonePin, startPin, stopPin)
 
     print("I'm Here1")
     
