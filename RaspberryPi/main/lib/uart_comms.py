@@ -30,7 +30,6 @@ class UARTComms:
 
         # Reset serial input buffer
         self.ser.reset_input_buffer()
-        self.ser.reset_output_buffer()
 
     def recieveData(self):
         """
