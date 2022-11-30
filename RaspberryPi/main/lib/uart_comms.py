@@ -43,14 +43,14 @@ class UARTComms:
         # Pull UART Data
         try:
             recievedData = self.ser.readline().decode('utf-8').rstrip()
-
-            # Seperate data
-            inputtedData = self.decodeInputtedData(recievedData)
-
-            # return UART data
-            return inputtedData
         except:
-            return "NULL"
+            recievedData = self.ser.readline().decode('utf-8').rstrip()
+
+        # Seperate data
+        inputtedData = self.decodeInputtedData(recievedData)
+
+        # return UART data
+        return inputtedData
 
     def writeData(self, motorData):
         """
