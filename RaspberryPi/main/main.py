@@ -45,7 +45,7 @@ def executeFunctions():
     diagTimeToShooting = 12
     leftRightTimeToShooting = 7
     forwardTimeToShooting = 4
-    rotate90Time = 3
+    rotate90Time = 4.5
     rotate45Time = rotate90Time / 2
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting, rotate90Time, rotate45Time]
     
@@ -77,8 +77,8 @@ def executeFunctions():
         if inputtedData[-1] == True:
             
             # Run motion planning functionality
-            currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
-            #currentModeInformation, movementCommand = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+            #currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+            currentModeInformation, movementCommand = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # Check if program should end
         if movementCommand == "Exit":
