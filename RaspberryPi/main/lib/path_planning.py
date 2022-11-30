@@ -295,7 +295,7 @@ class PathPlanning:
             print(subModeMoveForward)
 
             # Determine movement
-            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, forward)
+            movementCommand = self.moveBasedOnTime(forwardTimeToShooting, time1, forward)
 
             if movementCommand == stop:
                 
