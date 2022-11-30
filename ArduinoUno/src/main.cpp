@@ -25,7 +25,7 @@ const int fireTimeDelay = 1500;
 
 // Define servo constants
 const int servoLoadPosition = 0;
-const int servoFirePosition = 120;
+const int servoFirePosition = 110;
 
 // Serial speed constant
 const int serialSpeed = 115200;
