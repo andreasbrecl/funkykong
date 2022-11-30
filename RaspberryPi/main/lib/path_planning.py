@@ -36,7 +36,7 @@ class PathPlanning:
 
         # Define pins
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(firePin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(firePin, GPIO.OUT)
         GPIO.setup(reloadPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(reloadDonePin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(startPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
