@@ -104,6 +104,7 @@ int Shooter::shoot(int timesFired) {
         // Reset counter
         timesFired = 0;
     }
+    shouldFire = 0;
 
     return timesFired;
 }

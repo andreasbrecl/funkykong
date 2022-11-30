@@ -46,8 +46,8 @@ class Shooter {
         int triggerRelayPin;
         
         // Define bool private variables
-        bool shouldFire;
-        bool shouldReload;
+        bool shouldFire = 0;
+        bool shouldReload = 0;
 
         // Define private functions in class
         void returnToReloadSignal();
