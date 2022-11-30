@@ -925,5 +925,9 @@ class PathPlanning:
         # Remake current mode information
         currentModeInformationUpdated = [systemMode, time1, time2, subMode, sideColor]
 
+        # Check if shooter should stop
+        if GPIO.input(self.stopPin):
+            exit()
+
         # Return values
         return currentModeInformationUpdated, movementCommand

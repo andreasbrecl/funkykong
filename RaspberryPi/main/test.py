@@ -30,7 +30,6 @@ def main():
     GPIO.setup(reloadDonePin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     while True:
-        GPIO.output(firePin, 0)
         # Check start pin
         if GPIO.input(startPin):
 
@@ -45,7 +44,7 @@ def main():
 
         # Check if reload pin is triggerd
         if GPIO.input(reloadPin) == False and reloadDone == 0:
-            GPIO.output(firePin, 0)
+            GPIO.output(firePin, 1)
             print("Shooting")
         else:
             GPIO.output(firePin, 0)
