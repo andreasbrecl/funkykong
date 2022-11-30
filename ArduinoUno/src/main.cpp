@@ -16,7 +16,7 @@
 
 // Define pins being used for programs
 const int fireLogicPin = 2;
-const int servoPin = 3;
+const int servoPin = 11;
 const int reloadLogicPin = 4;
 const int triggerRelayPin = 5;
 
