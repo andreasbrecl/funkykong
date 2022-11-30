@@ -372,10 +372,10 @@ class PathPlanning:
                 GPIO.output(self.firePin, 0)
 
                 # See if reload is triggered
-                #if GPIO.input(self.reloadPin):
+                if GPIO.input(self.reloadPin):
 
                     # Change mode
-                #    subMode = subModeFixOrientation
+                    subMode = subModeFixOrientation
             
             # Check to aim right
             elif pixyCamAim == pixyCamAimRight:
@@ -387,10 +387,10 @@ class PathPlanning:
                 GPIO.output(self.firePin, 0)
 
                 # See if reload is triggered
-                #if GPIO.input(self.reloadPin):
+                if GPIO.input(self.reloadPin):
 
                     # Change mode
-                #    subMode = subModeFixOrientation
+                    subMode = subModeFixOrientation
                 
 
             elif pixyCamAim == pixyCamAimCenter:
@@ -402,13 +402,13 @@ class PathPlanning:
                 GPIO.output(self.firePin, 1)
 
                 # See if reload is triggered
-                #if GPIO.input(self.reloadPin):
+                if GPIO.input(self.reloadPin):
 
                     # Change mode
-                #    subMode = subModeFixOrientation
+                    subMode = subModeFixOrientation
                     
                     # Set GPIO low
-                #    GPIO.output(self.firePin, 0)
+                    GPIO.output(self.firePin, 0)
 
             print(pixyCamAim)
 
