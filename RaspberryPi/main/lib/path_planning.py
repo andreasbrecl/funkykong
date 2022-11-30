@@ -43,8 +43,8 @@ class PathPlanning:
         GPIO.setup(stopPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
         # Set pin modes
-        GPIO.output(reloadDonePin, 1)
-        GPIO.output(reloadDonePin, 0)
+        GPIO.output(reloadPin, 1)
+        GPIO.output(reloadPin, 0)
 
 
     def initializePath(self, inputtedData, currentModeInformation, pathDistanceList):
