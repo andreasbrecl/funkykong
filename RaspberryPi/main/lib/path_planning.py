@@ -85,7 +85,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Green"
+        colorCheckGreen = "Red"
 
         # Define sub modes
         subModeInitialize = "Initialize"
@@ -219,7 +219,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Green"
+        colorCheckGreen = "Red"
 
         # Define sub modes
         subModeMoveDiag = "MoveDiag"
@@ -338,7 +338,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Green"
+        colorCheckGreen = "Red"
 
         # Define sub modes
         subModeAimShooter = "AimShooter"
@@ -492,7 +492,7 @@ class PathPlanning:
 
         # Define color checks
         colorCheckRed = "Red"
-        colorCheckGreen = "Green"
+        colorCheckGreen = "Red"
 
         # Define sub modes
         subModeMoveDiag = "MoveDiag"
