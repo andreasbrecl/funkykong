@@ -44,8 +44,8 @@ def executeFunctions():
     # Path planning variables, times are in seconds
     diagTimeToShooting = 12
     leftRightTimeToShooting = 7
-    forwardTimeToShooting = 4
-    rotate90Time = 4.1
+    forwardTimeToShooting = 5
+    rotate90Time = 4.0
     rotate45Time = rotate90Time / 2
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting, rotate90Time, rotate45Time]
     
