@@ -41,10 +41,7 @@ class UARTComms:
         Output: inputedData <str> - String of sensor input from Arduino
         """
         # Pull UART Data
-        try:
-            recievedData = self.ser.readline().decode('utf-8').rstrip()
-        except:
-            recievedData = self.ser.readline().decode('utf-8').rstrip()
+        recievedData = self.ser.readline().decode('utf-8').rstrip()
 
         # Seperate data
         inputtedData = self.decodeInputtedData(recievedData)
