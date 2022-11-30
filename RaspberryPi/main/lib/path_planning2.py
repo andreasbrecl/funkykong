@@ -360,8 +360,37 @@ class PathPlanning2:
             if movementCommand == stop:
 
                 # Change mode
+                subMode = subModeRotateForward
+
+                # Update time
+                time1 = time.time()
+
+        # Rotate the system so it faces forward
+        elif subMode == subModeRotateForward:
+
+            # Print mode
+            print(subModeRotateSidways)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateLeft)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateRight)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change mode
                 systemMode = "Shoot"
                 subMode = "AimShooter"
+                
+                # Update time
+                time1 = time.time()
 
         # Move to forward location
         elif subMode == subModeMoveForward:
