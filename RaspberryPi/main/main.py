@@ -75,6 +75,10 @@ def executeFunctions():
             # Run motion planning functionality
             currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
+        # Check if program should end
+        if movementCommand == "Exit":
+            exit()
+            
         # Send command to arduino
         UART.writeData(movementCommand)
 

@@ -931,7 +931,7 @@ class PathPlanning:
 
         # Check if shooter should stop
         if GPIO.input(self.stopPin):
-            exit()
+            movementCommand = "Exit"
 
         # Return values
         return currentModeInformationUpdated, movementCommand
