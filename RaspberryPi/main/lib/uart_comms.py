@@ -41,13 +41,16 @@ class UARTComms:
         Output: inputedData <str> - String of sensor input from Arduino
         """
         # Pull UART Data
-        recievedData = self.ser.readline().decode('utf-8').rstrip()
+        try:
+            recievedData = self.ser.readline().decode('utf-8').rstrip()
 
-        # Seperate data
-        inputtedData = self.decodeInputtedData(recievedData)
+            # Seperate data
+            inputtedData = self.decodeInputtedData(recievedData)
 
-        # return UART data
-        return inputtedData
+            # return UART data
+            return inputtedData
+        except:
+            return "NULL"
 
     def writeData(self, motorData):
         """
