@@ -86,7 +86,7 @@ class UARTComms:
         isBeingReadStart = recievedData.find('<')
         isBeingReadEnd = recievedData.find('>')
 
-        if isBeingReadStart != -1 and isBeingReadEnd != -1:
+        if isBeingReadStart != -1 or isBeingReadEnd != -1:
             # Split the data 
             splitData = recievedData.split(",")
 
