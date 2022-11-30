@@ -45,7 +45,7 @@ def executeFunctions():
     diagTimeToShooting = 12
     leftRightTimeToShooting = 7
     forwardTimeToShooting = 4
-    rotate90Time = 4.5
+    rotate90Time = 4.1
     rotate45Time = rotate90Time / 2
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting, rotate90Time, rotate45Time]
     

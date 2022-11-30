@@ -210,8 +210,7 @@ class PathPlanning2:
                     movementCommand = stop
 
                     # Change vehicle modes
-                    systemMode = "GoToShoot"
-                    subMode = "MoveForward"
+                    subMode = subModeRotateForward
 
                     # Calculate start of movement time
                     time1 = time.time()
