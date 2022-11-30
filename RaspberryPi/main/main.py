@@ -51,7 +51,7 @@ def executeFunctions():
     
     # Path planning distances in CM
     initializationDistance = 15
-    shootingDistance = 20
+    shootingDistance = 35
     pathDistanceList = [initializationDistance, shootingDistance]
 
     # Initial movement criterias
