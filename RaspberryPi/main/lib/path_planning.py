@@ -184,7 +184,7 @@ class PathPlanning:
 
                     # Change vehicle modes
                     systemMode = "GoToShoot"
-                    subMode = "MoveDiag"
+                    subMode = "MoveForward"
 
                     # Calculate start of movement time
                     time1 = time.time()
