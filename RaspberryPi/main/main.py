@@ -41,7 +41,7 @@ def executeFunctions():
     stopPin = 24
 
     # Path planning variables, times are in seconds
-    diagTimeToShooting = 20
+    diagTimeToShooting = 10
     leftRightTimeToShooting = 5
     forwardTimeToShooting = 15
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting]
