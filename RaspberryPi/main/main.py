@@ -14,6 +14,7 @@ to put the system into the correct location.
 # Import classes
 from lib.uart_comms import UARTComms
 from lib.path_planning import PathPlanning
+from lib.path_planning2 import PathPlanning2
 
 # Import built in funcitons
 import time
@@ -65,6 +66,7 @@ def executeFunctions():
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)
     path = PathPlanning(firePin, reloadPin, reloadDonePin, startPin, stopPin)
+    path2 = PathPlanning2(firePin, reloadPin, reloadDonePin, startPin, stopPin)
     
     while True:
         # Recieve UART comms data
@@ -76,6 +78,7 @@ def executeFunctions():
             
             # Run motion planning functionality
             currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+            #currentModeInformation, movementCommand = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # Check if program should end
         if movementCommand == "Exit":
