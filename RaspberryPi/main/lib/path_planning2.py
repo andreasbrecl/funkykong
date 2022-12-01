@@ -464,6 +464,9 @@ class PathPlanning2:
         pixyCamAimLeft = "L"
         pixyCamAimRight = "R"
         pixyCamAimCenter = "C"
+
+        # Shooting time
+        shootingTime = 1
         
         # Enter Aim shooter mode
         if subMode == subModeAimShooter:
@@ -486,7 +489,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if changeInTime >= 60:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -506,7 +509,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if changeInTime >= 60:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -514,7 +517,7 @@ class PathPlanning2:
                     # Set GPIO low
                     GPIO.output(self.firePin, 0)
                 
-
+            # Check if ballon is center
             elif pixyCamAim == pixyCamAimCenter:
 
                 # Stop moving
@@ -526,7 +529,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if changeInTime >= 60:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -671,13 +674,13 @@ class PathPlanning2:
             print(subModeMoveSidways)
 
             # Move vehicle right
-            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, forward)            
+            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, backwards)            
 
             # Check if stop command recieved
             if movementCommand == stop:
 
                 # Change mode
-                subMode = subModeRotateForward
+                subMode = subModeMoveDiag
 
                 # Update time
                 time1 = time.time()
@@ -702,11 +705,17 @@ class PathPlanning2:
             # Check if system has run into side lines
             if lineSensorReading1 == 1 or lineSensorReading2 == 1 or lineSensorReading3 == 1 or lineSensorReading4 == 1:
 
-                # Stop system
-                movementCommand = stop
+                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
 
-                # Change mode
-                subMode = subModeAlignSide
+                    pass
+
+                else:                
+
+                    # Stop system
+                    movementCommand = stop
+
+                    # Change mode
+                    subMode = subModeAlignSide
 
         # Align robot on side
         elif subMode == subModeAlignSide:
