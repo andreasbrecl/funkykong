@@ -2,7 +2,7 @@ from __future__ import print_function
 #!/usr/bin/env python3
 """
 Author: Andrea Brecl
-Date: 11/2/2022
+Date: 11/30/2022
 
 This script will initalize the main functionality of the Raspberry
 Pi software. The raspberry pi will be responsible for determining
