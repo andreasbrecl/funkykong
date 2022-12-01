@@ -761,16 +761,9 @@ class PathPlanning2:
             # Print mode
             print(subModeMoveDiag)
 
-            # Check what side the robot is on
-            if sideColor == colorCheckGreen:
                 
-                # Move diag back right
-                movementCommand = diagBackRight
-
-            elif sideColor == colorCheckRed:
-        
-                # Move diag back left
-                movementCommand = diagBackLeft
+            # Move diag back right
+            movementCommand = backwards
 
             # Check if system has run into side lines
             if lineSensorReading1 == 1 or lineSensorReading2 == 1 or lineSensorReading3 == 1 or lineSensorReading4 == 1:
