@@ -1,7 +1,7 @@
 from __future__ import print_function
 #!/usr/bin/env python3
 """
-Author: Andrea Brecl
+Author: Andrea Brecl,  Sean Newman
 Date: 11/30/2022
 
 This script will initalize the main functionality of the Raspberry
