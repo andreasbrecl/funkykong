@@ -489,7 +489,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if changeInTime >= shootingTime:
+                if True: #changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -509,7 +509,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if changeInTime >= shootingTime:
+                if True: #changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -529,7 +529,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if changeInTime >= shootingTime:
+                if True: #changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
