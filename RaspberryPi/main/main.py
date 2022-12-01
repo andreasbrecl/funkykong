@@ -43,7 +43,7 @@ def executeFunctions():
 
     # Path planning variables, times are in seconds
     diagTimeToShooting = 13
-    leftRightTimeToShooting = 7
+    leftRightTimeToShooting = 5
     forwardTimeToShooting = 3.5
     rotate90Time = 3.9
     rotate45Time = rotate90Time / 2
