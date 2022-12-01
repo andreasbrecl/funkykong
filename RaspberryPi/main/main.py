@@ -34,7 +34,7 @@ def executeFunctions():
     baudRate = 115200
     timeout = 1
 
-    # Define GPIO pins
+    # Define GPIO pins asd
     firePin = 17
     reloadPin = 27
     reloadDonePin = 22
