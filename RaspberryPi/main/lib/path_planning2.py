@@ -896,8 +896,14 @@ class PathPlanning2:
         # Check what side the vehicle is on
         if sideColor == colorCheckGreen:
 
+            # Check if both are triggerd
+            if line1 == 1 and line2 == 1:
+                
+                # Stop movement
+                movementCommand = stop
+
             # Check if only front sensor is triggered   
-            if line1 == 1:
+            elif line1 == 1:
 
                 # Trigger rotation
                 movementCommand = rotateLeft
@@ -913,18 +919,18 @@ class PathPlanning2:
             
                 # Move right
                 movementCommand = right
-                
-            # Check if both are triggerd
-            elif line1 == 1 and line2 == 1:
-                
-                # Stop movement
-                movementCommand = stop
 
         # Check for other side
         elif sideColor == colorCheckRed:
             
+            # Check if both are triggerd
+            if line1 == 1 and line2 == 1:
+                
+                # Stop movement
+                movementCommand = stop
+
             # Check if only front sensor is triggered   
-            if line1 == 1:
+            elif line1 == 1:
 
                 # Trigger rotation
                 movementCommand = rotateRight
@@ -940,12 +946,6 @@ class PathPlanning2:
             
                 # Move right
                 movementCommand = left
-                
-            # Check if both are triggerd
-            elif line1 == 1 and line2 == 1:
-                
-                # Stop movement
-                movementCommand = stop
 
         elif sideColor == colorCheckRear:
 
