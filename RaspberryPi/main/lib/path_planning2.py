@@ -484,10 +484,15 @@ class PathPlanning2:
                 GPIO.output(self.firePin, 0)
 
                 # See if reload is triggered
-                #if GPIO.input(self.reloadPin):
+                time2 = time.time()
+                changeInTime = time2 - time1
+                if changeInTime >= 60:
 
                     # Change mode
-                #    subMode = subModeFixOrientation
+                    subMode = subModeFixOrientation
+                    
+                    # Set GPIO low
+                    GPIO.output(self.firePin, 0)
             
             # Check to aim right
             elif pixyCamAim == pixyCamAimRight:
@@ -499,10 +504,15 @@ class PathPlanning2:
                 GPIO.output(self.firePin, 0)
 
                 # See if reload is triggered
-                #if GPIO.input(self.reloadPin):
+                time2 = time.time()
+                changeInTime = time2 - time1
+                if changeInTime >= 60:
 
                     # Change mode
-                #    subMode = subModeFixOrientation
+                    subMode = subModeFixOrientation
+                    
+                    # Set GPIO low
+                    GPIO.output(self.firePin, 0)
                 
 
             elif pixyCamAim == pixyCamAimCenter:
@@ -514,15 +524,21 @@ class PathPlanning2:
                 GPIO.output(self.firePin, 1)
 
                 # See if reload is triggered
-                #if GPIO.input(self.reloadPin):
+                time2 = time.time()
+                changeInTime = time2 - time1
+                if changeInTime >= 60:
 
                     # Change mode
-                #    subMode = subModeFixOrientation
+                    subMode = subModeFixOrientation
                     
                     # Set GPIO low
-                #    GPIO.output(self.firePin, 0)
+                    GPIO.output(self.firePin, 0)
 
+            # Print aim information
             print(pixyCamAim)
+
+            # Update time
+            time1 = time.time()
 
         # Fix how robot is oriented         
         elif subMode == subModeFixOrientation:
@@ -553,7 +569,7 @@ class PathPlanning2:
 
                 # Change submode
                 systemMode = "GoToReload"
-                subMode = "MoveSidways"
+                subMode = "RotateSidways"
 
                 # Calculate time
                 time1 = time.time()
@@ -587,6 +603,7 @@ class PathPlanning2:
 
         # Pull timing values
         leftRightTimeToShooting = timeList[1]
+        rotate90Time = timeList[3]
 
         # Split input data
         lineSensorReading1 = inputtedData[0]
@@ -606,6 +623,7 @@ class PathPlanning2:
         subModeAlignSide = "AlignSide"
         subModeReload = "Reload"
         subModeAlignBack = "AlignBack"
+        subModeRotateSidways = "RotateSidways"
 
         # Define movement commands
         stop = "A"
@@ -620,28 +638,49 @@ class PathPlanning2:
         rotateRight = "J"
         rotateLeft = "K"
 
-        # Enter sidways movement mode
-        if subMode == subModeMoveSidways:
+        # Rotate the system so it faces forward
+        if subMode == subModeRotateSidways:
+
+            # Print mode
+            print(subModeRotateSidways)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateRight)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateLeft)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change vehicle modes
+                subMode = subModeMoveSidways
+                
+                # Update time
+                time1 = time.time()
+
+        # Move system sidways
+        elif subMode == subModeMoveSidways:
 
             # Print mode
             print(subModeMoveSidways)
 
-            # Check what side the robot is on
-            if sideColor == colorCheckGreen:
-                
-                # Move right
-                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, right)
+            # Move vehicle right
+            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, forward)            
 
-            elif sideColor == colorCheckRed:
-        
-                # Move left
-                movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, left)
-
-            # Check if movement has compleded 
+            # Check if stop command recieved
             if movementCommand == stop:
 
                 # Change mode
-                subMode = subModeMoveDiag
+                subMode = subModeRotateForward
+
+                # Update time
+                time1 = time.time()
 
         # Move diagonal until line is hit
         if subMode == subModeMoveDiag:
