@@ -786,28 +786,34 @@ class PathPlanning2:
             # Print mode
             print(subModeAlignSide)
 
-            # Check what side the robot is on
-            if sideColor == colorCheckGreen:
-                
-                # Align vehicle
-                movementCommand = self.alignOnLines(lineSensorReading1, lineSensorReading4, sideColor)
+            if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
 
-                # Check if alignment has stopped
-                if movementCommand == stop:
+                pass
 
-                    # Change mode
-                    subMode = subModeMoveBack
+            else:
 
-            elif sideColor == colorCheckRed:
+                # Check what side the robot is on
+                if sideColor == colorCheckGreen:
+                    
+                    # Align vehicle
+                    movementCommand = self.alignOnLines(lineSensorReading1, lineSensorReading4, sideColor)
 
-                # Align vehicle
-                movementCommand = self.alignOnLines(lineSensorReading2, lineSensorReading3, sideColor)
+                    # Check if alignment has stopped
+                    if movementCommand == stop:
 
-                # Check if alignment has stopped
-                if movementCommand == stop:
+                        # Change mode
+                        subMode = subModeMoveBack
 
-                    # Change mode
-                    subMode = subModeMoveBack
+                elif sideColor == colorCheckRed:
+
+                    # Align vehicle
+                    movementCommand = self.alignOnLines(lineSensorReading2, lineSensorReading3, sideColor)
+
+                    # Check if alignment has stopped
+                    if movementCommand == stop:
+
+                        # Change mode
+                        subMode = subModeMoveBack
 
         # Enter move backwards mode
         elif subMode == subModeMoveBack:
@@ -837,18 +843,24 @@ class PathPlanning2:
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
+
+            if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
+
+                pass
+
+            else:
                 
-            # Print mode
-            print(subModeAlignBack)
+                # Print mode
+                print(subModeAlignBack)
 
-            # Align vehicle
-            movementCommand = self.alignOnLines(lineSensorReading3, lineSensorReading4, "Rear")
+                # Align vehicle
+                movementCommand = self.alignOnLines(lineSensorReading3, lineSensorReading4, "Rear")
 
-            # Check if alignment has stopped
-            if movementCommand == stop:
+                # Check if alignment has stopped
+                if movementCommand == stop:
 
-                # Change mode
-                    subMode = subModeReload
+                    # Change mode
+                        subMode = subModeReload
                 
         # Enter reload mode
         elif subMode == subModeReload:
