@@ -624,7 +624,7 @@ class PathPlanning2:
         return movementCommand, systemMode, subMode, time1
 
     
-    def pathToReloadStation(self, inputtedData, currentModeInformation, timeList):
+    def pathToReloadStation(self, inputtedData, currentModeInformation, timeList, pathDistanceList):
         """
         This function will deal with the pathfinding from the
         shooting position to the reload station. It will align
