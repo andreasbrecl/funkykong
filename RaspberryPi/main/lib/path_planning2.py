@@ -281,6 +281,7 @@ class PathPlanning2:
         subModeMoveForward = "MoveForward"
         subModeRotateSidways = "RotateSidways"
         subModeRotateForward = "RotateForward"
+        subModeRotate45Degrees = "Rotate45Degrees"
 
         # Define movement commands
         stop = "A"
@@ -295,8 +296,34 @@ class PathPlanning2:
         rotateRight = "J"
         rotateLeft = "K"
 
+        # Rotate robot
+        if subMode == subModeRotate45Degrees:
+
+            # Print mode
+            print(subModeRotate45Degrees)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change vehicle modes
+                subMode = subModeMoveDiag
+                
+                # Update time
+                time1 = time.time()
+
         # See if system is in diagonal movement mode
-        if subMode == subModeMoveDiag:
+        elif subMode == subModeMoveDiag:
 
             # Print mode
             print(subModeMoveDiag)
@@ -305,12 +332,12 @@ class PathPlanning2:
             if sideColor == colorCheckRed:
 
                 # Move vehicle diag forward right
-                movementCommand = self.moveBasedOnTime(diagTimeToShooting, time1, diagFowardRight)
+                movementCommand = self.moveBasedOnTime(diagTimeToShooting, time1, forward)
 
             elif sideColor == colorCheckGreen:
 
                 # Move vehicle diag forward left
-                movementCommand = self.moveBasedOnTime(diagTimeToShooting, time1, diagFowardLeft)
+                movementCommand = self.moveBasedOnTime(diagTimeToShooting, time1, forward)
 
             if movementCommand == stop:
 
@@ -330,12 +357,12 @@ class PathPlanning2:
             if sideColor == colorCheckRed:
 
                 # Move vehicle left
-                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateRight)
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
 
             elif sideColor == colorCheckGreen:
 
                 # Move vehicle right
-                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateLeft)
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
 
             # Check if rotation stopped
             if movementCommand == stop:
@@ -403,7 +430,7 @@ class PathPlanning2:
             if movementCommand == stop:
                 
                 # Change mode
-                subMode = subModeMoveDiag
+                subMode = subModeRotate45Degrees
 
                 # Update time
                 time1 = time.time()
@@ -537,6 +564,22 @@ class PathPlanning2:
                     # Set GPIO low
                     GPIO.output(self.firePin, 0)
 
+            else:
+
+                # Stop moving
+                movementCommand = stop
+
+                # See if reload is triggered
+                time2 = time.time()
+                changeInTime = time2 - time1
+                if True: #changeInTime >= shootingTime:
+
+                    # Change mode
+                    subMode = subModeFixOrientation
+                    
+                    # Set GPIO low
+                    GPIO.output(self.firePin, 0)
+
             # Print aim information
             print(pixyCamAim)
 
@@ -627,6 +670,7 @@ class PathPlanning2:
         subModeReload = "Reload"
         subModeAlignBack = "AlignBack"
         subModeRotateSidways = "RotateSidways"
+        subModeRotate45Degrees = "Rotate45Degrees"
 
         # Define movement commands
         stop = "A"
@@ -680,8 +724,34 @@ class PathPlanning2:
             if movementCommand == stop:
 
                 # Change mode
-                subMode = subModeMoveDiag
+                subMode = subModeRotate45Degrees
 
+                # Update time
+                time1 = time.time()
+
+        # Rotate robot
+        elif subMode == subModeRotate45Degrees:
+
+            # Print mode
+            print(subModeRotate45Degrees)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change vehicle modes
+                subMode = subModeMoveDiag
+                
                 # Update time
                 time1 = time.time()
 
