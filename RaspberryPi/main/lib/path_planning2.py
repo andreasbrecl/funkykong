@@ -815,7 +815,7 @@ class PathPlanning2:
 
             if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
 
-                pass
+                movementCommand = stop
 
             else:
 
