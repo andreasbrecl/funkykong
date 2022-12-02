@@ -671,6 +671,7 @@ class PathPlanning2:
         subModeAlignBack = "AlignBack"
         subModeRotateSidways = "RotateSidways"
         subModeRotate45Degrees = "Rotate45Degrees"
+        subModeRotate45Degrees2 = "Rotate45Degrees2"
         subModeMoveSidwaysToReload = "MoveSidwaysToReload"
 
         # Time list
@@ -773,11 +774,38 @@ class PathPlanning2:
             movementCommand = self.moveBasedOnTime(timeAdjust, time1, backwards)   
 
             if movementCommand == stop:
-                # Stop system
-                movementCommand = stop
 
                 # Change mode
+                subMode = subModeRotate45Degrees2
+
+                # Updated time
+                time1 = time.time()
+
+        # Rotate 45 degrees again
+        elif subMode == subModeRotate45Degrees2:
+
+            # Print mode
+            print(subModeRotate45Degrees2)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change vehicle modes
                 subMode = subModeMoveBack
+                
+                # Update time
+                time1 = time.time()
 
         # Align robot on side
         elif subMode == subModeAlignSide:
