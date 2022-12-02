@@ -100,7 +100,7 @@ def executeFunctions():
         UART.writeData(movementCommand)
 
         # If keyboard interupt end cycle
-        signal.signal(signal.SIGINT, catchTheSignal(UART))
+        signal.signal(signal.SIGINT, catchTheSignal)
 
 def catchTheSignal(UART, signal, frame):
     """
