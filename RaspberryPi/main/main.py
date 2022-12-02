@@ -71,7 +71,7 @@ def executeFunctions():
     path2 = PathPlanning2(firePin, reloadPin, reloadDonePin, startPin, stopPin)
 
     # Test variables
-    systemMode = "GoToReload"
+    currentModeInformation[0] = "GoToReload"
     currentModeInformation[3] = "MoveBack"
     currentModeInformation[4] = "Red"
 
