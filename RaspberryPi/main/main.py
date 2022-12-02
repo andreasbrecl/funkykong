@@ -106,6 +106,7 @@ def executeFunctions():
 def catchTheSignal(signal, frame):
     """
     """
+    global globalExit
     globalExit = "Exit"
     
 
