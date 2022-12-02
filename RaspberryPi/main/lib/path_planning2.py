@@ -945,6 +945,9 @@ class PathPlanning2:
             # Print mode
             print(subModeReload)
 
+            # Stop movememnt
+            movementCommand = stop
+
             # Wait for reload done input
             if GPIO.input(self.reloadDonePin):
 
