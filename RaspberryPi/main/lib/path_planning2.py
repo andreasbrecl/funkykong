@@ -1199,6 +1199,8 @@ class PathPlanning2:
 
         #systemMode = "Shoot"
         #currentModeInformation[3] = "AimShooter"
+        systemMode = "GoToReload"
+        subMode = "MoveBack"
 
         # Initialize and localize the robot's motion
         if systemMode == "Initialize":
