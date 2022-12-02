@@ -93,6 +93,7 @@ def executeFunctions():
 
         # Check if program should end
         if movementCommand == "Exit" or globalExit == "Exit":
+            print("Bruh moment")
             UART.writeData("A")
             sys.exit(0)
             
