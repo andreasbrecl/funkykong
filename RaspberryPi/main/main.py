@@ -18,6 +18,8 @@ from lib.path_planning2 import PathPlanning2
 
 # Import built in funcitons
 import time
+import sys
+import signal
 
 def executeFunctions():
     """
@@ -86,6 +88,16 @@ def executeFunctions():
             
         # Send command to arduino
         UART.writeData(movementCommand)
+
+        # If keyboard interupt end cycle
+        signal.signal(signal.SIGINT, catchTheSignal(UART))
+
+def catchTheSignal(UART, signal, frame):
+    """
+    """
+    movementCommand = "A"
+    UART.writeData(movementCommand)
+    sys.exit(0)
 
 def main():
     """
