@@ -978,13 +978,13 @@ class PathPlanning2:
                 movementCommand = stop
 
             # Check if only front sensor is triggered   
-            elif line1 == 1:
+            elif line1 == 1 and line2 == 0:
 
                 # Trigger rotation
                 movementCommand = rotateLeft
             
             # Check if only back sensor is triggered
-            elif line2 == 1:
+            elif line2 == 1 and line1 == 0:
             
                 # Trigger rotation
                 movementCommand = rotateRight
@@ -1005,13 +1005,13 @@ class PathPlanning2:
                 movementCommand = stop
 
             # Check if only front sensor is triggered   
-            elif line1 == 1:
+            elif line1 == 1 and line2 == 0:
 
                 # Trigger rotation
                 movementCommand = rotateRight
             
             # Check if only back sensor is triggered
-            elif line2 == 1:
+            elif line2 == 1 and line1 == 0:
             
                 # Trigger rotation
                 movementCommand = rotateLeft
@@ -1025,13 +1025,13 @@ class PathPlanning2:
         elif sideColor == colorCheckRear:
 
             # Check if only front sensor is triggered   
-            if line1 == 1:
+            if line1 == 1 and line2 == 0:
 
                 # Trigger rotation
                 movementCommand = rotateRight
             
             # Check if only back sensor is triggered
-            elif line2 == 1:
+            elif line2 == 1 and line1 == 0:
             
                 # Trigger rotation
                 movementCommand = rotateLeft
