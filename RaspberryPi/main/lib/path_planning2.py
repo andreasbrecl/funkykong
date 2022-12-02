@@ -724,7 +724,7 @@ class PathPlanning2:
             print(subModeMoveSidways)
 
             # Move vehicle right
-            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1, backwards)            
+            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1 + 1, backwards)            
 
             # Check if stop command recieved
             if movementCommand == stop:
