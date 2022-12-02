@@ -21,6 +21,10 @@ import time
 import sys
 import signal
 
+# Define global var
+global globalExit
+globalExit = "SeanToldMeToDoThis"
+
 def executeFunctions():
     """
     This will execute the logic for what the system should be doing in
@@ -88,8 +92,9 @@ def executeFunctions():
             currentModeInformation, movementCommand = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # Check if program should end
-        if movementCommand == "Exit":
-            exit()
+        if movementCommand == "Exit" or globalExit == "Exit":
+            UART.writeData("A")
+            sys.exit(0)
             
         # Send command to arduino
         UART.writeData(movementCommand)
@@ -100,9 +105,8 @@ def executeFunctions():
 def catchTheSignal(UART, signal, frame):
     """
     """
-    movementCommand = "A"
-    UART.writeData(movementCommand)
-    sys.exit(0)
+    globalExit = "Exit"
+    
 
 def main():
     """
