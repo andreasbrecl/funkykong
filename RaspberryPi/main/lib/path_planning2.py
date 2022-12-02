@@ -671,6 +671,11 @@ class PathPlanning2:
         subModeAlignBack = "AlignBack"
         subModeRotateSidways = "RotateSidways"
         subModeRotate45Degrees = "Rotate45Degrees"
+        subModeMoveSidwaysToReload = "MoveSidwaysToReload"
+
+        # Time list
+        forwardTimeToShooting = timeList[2]
+        diagTimeToShooting = timeList[0]
 
         # Define movement commands
         stop = "A"
@@ -761,24 +766,18 @@ class PathPlanning2:
             # Print mode
             print(subModeMoveDiag)
 
-                
+            # Time adjustment
+            timeAdjust = diagTimeToShooting - 1
+
             # Move diag back right
-            movementCommand = backwards
+            movementCommand = self.moveBasedOnTime(timeAdjust, time1, backwards)   
 
-            # Check if system has run into side lines
-            if lineSensorReading1 == 1 or lineSensorReading2 == 1 or lineSensorReading3 == 1 or lineSensorReading4 == 1:
+            if movementCommand == stop:
+                # Stop system
+                movementCommand = stop
 
-                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
-
-                    pass
-
-                else:                
-
-                    # Stop system
-                    movementCommand = stop
-
-                    # Change mode
-                    subMode = subModeAlignSide
+                # Change mode
+                subMode = subModeMoveBack
 
         # Align robot on side
         elif subMode == subModeAlignSide:
@@ -860,8 +859,44 @@ class PathPlanning2:
                 if movementCommand == stop:
 
                     # Change mode
-                        subMode = subModeReload
+                        subMode = subModeMoveSidwaysToReload
+
+        # Move robot to reload area
+        elif subMode == subModeMoveSidwaysToReload:
                 
+            # print submode
+            print(subModeMoveSidwaysToReload)
+
+            # Check what side vehicle is on
+            if sideColor == colorCheckGreen:
+                
+                # Align vehicle
+                movementCommand = right
+
+            elif sideColor == colorCheckRed:
+
+                # Align vehicle
+                movementCommand = left
+
+                # Check if line is hit
+            # Check if the boundry is reached
+            if lineSensorReading1 == 1 or lineSensorReading2 == 1:
+
+                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
+
+                    pass
+
+                else:
+
+                    # Stop vehicle
+                    movementCommand = stop
+
+                    # Change vehicle modes
+                    subMode = subModeAlignSide
+
+                    # Calculate start of movement time
+                    time1 = time.time()
+
         # Enter reload mode
         elif subMode == subModeReload:
 
