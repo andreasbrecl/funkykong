@@ -102,7 +102,7 @@ def executeFunctions():
         # If keyboard interupt end cycle
         signal.signal(signal.SIGINT, catchTheSignal)
 
-def catchTheSignal(UART, signal, frame):
+def catchTheSignal(signal, frame):
     """
     """
     globalExit = "Exit"
