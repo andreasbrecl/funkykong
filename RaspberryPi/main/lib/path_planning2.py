@@ -853,20 +853,34 @@ class PathPlanning2:
 
             # Check what side the robot is on
             if sideColor == colorCheckGreen and lineSensorReading3 == 1:
-                
-                # Stop movement
-                movementCommand = stop
 
-                # Change mode
-                subMode = subModeAlignBack
+                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
+
+                    movementCommand = backwards
+
+                else:
+                
+                    # Stop movement
+                    movementCommand = stop
+
+                    # Change mode
+                    subMode = subModeAlignBack
 
             elif sideColor == colorCheckRed and lineSensorReading4 == 1:
-        
-                # Stop movement
-                movementCommand = stop
 
-                # Change mode
-                subMode = subModeAlignBack
+                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
+
+                    movementCommand = backwards
+
+                else:
+        
+                    # Stop movement
+                    movementCommand = stop
+
+                    # Change mode
+                    subMode = subModeAlignBack
+
+            print(movementCommand)
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
