@@ -840,7 +840,7 @@ class PathPlanning2:
                     if movementCommand == stop:
 
                         # Change mode
-                        subMode = subModeMoveBack
+                        subMode = subModeReload
 
         # Enter move backwards mode
         elif subMode == subModeMoveBack:
