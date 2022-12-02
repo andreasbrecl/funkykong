@@ -69,7 +69,12 @@ def executeFunctions():
     UART = UARTComms(port, baudRate, timeout)
     path = PathPlanning(firePin, reloadPin, reloadDonePin, startPin, stopPin)
     path2 = PathPlanning2(firePin, reloadPin, reloadDonePin, startPin, stopPin)
-    
+
+    # Test variables
+    systemMode = "GoToReload"
+    currentModeInformation[3] = "MoveBack"
+    currentModeInformation[4] = "Red"
+
     while True:
         # Recieve UART comms data
         if currentModeInformation[3] != "AimShooter":
