@@ -876,20 +876,30 @@ class PathPlanning2:
             # Start backwards movement
             movementCommand = backwards
 
-            # Check what side the robot is on
-            if lineSensorReading3 == 1 or lineSensorReading4 == 1:
+            if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
 
-                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
+                movementCommand = backwards
 
-                    movementCommand = backwards
+            else:
+    
+                # Check what side the robot is on
+                if sideColor == colorCheckGreen:
+                    
+                    # Check line
+                    if lineSensorReading3 == 1:
 
-                else:
-                
-                    # Stop movement
-                    movementCommand = stop
+                        # Stop if condition met and change mode
+                        movementCommand = stop
+                        subMode = subModeReload
 
-                    # Change mode
-                    subMode = subModeReload
+                elif sideColor == colorCheckRed:
+
+                    # Check line
+                    if lineSensorReading4 == 1:
+
+                        # Stop if condition met and change mode
+                        movementCommand = stop
+                        subMode = subModeReload
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
