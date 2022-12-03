@@ -75,9 +75,9 @@ def executeFunctions():
     path2 = PathPlanning2(firePin, reloadPin, reloadDonePin, startPin, stopPin)
 
     # Test variables
-    currentModeInformation[0] = "GoToReload"
-    currentModeInformation[3] = "MoveBack"
-    currentModeInformation[4] = "Red"
+    #currentModeInformation[0] = "GoToReload"
+    #currentModeInformation[3] = "MoveBack"
+    #currentModeInformation[4] = "Red"
 
     while True:
         # Recieve UART comms data
