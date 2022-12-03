@@ -50,14 +50,14 @@ def executeFunctions():
     # Path planning variables, times are in seconds
     diagTimeToShooting = 11
     leftRightTimeToShooting = 5
-    forwardTimeToShooting = 3.5
+    forwardTimeToShooting = 3.25
     rotate90Time = 3.9
     rotate45Time = rotate90Time / 2
     timeList = [diagTimeToShooting, leftRightTimeToShooting, forwardTimeToShooting, rotate90Time, rotate45Time]
     
     # Path planning distances in CM
     initializationDistance = 15
-    shootingDistance = 20
+    shootingDistance = 30
     pathDistanceList = [initializationDistance, shootingDistance]
 
     # Initial movement criterias
