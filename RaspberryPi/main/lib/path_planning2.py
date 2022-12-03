@@ -665,6 +665,7 @@ class PathPlanning2:
         subModeMoveDiag = "MoveDiag"
         subModeMoveSidways = "MoveSidways"
         subModeMoveBack = "MoveBack"
+        subModeMoveBack2 = "MoveBack2"
         subModeMoveForward = "MoveForward"
         subModeAlignSide = "AlignSide"
         subModeReload = "Reload"
@@ -840,7 +841,7 @@ class PathPlanning2:
                     if movementCommand == stop:
 
                         # Change mode
-                        subMode = subModeReload
+                        subMode = subModeMoveBack2
 
         # Enter move backwards mode
         elif subMode == subModeMoveBack:
@@ -865,13 +866,37 @@ class PathPlanning2:
 
                     # Change mode
                     subMode = subModeAlignBack
+
+        # Enter move backwards mode
+        elif subMode == subModeMoveBack2:
+
+            # Print mode
+            print(subModeMoveBack2)
+
+            # Start backwards movement
+            movementCommand = backwards
+
+            # Check what side the robot is on
+            if lineSensorReading3 == 1 or lineSensorReading4 == 1:
+
+                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
+
+                    movementCommand = backwards
+
+                else:
+                
+                    # Stop movement
+                    movementCommand = stop
+
+                    # Change mode
+                    subMode = subModeReload
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
 
             if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
 
-                movementCommand = stop
+                movementCommand = backwards
 
             else:
                 
