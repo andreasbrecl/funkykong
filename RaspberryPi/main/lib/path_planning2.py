@@ -892,6 +892,9 @@ class PathPlanning2:
                         movementCommand = stop
                         subMode = subModeReload
 
+                        # Update time
+                        timeList[0] = 13
+
                 elif sideColor == colorCheckRed:
 
                     # Check line
@@ -900,6 +903,9 @@ class PathPlanning2:
                         # Stop if condition met and change mode
                         movementCommand = stop
                         subMode = subModeReload
+
+                        # Time 
+                        timeList[0] = 13
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
@@ -978,7 +984,7 @@ class PathPlanning2:
                 time1 = time.time()
 
         # Return data
-        return movementCommand, systemMode, subMode, time1
+        return movementCommand, systemMode, subMode, time1, timeList
     
     def alignOnLines(self, line1, line2, sideColor):
         """
@@ -1246,7 +1252,7 @@ class PathPlanning2:
 
         # travel path for reload
         elif systemMode == "GoToReload":
-            movementCommand, systemMode, subMode, time1 = self.pathToReloadStation(inputtedData, currentModeInformation, timeList, pathDistanceList) 
+            movementCommand, systemMode, subMode, time1, timeList = self.pathToReloadStation(inputtedData, currentModeInformation, timeList, pathDistanceList) 
 
         # Fire projectiles
         elif systemMode == "Shoot":
@@ -1260,4 +1266,4 @@ class PathPlanning2:
             movementCommand = "Exit"
 
         # Return values
-        return currentModeInformationUpdated, movementCommand
+        return currentModeInformationUpdated, movementCommand, timeList

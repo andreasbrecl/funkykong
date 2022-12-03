@@ -48,7 +48,7 @@ def executeFunctions():
     stopPin = 24
 
     # Path planning variables, times are in seconds
-    diagTimeToShooting = 13
+    diagTimeToShooting = 11
     leftRightTimeToShooting = 5
     forwardTimeToShooting = 3.5
     rotate90Time = 3.9
@@ -89,7 +89,7 @@ def executeFunctions():
             
             # Run motion planning functionality
             #currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
-            currentModeInformation, movementCommand = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+            currentModeInformation, movementCommand, timeList = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
 
         # Check if program should end
         if movementCommand == "Exit" or globalExit == "Exit":
