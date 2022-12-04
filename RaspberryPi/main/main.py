@@ -78,8 +78,8 @@ def executeFunctions():
     #currentModeInformation[0] = "GoToReload"
     #currentModeInformation[3] = "MoveBack"
     #currentModeInformation[4] = "Red"
-    currentModeInformation[0] = "Shoot"
-    currentModeInformation[3] = "AimShooter"
+    currentModeInformation[0] = "GoToShoot"
+    currentModeInformation[3] = "RotateForward"
     currentModeInformation[4] = "Red"
 
     while True:
