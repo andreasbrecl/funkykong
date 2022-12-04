@@ -493,7 +493,7 @@ class PathPlanning2:
         pixyCamAimCenter = "C"
 
         # Shooting time
-        shootingTime = 1
+        shootingTime = 10
         
         # Enter Aim shooter mode
         if subMode == subModeAimShooter:
@@ -516,7 +516,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if True: #changeInTime >= shootingTime:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -536,7 +536,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if True: #changeInTime >= shootingTime:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -556,7 +556,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if True: #changeInTime >= shootingTime:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
@@ -572,7 +572,7 @@ class PathPlanning2:
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
-                if True: #changeInTime >= shootingTime:
+                if changeInTime >= shootingTime:
 
                     # Change mode
                     subMode = subModeFixOrientation
