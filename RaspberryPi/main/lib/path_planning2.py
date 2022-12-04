@@ -279,6 +279,7 @@ class PathPlanning2:
         subModeMoveDiag = "MoveDiag"
         subModeMoveSidways = "MoveSidways"
         subModeMoveForward = "MoveForward"
+        subModeMoveForward2 = "MoveForward2"
         subModeRotateSidways = "RotateSidways"
         subModeRotateForward = "RotateForward"
         subModeRotate45Degrees = "Rotate45Degrees"
@@ -412,8 +413,7 @@ class PathPlanning2:
             if movementCommand == stop:
 
                 # Change mode
-                systemMode = "Shoot"
-                subMode = "AimShooter"
+                subMode = subModeMoveForward2
                 
                 # Update time
                 time1 = time.time()
@@ -431,6 +431,23 @@ class PathPlanning2:
                 
                 # Change mode
                 subMode = subModeRotate45Degrees
+
+                # Update time
+                time1 = time.time()
+
+        elif subMode == subModeMoveForward2:
+
+            # Print mode
+            print(subModeMoveForward)
+
+            # Determine movement
+            movementCommand = self.moveBasedOnTime(1, time1, forward)
+
+            if movementCommand == stop:
+                
+                # Change mode
+                systemMode = "Shoot"
+                subMode = "AimShooter"
 
                 # Update time
                 time1 = time.time()
