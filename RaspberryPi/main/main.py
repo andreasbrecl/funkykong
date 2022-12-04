@@ -78,6 +78,9 @@ def executeFunctions():
     #currentModeInformation[0] = "GoToReload"
     #currentModeInformation[3] = "MoveBack"
     #currentModeInformation[4] = "Red"
+    currentModeInformation[0] = "Shoot"
+    currentModeInformation[3] = "AimShooter"
+    currentModeInformation[4] = "Red"
 
     while True:
         # Recieve UART comms data
