@@ -523,6 +523,9 @@ class PathPlanning2:
                     
                     # Set GPIO low
                     GPIO.output(self.firePin, 0)
+
+                    # Update time
+                    time1 = time.time()
             
             # Check to aim right
             elif pixyCamAim == pixyCamAimRight:
@@ -543,6 +546,9 @@ class PathPlanning2:
                     
                     # Set GPIO low
                     GPIO.output(self.firePin, 0)
+
+                    # Update time
+                    time1 = time.time()
                 
             # Check if ballon is center
             elif pixyCamAim == pixyCamAimCenter:
@@ -564,6 +570,9 @@ class PathPlanning2:
                     # Set GPIO low
                     GPIO.output(self.firePin, 0)
 
+                    # Update time
+                    time1 = time.time()
+
             else:
 
                 # Stop moving
@@ -580,11 +589,12 @@ class PathPlanning2:
                     # Set GPIO low
                     GPIO.output(self.firePin, 0)
 
+                    # Update time
+                    time1 = time.time()
+
             # Print aim information
             print(pixyCamAim)
 
-            # Update time
-            time1 = time.time()
 
         # Fix how robot is oriented         
         elif subMode == subModeFixOrientation:
