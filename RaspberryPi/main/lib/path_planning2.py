@@ -831,7 +831,16 @@ class PathPlanning2:
 
             if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
 
-                movementCommand = stop
+                # Check what side the robot is on
+                if sideColor == colorCheckGreen:
+                    
+                    # Align vehicle
+                    movementCommand = right
+
+                elif sideColor == colorCheckRed:
+
+                    # Align vehicle
+                    movementCommand = left
 
             else:
 
