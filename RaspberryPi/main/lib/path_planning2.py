@@ -871,7 +871,7 @@ class PathPlanning2:
                     if movementCommand == stop:
 
                         # Change mode
-                        subMode = subModeMoveBack
+                        subMode = subModeMoveBack2
 
                 elif sideColor == colorCheckRed:
 
