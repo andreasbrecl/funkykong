@@ -908,7 +908,7 @@ class PathPlanning2:
                         subMode = subModeReload
 
                         # Update time
-                        timeList[0] = 15
+                        timeList[2] = 5.5
 
                 elif sideColor == colorCheckRed:
 
@@ -920,7 +920,7 @@ class PathPlanning2:
                         subMode = subModeReload
 
                         # Time 
-                        timeList[0] = 15
+                        timeList[2] = 5.5
             
         # Align rear of vehicle
         elif subMode == subModeAlignBack:
