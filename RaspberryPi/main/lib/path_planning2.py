@@ -578,6 +578,9 @@ class PathPlanning2:
                 # Stop moving
                 movementCommand = stop
 
+                # Trigger firing
+                GPIO.output(self.firePin, 0)
+
                 # See if reload is triggered
                 time2 = time.time()
                 changeInTime = time2 - time1
