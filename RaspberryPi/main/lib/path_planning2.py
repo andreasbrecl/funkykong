@@ -801,7 +801,7 @@ class PathPlanning2:
             print(subModeMoveDiag)
 
             # Time adjustment
-            timeAdjust = diagTimeToShooting - 1
+            timeAdjust = diagTimeToShooting - 2
 
             # Move diag back right
             movementCommand = self.moveBasedOnTime(timeAdjust, time1, backwards)   
