@@ -1183,9 +1183,9 @@ class PathPlanning2:
         rotateLeft = "K"
 
         # Run rotation 
-        if ultrasonic1 > ultrasonic2 and ultrasonic1 < 50 and ultrasonic2 < 50:
+        if ultrasonic1 > ultrasonic2 and ultrasonic1 < 40 and ultrasonic2 < 40:
             movementCommand = rotateLeft
-        elif ultrasonic2 > ultrasonic1 and ultrasonic1 < 50 and ultrasonic2 < 50:
+        elif ultrasonic2 > ultrasonic1 and ultrasonic1 < 40 and ultrasonic2 < 40:
             movementCommand = rotateRight
         else:
             movementCommand = rotateLeft
@@ -1194,7 +1194,7 @@ class PathPlanning2:
         percentDifference = self.calculatePercentage(ultrasonic1, ultrasonic2)
 
         # See if value is within 5 %
-        if percentDifference <= 5 and ultrasonic1 < 50 and ultrasonic2 < 50:
+        if percentDifference <= 5 and ultrasonic1 < 40 and ultrasonic2 < 40:
 
             # Stop motion
             movementCommand = stop
