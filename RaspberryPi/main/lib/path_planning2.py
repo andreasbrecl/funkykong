@@ -641,7 +641,7 @@ class PathPlanning2:
             print(subModeFixOrientation)
             
             # Fix how it is facing
-            movementCommand, time1, timesRotated = self.verifyForwardFacingShooterSecond(ultrasonicSensorReading1, ultrasonicSensorReading2, movementCommand, rotate90Time, time1)
+            movementCommand, time1, timesRotated = self.verifyForwardFacingShooterSecond(ultrasonicSensorReading1, ultrasonicSensorReading2, movementCommand, rotate90Time, time1, timesRotated)
 
             # Checkmovement command
             if movementCommand == stop:
@@ -1218,7 +1218,7 @@ class PathPlanning2:
         # Return command
         return movementCommand
 
-    def verifyForwardFacingShooterSecond(self, ultrasonic1, ultrasonic2, movementCommand, rotateTime, time1):
+    def verifyForwardFacingShooterSecond(self, ultrasonic1, ultrasonic2, movementCommand, rotateTime, time1, timesRotated):
         """
         This function will determine if the system is facing
         forward by comparing the ultrasonic readings of the
@@ -1239,10 +1239,6 @@ class PathPlanning2:
 
         # Calculate time difference
         timeDifference = time2 - time1
-
-        print(timeDifference)
-        # Print movement command
-        print(movementCommand)
 
         # Check if movement must start
         if movementCommand == stop:
