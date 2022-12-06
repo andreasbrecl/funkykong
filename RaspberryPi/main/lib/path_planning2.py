@@ -1241,7 +1241,7 @@ class PathPlanning2:
         timeDifference = time2 - time1
 
         # Check if movement must start
-        if movementCommand == stop:
+        if timesRotated == 0:
 
             # Print check
             print("I'm Here 1")
@@ -1251,8 +1251,6 @@ class PathPlanning2:
 
             # Start new time
             time1 = time.time()
-
-            timesRotated = 0
 
         # Check if time is exceeded
         elif movementCommand == rotateLeft and timeDifference >= rotateTime:
