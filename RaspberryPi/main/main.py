@@ -67,7 +67,8 @@ def executeFunctions():
     time2 = time.time()
     subMode = "Initialize"
     sideColor = "None"
-    currentModeInformation = [systemMode, time1, time2, subMode, sideColor]
+    timesRotated = 0
+    currentModeInformation = [systemMode, time1, time2, subMode, sideColor, timesRotated]
 
     # Create UART object
     UART = UARTComms(port, baudRate, timeout)

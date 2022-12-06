@@ -456,7 +456,7 @@ class PathPlanning2:
         return movementCommand, systemMode, subMode, time1
 
     
-    def shootAtTarget(self, inputtedData, currentModeInformation, pathDistanceList):
+    def shootAtTarget(self, inputtedData, currentModeInformation, pathDistanceList, timeList):
         """
         This function will deal with shooting the shooter at
         the detected target. It will locate the enemy balloon
@@ -476,6 +476,7 @@ class PathPlanning2:
         systemMode = currentModeInformation[0]
         time1 = currentModeInformation[1]
         subMode = currentModeInformation[3]
+        timesRotated = currentModeInformation[4]
 
         # Pull distance values
         shootingDistance = pathDistanceList[1]
@@ -511,6 +512,9 @@ class PathPlanning2:
 
         # Shooting time
         shootingTime = 10
+
+        # Pull time data
+        rotate90Time = timeList[3]
         
         # Enter Aim shooter mode
         if subMode == subModeAimShooter:
@@ -543,6 +547,9 @@ class PathPlanning2:
 
                     # Update time
                     time1 = time.time()
+
+                    # Stop robot
+                    movementCommand = stop
             
             # Check to aim right
             elif pixyCamAim == pixyCamAimRight:
@@ -566,6 +573,9 @@ class PathPlanning2:
 
                     # Update time
                     time1 = time.time()
+
+                    # Stop robot
+                    movementCommand = stop
                 
             # Check if ballon is center
             elif pixyCamAim == pixyCamAimCenter:
@@ -590,6 +600,9 @@ class PathPlanning2:
                     # Update time
                     time1 = time.time()
 
+                    # Stop robot
+                    movementCommand = stop
+
             else:
 
                 # Stop moving
@@ -612,6 +625,9 @@ class PathPlanning2:
                     # Update time
                     time1 = time.time()
 
+                    # Stop robot
+                    movementCommand = stop
+
             # Print aim information
             print(pixyCamAim)
 
@@ -625,7 +641,7 @@ class PathPlanning2:
             print(subModeFixOrientation)
             
             # Fix how it is facing
-            movementCommand = self.verifyForwardFacing(ultrasonicSensorReading1, ultrasonicSensorReading2)
+            movementCommand, time1, timesRotated = self.verifyForwardFacingShooterSecond(self, ultrasonicSensorReading1, ultrasonicSensorReading2, movementCommand, rotate90Time)
 
             # Checkmovement command
             if movementCommand == stop:
@@ -653,7 +669,7 @@ class PathPlanning2:
                 time1 = time.time()
 
         # Return data
-        return movementCommand, systemMode, subMode, time1
+        return movementCommand, systemMode, subMode, time1, timesRotated
 
     
     def pathToReloadStation(self, inputtedData, currentModeInformation, timeList, pathDistanceList):
@@ -1201,6 +1217,84 @@ class PathPlanning2:
         
         # Return command
         return movementCommand
+
+    def verifyForwardFacingShooterSecond(self, ultrasonic1, ultrasonic2, movementCommand, rotateTime):
+        """
+        This function will determine if the system is facing
+        forward by comparing the ultrasonic readings of the
+        system.
+
+        Input:  ultrasonic1 <int> - Ultrasonic reading from sensor 1
+                ultrasonic2 <int> - Ultrasonic reading from sensor 2
+
+        Output: movementCommand <str> - Movement command to be sent to system
+        """
+        # Define movements
+        stop = "A"
+        rotateRight = "J"
+        rotateLeft = "K"
+
+        # Pull second time
+        time2 = time.time()
+
+        # Calculate time difference
+        timeDifference = time2 - time1
+
+        # Check if movement must start
+        if movementCommand == stop:
+
+            # Start rotating in one direction
+            movementCommand = rotateLeft
+
+            # Start new time
+            time1 = time.time()
+
+            timesRotated = 0
+
+        # Check if time is exceeded
+        elif movementCommand == rotateLeft and timeDifference >= rotateTime:
+
+            # Change motion
+            movementCommand = rotateRight
+            
+            # Start new time
+            time1 = time.time()
+
+            timesRotated = timesRotated + 1
+
+        # Check if time is exceeded
+        elif movementCommand == rotateRight and timeDifference >= rotateTime*2 and timesRotated > 1:
+
+            # Change motion
+            movementCommand = rotateLeft
+            
+            # Start new time
+            time1 = time.time()
+
+            timesRotated = timesRotated + 1
+
+        # Check if time is exceeded
+        elif movementCommand == rotateLeft and timeDifference >= rotateTime*2 and timesRotated > 1:
+
+            # Change motion
+            movementCommand = rotateRight
+            
+            # Start new time
+            time1 = time.time()
+
+            timesRotated = timesRotated + 1
+
+        # Calculate percent different of ultrasonic readings
+        percentDifference = self.calculatePercentage(ultrasonic1, ultrasonic2)
+
+        # See if value is within 5 %
+        if percentDifference <= 5 and ultrasonic1 < 40 and ultrasonic2 < 40:
+
+            # Stop motion
+            movementCommand = stop
+        
+        # Return command
+        return movementCommand, time1, timesRotated
         
 
     def checkDistance(self, expectedDistance, ultrasonic):
@@ -1279,6 +1373,7 @@ class PathPlanning2:
         time2 = currentModeInformation[2]
         subMode = currentModeInformation[3]
         sideColor = currentModeInformation[4]
+        timesRotated = currentModeInformation[5]
 
         #systemMode = "Shoot"
         #currentModeInformation[3] = "AimShooter"
@@ -1297,10 +1392,10 @@ class PathPlanning2:
 
         # Fire projectiles
         elif systemMode == "Shoot":
-            movementCommand, systemMode, subMode, time1 = self.shootAtTarget(inputtedData, currentModeInformation, pathDistanceList)
+            movementCommand, systemMode, subMode, time1, timesRotated = self.shootAtTarget(inputtedData, currentModeInformation, pathDistanceList, timeList)
 
         # Remake current mode information
-        currentModeInformationUpdated = [systemMode, time1, time2, subMode, sideColor]
+        currentModeInformationUpdated = [systemMode, time1, time2, subMode, sideColor, timesRotated]
 
         # Check if shooter should stop
         if GPIO.input(self.stopPin):
