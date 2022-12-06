@@ -1240,6 +1240,8 @@ class PathPlanning2:
         # Calculate time difference
         timeDifference = time2 - time1
 
+        print(timeDifference)
+
         # Check if movement must start
         if movementCommand == stop:
 
