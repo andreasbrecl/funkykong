@@ -1245,6 +1245,9 @@ class PathPlanning2:
         # Check if movement must start
         if movementCommand == stop:
 
+            # Print check
+            print("I'm Here 1")
+
             # Start rotating in one direction
             movementCommand = rotateLeft
 
@@ -1255,6 +1258,9 @@ class PathPlanning2:
 
         # Check if time is exceeded
         elif movementCommand == rotateLeft and timeDifference >= rotateTime:
+
+            # Print check
+            print("I'm Here 2")
 
             # Change motion
             movementCommand = rotateRight
@@ -1267,6 +1273,9 @@ class PathPlanning2:
         # Check if time is exceeded
         elif movementCommand == rotateRight and timeDifference >= rotateTime*2 and timesRotated > 1:
 
+            # Print check
+            print("I'm Here 3")
+
             # Change motion
             movementCommand = rotateLeft
             
@@ -1277,6 +1286,9 @@ class PathPlanning2:
 
         # Check if time is exceeded
         elif movementCommand == rotateLeft and timeDifference >= rotateTime*2 and timesRotated > 1:
+
+            # Print check
+            print("I'm Here 4")
 
             # Change motion
             movementCommand = rotateRight
