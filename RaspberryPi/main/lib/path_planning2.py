@@ -641,7 +641,7 @@ class PathPlanning2:
             print(subModeFixOrientation)
             
             # Fix how it is facing
-            movementCommand, time1, timesRotated = self.verifyForwardFacingShooterSecond(self, ultrasonicSensorReading1, ultrasonicSensorReading2, movementCommand, rotate90Time)
+            movementCommand, time1, timesRotated = self.verifyForwardFacingShooterSecond(ultrasonicSensorReading1, ultrasonicSensorReading2, movementCommand, rotate90Time)
 
             # Checkmovement command
             if movementCommand == stop:
