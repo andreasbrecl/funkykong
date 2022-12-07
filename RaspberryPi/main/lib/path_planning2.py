@@ -1365,7 +1365,7 @@ class PathPlanning2:
         # Return values
         return percentDifference
 
-    def mainPathPlanning(self, inputtedData, currentModeInformation, timeList, pathDistanceList):
+    def mainPathPlanning(self, inputtedData, currentModeInformation, timeList, pathDistanceList, movementCommand):
         """
         This is the main function that will handle which part of
         the motion planning process our system is on.

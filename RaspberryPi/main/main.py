@@ -93,7 +93,7 @@ def executeFunctions():
             
             # Run motion planning functionality
             #currentModeInformation, movementCommand = path.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
-            currentModeInformation, movementCommand, timeList = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList)
+            currentModeInformation, movementCommand, timeList = path2.mainPathPlanning(inputtedData, currentModeInformation, timeList, pathDistanceList, movementCommand)
 
         # Check if program should end
         if movementCommand == "Exit" or globalExit == "Exit":
