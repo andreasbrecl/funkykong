@@ -997,12 +997,12 @@ class PathPlanning2:
             if sideColor == colorCheckRed:
 
                 # Move vehicle left
-                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateLeft)
 
             elif sideColor == colorCheckGreen:
 
                 # Move vehicle right
-                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateRight)
 
             # Check if rotation stopped
             if movementCommand == stop:
@@ -1059,12 +1059,12 @@ class PathPlanning2:
             if sideColor == colorCheckRed:
 
                 # Move vehicle left
-                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateRight)
 
             elif sideColor == colorCheckGreen:
 
                 # Move vehicle right
-                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+                movementCommand = self.moveBasedOnTime(rotate90Time, time1, rotateLeft)
 
             # Check if rotation stopped
             if movementCommand == stop:
