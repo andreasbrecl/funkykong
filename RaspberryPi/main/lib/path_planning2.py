@@ -718,6 +718,8 @@ class PathPlanning2:
         subModeRotateSidways = "RotateSidways"
         subModeRotate45Degrees = "Rotate45Degrees"
         subModeRotate45Degrees2 = "Rotate45Degrees2"
+        subModeRotate45Degrees3 = "Rotate45Degrees3"
+        subModeRotate45Degrees4 = "Rotate45Degrees4"
         subModeMoveSidwaysToReload = "MoveSidwaysToReload"
 
         # Time list
@@ -770,7 +772,7 @@ class PathPlanning2:
             print(subModeMoveSidways)
 
             # Move vehicle right
-            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting, time1 + 1, backwards)            
+            movementCommand = self.moveBasedOnTime(leftRightTimeToShooting - 1, time1, backwards)            
 
             # Check if stop command recieved
             if movementCommand == stop:
@@ -814,7 +816,7 @@ class PathPlanning2:
             print(subModeMoveDiag)
 
             # Time adjustment
-            timeAdjust = diagTimeToShooting - 2
+            timeAdjust = diagTimeToShooting - 3
 
             # Move diag back right
             movementCommand = self.moveBasedOnTime(timeAdjust, time1, backwards)   
@@ -980,7 +982,36 @@ class PathPlanning2:
                 if movementCommand == stop:
 
                     # Change mode
-                        subMode = subModeMoveSidwaysToReload
+                    subMode = subModeRotate45Degrees3
+
+                    # Update time   
+                    time1 = time.time()
+
+        # Rotate first
+        elif subMode == subModeRotate45Degrees3:
+
+            # Print mode
+            print(subModeRotate45Degrees3)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change vehicle modes
+                subMode = subModeMoveSidwaysToReload
+                
+                # Update time
+                time1 = time.time()
 
         # Move robot to reload area
         elif subMode == subModeMoveSidwaysToReload:
@@ -988,35 +1019,76 @@ class PathPlanning2:
             # print submode
             print(subModeMoveSidwaysToReload)
 
-            # Check what side vehicle is on
-            if sideColor == colorCheckGreen:
-                
-                # Align vehicle
-                movementCommand = right
+            # Align vehicle
+            movementCommand = forward
 
-            elif sideColor == colorCheckRed:
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
 
-                # Align vehicle
-                movementCommand = left
+                # Move vehicle left
+                if lineSensorReading1 == 1:
 
-                # Check if line is hit
-            # Check if the boundry is reached
-            if lineSensorReading1 == 1 or lineSensorReading2 == 1:
-
-                if lineSensorReading1 == 1 and lineSensorReading2 == 1 and lineSensorReading3 == 1 and lineSensorReading4 == 1:
-
-                    movementCommand = stop
-
-                else:
-
-                    # Stop vehicle
                     movementCommand = stop
 
                     # Change vehicle modes
-                    subMode = subModeAlignSide
+                    subMode = subModeRotate45Degrees4
 
                     # Calculate start of movement time
                     time1 = time.time()
+
+                # Chose movement based on side
+            if sideColor == colorCheckGreen:
+
+                # Move vehicle left
+                if lineSensorReading2 == 1:
+
+                    movementCommand = stop
+
+                    # Change vehicle modes
+                    subMode = subModeRotate45Degrees4
+
+                    # Calculate start of movement time
+                    time1 = time.time()
+
+        elif subMode == subModeRotate45Degrees4:
+
+            # Print mode
+            print(subModeRotate45Degrees4)
+
+            # Chose movement based on side
+            if sideColor == colorCheckRed:
+
+                # Move vehicle left
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateRight)
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                movementCommand = self.moveBasedOnTime(rotate90Time/2, time1, rotateLeft)
+
+            # Check if rotation stopped
+            if movementCommand == stop:
+
+                # Change vehicle modes
+                subMode = subModeMoveSidwaysToReload
+                
+                # Update time
+                time1 = time.time()
+
+            elif sideColor == colorCheckGreen:
+
+                # Move vehicle right
+                if lineSensorReading2 == 1:
+
+                    movementCommand = stop
+
+                    # Change vehicle modes
+                    subMode = subModeReload
+
+                    # Calculate start of movement time
+                    time1 = time.time()
+
+
 
         # Enter reload mode
         elif subMode == subModeReload:
