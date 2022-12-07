@@ -438,7 +438,7 @@ class PathPlanning2:
         elif subMode == subModeMoveForward2:
 
             # Print mode
-            print(subModeMoveForward)
+            print(subModeMoveForward2)
 
             # Determine movement
             movementCommand = self.moveBasedOnTime(1, time1, forward)
@@ -1083,6 +1083,8 @@ class PathPlanning2:
 
             # Stop movememnt
             movementCommand = stop
+
+            timeList[2] = 5.25
 
             # Wait for reload done input
             if GPIO.input(self.reloadDonePin):
