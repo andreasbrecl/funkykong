@@ -501,9 +501,6 @@ class PathPlanning2:
         rotateRight = "J"
         rotateLeft = "K"
 
-        # Movement command
-        movementCommand = stop
-
         # Predefine pixy cam
         pixyCamAim = "N"
         pixyCamAimLeft = "L"
@@ -1243,7 +1240,7 @@ class PathPlanning2:
         print(timeDifference)
 
         # Check if movement must start
-        if timesRotated == 0 and movementCommand != rotateLeft:
+        if timesRotated == 0 and movementCommand != rotateLeft and movementCommand != rotateRight:
 
             # Print check
             print("I'm Here 1")
@@ -1406,7 +1403,7 @@ class PathPlanning2:
 
         # Fire projectiles
         elif systemMode == "Shoot":
-            movementCommand, systemMode, subMode, time1, timesRotated = self.shootAtTarget(inputtedData, currentModeInformation, pathDistanceList, timeList)
+            movementCommand, systemMode, subMode, time1, timesRotated = self.shootAtTarget(inputtedData, currentModeInformation, pathDistanceList, timeList, movementCommand)
 
         # Remake current mode information
         currentModeInformationUpdated = [systemMode, time1, time2, subMode, sideColor, timesRotated]
