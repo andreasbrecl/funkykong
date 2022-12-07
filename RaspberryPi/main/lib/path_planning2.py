@@ -1070,25 +1070,10 @@ class PathPlanning2:
             if movementCommand == stop:
 
                 # Change vehicle modes
-                subMode = subModeMoveSidwaysToReload
+                subMode = subModeReload
                 
                 # Update time
                 time1 = time.time()
-
-            elif sideColor == colorCheckGreen:
-
-                # Move vehicle right
-                if lineSensorReading2 == 1:
-
-                    movementCommand = stop
-
-                    # Change vehicle modes
-                    subMode = subModeReload
-
-                    # Calculate start of movement time
-                    time1 = time.time()
-
-
 
         # Enter reload mode
         elif subMode == subModeReload:
