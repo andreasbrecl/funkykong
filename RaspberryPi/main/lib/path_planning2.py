@@ -43,7 +43,6 @@ class PathPlanning2:
         GPIO.setup(stopPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
         # Set pin modes
-        GPIO.output(firePin, 1)
         GPIO.output(firePin, 0)
 
 
