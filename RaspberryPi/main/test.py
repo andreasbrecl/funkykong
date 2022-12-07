@@ -27,7 +27,7 @@ def main():
 
     while True:
         # Check start pin
-        GPIO.output(firePin, 0)
+        pass
         
 
 if __name__ == "__main__":
