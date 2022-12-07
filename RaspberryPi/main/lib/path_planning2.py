@@ -456,7 +456,7 @@ class PathPlanning2:
         return movementCommand, systemMode, subMode, time1
 
     
-    def shootAtTarget(self, inputtedData, currentModeInformation, pathDistanceList, timeList):
+    def shootAtTarget(self, inputtedData, currentModeInformation, pathDistanceList, timeList, movementCommand):
         """
         This function will deal with shooting the shooter at
         the detected target. It will locate the enemy balloon
