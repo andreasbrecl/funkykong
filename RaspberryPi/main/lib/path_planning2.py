@@ -1241,9 +1241,10 @@ class PathPlanning2:
         timeDifference = time2 - time1
 
         print(timeDifference)
+        print(movementCommand)
 
         # Check if movement must start
-        if timesRotated == 0:
+        if timesRotated == 0 and movementCommand != rotateLeft:
 
             # Print check
             print("I'm Here 1")
