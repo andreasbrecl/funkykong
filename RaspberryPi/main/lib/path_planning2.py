@@ -476,7 +476,7 @@ class PathPlanning2:
         systemMode = currentModeInformation[0]
         time1 = currentModeInformation[1]
         subMode = currentModeInformation[3]
-        timesRotated = currentModeInformation[4]
+        timesRotated = currentModeInformation[5]
 
         # Pull distance values
         shootingDistance = pathDistanceList[1]
