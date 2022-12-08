@@ -507,7 +507,7 @@ class PathPlanning2:
         pixyCamAimCenter = "C"
 
         # Shooting time
-        shootingTime = 30
+        shootingTime = 45
 
         # Pull time data
         rotate90Time = timeList[3]
